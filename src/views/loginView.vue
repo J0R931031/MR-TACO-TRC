@@ -44,7 +44,7 @@ const password = ref('Password');
                     <v-col>Correo<v-text-field label="Correo"></v-text-field></v-col>
                   </v-row>
                   <v-row>
-                    <v-col>Contraseña
+                    <v-col>Contra
                       <v-text-field v-model="password"
                         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                         :rules="[rules.required, rules.min]"

@@ -14,8 +14,6 @@ import {  RouterView } from 'vue-router'
 </template>
 
 <style scoped>
-.div{
-  padding: 0%;
-}
+
 
 </style>

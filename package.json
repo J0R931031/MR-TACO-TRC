@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "pinia": "^2.1.7",
-    "vue": "^3.4.29",
+    "vue": "^3.4.33",
     "vue-router": "^4.3.3",
     "vuetify": "^3.6.12"
   },
@@ -25,5 +25,10 @@
     "prettier": "^3.2.5",
     "vite": "^5.3.1",
     "vite-plugin-vue-devtools": "^7.3.1"
-  }
+  },
+  "description": "This template should help get you started developing with Vue 3 in Vite.",
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

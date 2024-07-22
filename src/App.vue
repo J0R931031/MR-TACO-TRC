@@ -1,19 +1,21 @@
 <script setup>
-import {  RouterView } from 'vue-router'
+import BarNav from './components/barNav.vue';
+
+
+
+
 
 </script>
 
 <template>
-  <div>
-   
-  <RouterView />
-  </div>
+    <nav> 
+<BarNav/>
+  </nav>
 
 
   
 </template>
 
 <style scoped>
-
 
 </style>

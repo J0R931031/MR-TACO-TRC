@@ -33,7 +33,7 @@ const password = ref('Password');
         <v-row justify="center" style="padding: 40px;">
           <v-col cols="6" style="border: solid 0.1px black;">
             <v-card>
-              <v-card-title>Iniciar sesión</v-card-title>
+              <v-card-title> sesión</v-card-title>
               <v-card-text>
                 <v-container>
                   <v-row>

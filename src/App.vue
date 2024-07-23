@@ -1,21 +1,8 @@
-<script setup>
-import BarNav from './components/barNav.vue';
-
-
-
-
-
-</script>
-
 <template>
-    <nav> 
-<BarNav/>
-  </nav>
-
-
-  
+  <RouterView></RouterView>
 </template>
 
-<style scoped>
 
+
+<style scoped>
 </style>

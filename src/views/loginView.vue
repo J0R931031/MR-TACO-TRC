@@ -1,98 +1,83 @@
 <template>
   <div class="menu-container">
     <v-row class="menu" align="center" justify="center">
-      
-          <v-col cols="6" style="border: solid 0.1px black;">
-            <v-card>
-              <v-card-title>Iniciar sesión</v-card-title>
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col cols="4">Nombre<v-text-field label="Nombre" v-model="formData.nombre"></v-text-field></v-col>
-                    <v-col cols="7">Apellido<v-text-field label="Apellido" v-model="formData.apellido"></v-text-field></v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>Correo<v-text-field label="Correo" v-model="formData.correo"></v-text-field></v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>Contraseña
-                      <v-text-field v-model="formData.password"
-                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                        :rules="[rules.required, rules.min]"
-                        :type="show1 ? 'text' : 'password'"
-                        label="Password"
-                        name="input-10-1"
-                        counter
-                        @click:append="show1 = !show1"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>Confirmar contraseña
-                      <v-text-field v-model="formData.confirmPassword"
-                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                        :rules="[rules.required, rules.min]"
-                        :type="show1 ? 'text' : 'password'"
-                        label="Password"
-                        name="input-10-1"
-                        counter
-                        @click:append="show1 = !show1"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-              <v-card-actions>
-                <v-row justify="end">
-                  <v-col class="d-flex justify-md-end">
-                    <v-btn size="x-large" variant="elevated" color="indigo-darken-3" @click="submitForm">
-                      Registrarse
+    </v-row>
+    <div class="content-container"> 
+      <v-row align="center" justify="center">
+        <v-col cols="5" class="form-container">
+          <v-card class="bordered-card">
+            <v-row justify="center">
+              <v-card-title class="title">
+                <h1>BIENVENIDO</h1>
+              </v-card-title>
+            </v-row>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                     Correo
+                    <v-text-field label="Correo" v-model="loginData.correo" outlined></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12">
+                    Contraseña
+                    <v-text-field 
+                      v-model="loginData.password"
+                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                      :type="showPassword ? 'text' : 'password'"
+                      label="Contraseña"
+                      outlined
+                      @click:append="togglePasswordVisibility"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" class="d-flex justify-center">
+                    <v-btn class="login-button" size="x-large" @click="submitLogin">
+                      Iniciar Sesión
                     </v-btn>
                   </v-col>
                 </v-row>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
-     
+                <v-row>
+                  <v-col cols="12" class="d-flex justify-center links">
+                    <a href="#">¿Olvidaste la contraseña?</a>
+                    <br>
+                    <RouterLink to="/reg">¿No tienes Cuenta? Regístrate</RouterLink>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div> 
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
-const rules = {
-  required: value => !!value || 'Obligatorio.',
-  min: v => v.length >= 8 || '8 caracteres mínimo',
-  emailMatch: () => ('El correo y la contraseña no coinciden'),
-};
-
-const show1 = ref(false);
-const formData = ref({
-  nombre: '',
-  apellido: '',
+const showPassword = ref(false);
+const loginData = ref({
   correo: '',
-  password: '',
-  confirmPassword: ''
+  password: ''
 });
 
-const submitForm = async () => {
-  if (formData.value.password !== formData.value.confirmPassword) {
-    alert('Las contraseñas no coinciden');
-    return;
-  }
+const togglePasswordVisibility = () => {
+  showPassword.value = !showPassword.value;
+};
 
+const submitLogin = async () => {
   try {
-    const response = await fetch('http://misitio.com/', {
+    const response = await fetch('http://misitio.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        nombre: formData.value.nombre,
-        apellido: formData.value.apellido,
-        correo: formData.value.correo,
-        password: formData.value.password
+        correo: loginData.value.correo,
+        password: loginData.value.password
       })
     });
 
@@ -102,17 +87,58 @@ const submitForm = async () => {
 
     const data = await response.json();
     console.log(data);
-    alert('User registered successfully!');
+    alert('Inicio de sesión exitoso!');
   } catch (error) {
-    console.error('There was an error!', error);
-    alert('Failed to register user.');
+    console.error('Hubo un error!', error);
+    alert('No se pudo iniciar sesión.');
   }
 };
 </script>
 
-<style>
+<style scoped>
 .menu-container {
   position: relative;
 }
 
+.content-container { 
+  margin-top: 70px; 
+}
+
+.title h1 {
+  font-family: 'Arial', sans-serif; 
+  font-size: 32px;
+}
+
+.bordered-card {
+  border: 2px solid #ff4f09;
+  border-radius: 15px;
+  box-shadow: 0 0 25px 10px rgba(255, 79, 9, 0.8);
+  padding: 16px;
+}
+
+.v-text-field input {
+  font-family: 'Arial', sans-serif;
+}
+
+.login-button {
+  background-color: #ff4f09;
+  color: white;
+  width: 100%;
+}
+
+.links {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.links a {
+  color: #000;
+  text-decoration: none;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
 </style>

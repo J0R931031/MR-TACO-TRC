@@ -8,7 +8,7 @@
                 </v-card-title>
               </v-row>
     <v-row justify="center">
-        <v-col cols="4" class="bordered-card">
+        <v-col cols="4" class="bordered">
           <h1>ORDEN DE TACOS DORADOS 
             <br>(8 PZAS.)</h1> <br>
             <h2>Tacos de guiso a eleccion debajo
@@ -16,21 +16,21 @@
             <br> cueritos y crema</h2><h1 style="padding-left: 80px; font-size: 25px;">$152.00</h1>
 
         </v-col>
-        <v-col cols="4" class="bordered-card">
+        <v-col cols="4" class="bordered">
           <h1>POLLO A LA PLANCHA</h1> <br>
             <h2>Fajitas de pollo acompañado
               <br> de verduras en vinagre,
               <br> ensalada y deliciosa pasta.</h2>
               <h1 style="width:12px; padding-left: 70px; margin-top: 20px; font-size: 25px;" >     $152.00</h1>
         </v-col>
-        <v-col cols="4" class="bordered-card">
+        <v-col cols="4" class="bordered">
           <h1>POLLO A LA PLANCHA</h1> <br>
             <h2>Fajitas de pollo acompañado
               <br> de verduras en vinagre,
               <br> ensalada y deliciosa pasta.</h2>
               <h1 style="width:12px; padding-left: 70px; margin-top: 20px; font-size: 25px;" >     $152.00</h1>
         </v-col>
-        <v-col cols="4" class="bordered-card">
+        <v-col cols="4" class="bordered">
           <h1>POLLO A LA PLANCHA</h1> <br>
             <h2>Fajitas de pollo acompañado
               <br> de verduras en vinagre,
@@ -47,7 +47,7 @@
     font-size: 33px;
     padding-top: 50px;
   }
-  .bordered-card {
+  .bordered {
   border: 2px solid #ff4f09;
   border-radius: 15px;
   margin: 70px;

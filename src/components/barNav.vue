@@ -1,6 +1,6 @@
 <script setup>
 import { RouterView, RouterLink } from 'vue-router';
-import logo from '@/assets/mr-taco.png';  
+import logo from '@/assets/mr-taco-min.png';  
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -40,7 +40,7 @@ const isSelected = (path) => route.path === path;
 
 <style scoped>
 .menu-container {
-  position: relative;
+  position: static;
 }
 
 .menu {
@@ -48,6 +48,7 @@ const isSelected = (path) => route.path === path;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
 .menu-item {
@@ -60,6 +61,7 @@ const isSelected = (path) => route.path === path;
   border-radius: 100px; 
   padding: 2px 10px; 
   transition: background-color 0.3s ease, color 0.3s ease; 
+  
 }
 
 .menu-item.selected { 
@@ -71,11 +73,13 @@ const isSelected = (path) => route.path === path;
   text-align: center;
   height: 80px;
 }
-
 .logo {
-  padding: 0%;
-  width: 150px; 
+  padding: 5.5%;
+  width: 200px; 
   position: absolute;
   top: 10px;
+  transform: translate(-20%, 1%);
 }
+
+
 </style>

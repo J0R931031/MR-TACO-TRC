@@ -152,10 +152,11 @@
   <style scoped>
   .menu-container {
     position: relative;
+    
   }
   
   .content-container { 
-    margin-top: 70px; 
+    margin-top: 100px; 
   }
   
   .title h1 {

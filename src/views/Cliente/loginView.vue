@@ -102,7 +102,7 @@ const submitLogin = async () => {
 }
 
 .content-container { 
-  margin-top: 70px; 
+  margin-top: 100px; 
 }
 
 .title h1 {

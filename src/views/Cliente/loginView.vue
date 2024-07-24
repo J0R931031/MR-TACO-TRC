@@ -1,6 +1,6 @@
 <template>
   <div class="menu-container">
-    <BarNav/>
+    <barNav/> 
     <v-row class="menu" align="center" justify="center">
     </v-row>
     <div class="content-container"> 
@@ -58,7 +58,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import BarNav from '@/components/barNav.vue';
+import  barNav from '@/components/barNav.vue';
 const showPassword = ref(false);
 const loginData = ref({
   correo: '',

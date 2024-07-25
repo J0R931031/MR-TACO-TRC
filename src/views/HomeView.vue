@@ -80,7 +80,7 @@ const handleButtonClick = (index) => {
   }
 }
 
-import Video from '@/Video/Restaurante.mp4';
+import Video from '@/Video/Restaurante5.mp4';
 </script>
 
 <style scoped>

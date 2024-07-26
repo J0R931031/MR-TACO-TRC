@@ -31,14 +31,14 @@
             </v-sheet>
           </v-col>
           
-          <v-col cols="12" md="6">
-            <v-sheet height="100vh" width="200vh" border color="white" rounded>
-                <v-container class="pa-0 ma-0">
-                    <video  height="735vh"  autoplay loop  :src="Video">
-                    </video>
-                </v-container>
-            </v-sheet>
-          </v-col>
+            <v-col cols="12" md="6">
+              <v-sheet height="100vh" width="200vh" border color="white" rounded>
+                  <v-container class="pa-0 ma-0">
+                      <video  height="735vh"  autoplay loop  :src="Video">
+                      </video>
+                  </v-container>
+              </v-sheet>
+            </v-col>
         </v-row>
       </v-container>
     </v-main>

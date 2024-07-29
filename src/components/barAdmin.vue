@@ -1,6 +1,7 @@
 <script setup>
 import { RouterView, RouterLink } from 'vue-router';
-import logo from '@/assets/mr-taco.png';  
+import logo from '@/assets/mr-taco.png'; 
+import perfil from '@/assets/RICHI-PELON.jpg'
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -10,17 +11,25 @@ const isSelected = (path) => route.path === path;
 <template>
   <div class="menu-container">
     <v-row class="menu" align="center" justify="center">
-      <v-col class="logo-container" cols="2" align="start">
-        <v-img class="logo" :src="logo" contain></v-img>
-      </v-col>
-      <v-col class="menu-item" cols="2" align="center">
+      <v-col class="menu-item" cols="2" align="start">
         <RouterLink to="/" class="menu-item" :class="{ selected: isSelected('/') }">Inicio</RouterLink>
       </v-col>
       <v-col class="menu-item" cols="2" align="center">
         <RouterLink to="/registros" class="menu-item" :class="{ selected: isSelected('/registros') }">Registros</RouterLink>
       </v-col>
+      <v-col class="logo-container" cols="2" align="start">
+        <v-img class="logo" :src="logo" contain></v-img>
+      </v-col>
       <v-col cols="2" align="end">
         <RouterLink to="/posts" class="menu-item" :class="{ selected: isSelected('/posts') }"> Posts</RouterLink>
+      </v-col>
+      <v-col cols="2" class="d-flex align-center justify-space-around">
+          <v-avatar color="info">
+            <v-img class="icon" :src="perfil" contain > </v-img>
+          </v-avatar>
+      </v-col>
+      <v-col cols="2">
+
       </v-col>
     </v-row>
     <v-row class="fill-height" align="center" justify="center">
@@ -65,11 +74,11 @@ const isSelected = (path) => route.path === path;
   text-align: center;
   height: 80px;
 }
-
 .logo {
-  padding: 0%;
-  width: 150px; 
+  padding: 5.5%;
+  width: 200px; 
   position: absolute;
   top: 10px;
+  transform: translate(-20%, 1%);
 }
 </style>

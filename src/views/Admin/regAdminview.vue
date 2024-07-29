@@ -176,7 +176,8 @@
     fechaNacimiento: '',
     correo: '',
     password: '',
-    confirmpassword: ''
+    confirmpassword: '',
+    confirmartelefono:''
   });
   
   const togglePasswordVisibility = () => {

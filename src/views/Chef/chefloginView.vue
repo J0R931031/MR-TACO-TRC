@@ -41,9 +41,8 @@
                 </v-row>
                 <v-row>
                   <v-col cols="12" class="d-flex justify-center">
-                    <v-btn class="login-button" size="x-large" @click="submitLogin">
-                      Iniciar Sesión
-                    </v-btn>
+                    <RouterLink to="/Cheforden"><v-btn class="login-button" size="x-large" @click="submitLogin">
+                      Iniciar Sesión  </v-btn></RouterLink>                  
                   </v-col>
                 </v-row>
                

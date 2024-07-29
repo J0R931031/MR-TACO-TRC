@@ -58,7 +58,7 @@
                     <v-col cols="6">
                         Fecha de Ingreso
                         <v-text-field
-                          label="Fecha de Nacimiento"
+                          label="Fecha de Ingreso"
                           v-model="formData.fechaNacimiento"
                           outlined
                           type="date"
@@ -75,7 +75,7 @@
                     <v-col cols="6">
                       Contraseña
                       <v-text-field 
-                        v-model="formData.password"
+                        v-model="formData.confirmpassword"
                         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                         :type="showPassword ? 'text' : 'password'"
                         label="Contraseña"
@@ -175,7 +175,8 @@
     telefono: '',
     fechaNacimiento: '',
     correo: '',
-    password: ''
+    password: '',
+    confirmpassword: ''
   });
   
   const togglePasswordVisibility = () => {
@@ -193,14 +194,14 @@
       });
   
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Ha ocurrido un error en el sistema.');
       }
   
       const data = await response.json();
       console.log(data);
-      alert('Usuario registrado con éxito!');
+      alert('¡Usuario registrado con éxito!');
     } catch (error) {
-      console.error('Hubo un error!', error);
+      console.error('¡Hubo un error!', error);
       alert('No se pudo registrar al usuario.');
     }
   };

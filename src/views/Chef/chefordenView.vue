@@ -1,124 +1,132 @@
 
 <template>
-     <Chefbar></Chefbar>
-  <v-container>
-    
-     <v-row justify="center">
-         <v-col><button class="eliminar">Eliminar Orden</button></v-col>
-         <v-col><button class="eliminar">Añadir Orden</button></v-col>
-     </v-row>
-    <v-data-table
-      :headers="headers"
-      :items="items"
-      item-key="order"
-      class="elevation-1"
-    style=" border: #ff4f09 2px solid;">
-    
-      <template v-slot:top>              
-        <v-toolbar flat style=" background-color: #ff4f09; opacity: 90%;">
-         <h2>Tabla de Pedidos</h2>
-        </v-toolbar>
-      </template>
-
-      <template v-slot:item.detail="{ item }">
-        <td>{{ item.detail }}</td>
-      </template>
-      <template v-slot:item.order="{ item }">
-        <td>{{ item.order }}</td>
-      </template>
-      <template v-slot:item.client="{ item }">
-        <td>{{ item.client }}</td>
-      </template>
-      <template v-slot:item.date="{ item }">
-        <td>{{ item.date }}</td>
-      </template>
-      <template v-slot:item.time="{ item }">
-        <td>{{ item.time }}</td>
-      </template>
-      <template v-slot:item.status="{ item }">
-        <td>{{ item.status }}</td>
-      </template>
-    </v-data-table>
-<v-row justify="center">
-     <v-table style="width: 800px; height: 600%; margin-top: 50px; border: #ff4f09 2px solid;" density="compact">
-    <thead>
+  <chefBar></chefBar>
+  <v-table theme="dark" height="200px" style="width: 1000px; margin-left: 250px;">
+    <thead style="background-color: #ff4f09;">
       <tr>
-        <th class="text-left">
-        <h2> N° Orden   001</h2>
-        </th>
-        <th class="text-left">
-        <h2>Especificaciones</h2>      
-        </th>
+        <th class="text-left">Detalles</th>
+        <th class="text-left">Orden</th>
+        <th class="text-left">Cliente</th>
+        <th class="text-left">Fecha</th>
+        <th class="text-left">Hora</th>
+        <th class="text-left">Estado de Orden</th>
       </tr>
     </thead>
     <tbody>
-      <tr
-        v-for="item in desserts"
-        :key="item.name"
-      >
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
+      <tr v-for="item in desserts" :key="item.norden">
+        <td>
+          <button style="border: 2px salmon solid; background-color: #ff4f09; width: 70px; border-radius: 15px;">Ver</button>
+        </td>
+        <td>{{ item.norden }}</td>
+        <td>{{ item.cliente }}</td>
+        <td>{{ item.fecha }}</td>
+        <td>{{ item.hora }}</td>
+        <td :class="getStatusClass(item.estadord)">
+          {{ item.estadord }}
+          <v-btn
+            style="border: 2px salmon solid; background-color: #ff4f09; width: 150px; border-radius: 15px; margin-left: 20px; color: white;"
+            @click="openDialog(item)"
+          >
+            Cambiar estatus
+          </v-btn>
+        </td>
       </tr>
     </tbody>
   </v-table>
-</v-row>
-   
-  </v-container>
 
- 
+  <!-- Dialogo para seleccionar nuevo estatus -->
+  <v-dialog v-model="dialog" max-width="290">
+    <v-card>
+      <v-card-title class="headline">Seleccionar Estatus</v-card-title>
+      <v-card-text>
+        <v-select
+          v-model="selectedStatus"
+          :items="statusOptions"
+          label="Estatus"
+        ></v-select>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="primary" @click="updateStatus">Actualizar</v-btn>
+        <v-btn text @click="closeDialog">Cancelar</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script setup>
-import Chefbar from '@/components/chefBar.vue';
+import chefBar from '@/components/chefBar.vue';
 import { ref } from 'vue';
 
-const headers = [
-  { text: 'Detalle', value: 'detail' },
-  { text: 'Orden', value: 'order' },
-  { text: 'Cliente', value: 'client' },
-  { text: 'Fecha', value: 'date' },
-  { text: 'Hora', value: 'time' },
-  { text: 'Estatus', value: 'status' },
-];
-
-const items = ref([
-  { detail: 'Pizza Margarita', order: '001', client: 'Juan Pérez', date: '2024-07-25', time: '19:00', status: 'Enviado' },
-  { detail: 'Burgers Clásicas', order: '002', client: 'Laura Gómez', date: '2024-07-25', time: '19:15', status: 'En preparación' },
-  { detail: 'Tacos Dorados', order: '003', client: 'Carlos Ruiz', date: '2024-07-26', time: '12:00', status: 'Entregado' },
-]);
 const desserts = ref([
-    {
-      name: 'Platillo',
-      calories: 159,
-    },
-    {
-      name: 'Postre',
-      calories: 237,
-    },
-    {
-      name: 'Bebidas',
-      calories: 262
-    }]);
-</script>
- 
-<style scoped>
-.v-data-table thead th {
-  color: black;
-  font-weight: bold;
+  {
+    norden: 1001,
+    cliente: 'Mariana',
+    fecha: '01/01/24',
+    hora: '03:00',
+    estadord: 'Proceso',
+  },
+  {
+    norden: 1002,
+    cliente: 'Ricky',
+    fecha: '01/01/24',
+    hora: '02:00',
+    estadord: 'Concluido',
+  },
+  {
+    norden: 1003,
+    cliente: 'Maria',
+    fecha: '01/01/24',
+    hora: '04:00',
+    estadord: 'Pendiente',
+  },
+]);
+
+const dialog = ref(false);
+const selectedStatus = ref('');
+const currentItem = ref(null);
+
+const statusOptions = ['Proceso', 'Pendiente', 'Completado', 'Concluido'];
+
+function openDialog(item) {
+  currentItem.value = item;
+  selectedStatus.value = item.estadord;
+  dialog.value = true;
 }
 
-.v-data-table .v-data-table-header {
-  background-color: #f4f4f4;
+function closeDialog() {
+  dialog.value = false;
 }
-.eliminar{
- border: 2px solid #ff4f09;
-  border-radius: 15px;
-  height: 90px;
-  width:300px;
-  background-color: #ff4f09;
-  font-family: monospace;
-  font-size: 30px;
-  margin-left: 550px;    
-  margin: 100px;
+
+function updateStatus() {
+  if (currentItem.value) {
+    currentItem.value.estadord = selectedStatus.value;
+    closeDialog();
+  }
+}
+
+function getStatusClass(status) {
+  if (status === 'Concluido') return 'status-concluido';
+  if (status === 'Pendiente') return 'status-pendiente';
+  if (status === 'Concluido') return 'status-completado';
+  if (status === 'Proceso') return 'status-proceso';
+  return '';
+}
+</script>
+
+<style scoped>
+.status-concluido {
+  color: rgb(6, 163, 242);
+}
+.status-completado {
+  color: rgb(6, 242, 6);
+}
+
+.status-pendiente {
+  color: red;
+}
+
+.status-proceso {
+  color: orange;
 }
 </style>

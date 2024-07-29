@@ -59,7 +59,7 @@
                         Fecha de Ingreso
                         <v-text-field
                           label="Fecha de Ingreso"
-                          v-model="formData.fechaNacimiento"
+                          v-model="formData.fechaIngreso"
                           outlined
                           type="date"
                         ></v-text-field>
@@ -75,8 +75,7 @@
                     <v-col cols="6">
                       Contraseña
                       <v-text-field 
-                        v-model="formData.confirmpassword"
-                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                        v-model="formData.password"
                         :type="showPassword ? 'text' : 'password'"
                         label="Contraseña"
                         outlined
@@ -84,33 +83,33 @@
                       ></v-text-field>
                     </v-col>
                     <v-col cols="6">
-                        Confirmar Contraseña
-                        <v-text-field 
-                          v-model="formData.password"
-                          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                          :type="showPassword ? 'text' : 'password'"
-                          label="Contraseña"
-                          outlined
-                          @click:append="togglePasswordVisibility"
-                        ></v-text-field>
-                      </v-col>
+                      Confirmar Contraseña
+                      <v-text-field 
+                      v-model="formData.confirmpassword"
+                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-on'"
+                      :type="showPassword ? 'text' : 'password'"
+                      label="Contraseña"
+                      outlined
+                      @click:append="togglePasswordVisibility"
+                      ></v-text-field>
+                    </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="8">
                       Direccion
-                      <v-text-field label="Calle,colonia,num.ext" v-model="formData.Direccion" outlined></v-text-field>
+                      <v-text-field label="Calle, Colonia, Número Exterior" v-model="formData.Direccion" outlined></v-text-field>
                     </v-col>
                     <v-col cols="3">
                       Codigo Postal
                       <v-text-field label="C.P" v-model="formData.CP" outlined></v-text-field>
                     </v-col>
                     <v-col cols="5">
-                        Teléfono
-                        <v-text-field label="Teléfono" v-model="formData.telefono" outlined></v-text-field>
+                        Teléfono 1
+                        <v-text-field label="Teléfono 1" v-model="formData.telefono1" outlined></v-text-field>
                       </v-col>
                       <v-col cols="5">
-                        Confirmar Teléfono
-                        <v-text-field label="Teléfono" v-model="formData.confirmartelefono" outlined></v-text-field>
+                        Teléfono 2
+                        <v-text-field label="Teléfono 2" v-model="formData.telefono2" outlined></v-text-field>
                       </v-col>
                   </v-row>
                   <v-container>
@@ -172,8 +171,10 @@
     apellidoPaterno: '',
     apellidoMaterno: '',
     sexo: '',
-    telefono: '',
+    telefono1: '',
+    telefono2: '',
     fechaNacimiento: '',
+    fechaIngreso: '',
     correo: '',
     password: '',
     confirmpassword: ''
@@ -267,5 +268,5 @@ const removeEmployee = () => {
     color: white;
     width: 100%;
   }
+
   </style>
-  

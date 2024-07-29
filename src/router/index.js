@@ -11,8 +11,6 @@ import RegAdmin from '@/views/Admin/regAdminview.vue'
 import PostAdmin from '@/views/Admin/postAdminView.vue'
 import Meseros from '@/views/Mesero/meseroInicioview.vue'
 import Chef from '@/views/Chef/chefIniciView.vue'
-import ChefOrden from '@/views/Chef/chefordenView.vue'
-import ChefLogin from '@/views/Chef/chefloginView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -76,18 +74,7 @@ const router = createRouter({
       path:'/Chef',
       name:'Chef',
       component:Chef
-    },
-    {
-      path:'/ChefOrden',
-      name:'ChefOrden',
-      component:ChefOrden
-    },
-    {
-      path:'/ChefLogin',
-      name:'ChefLogin',
-      component:ChefLogin
     }
-  
   ]
 
 })

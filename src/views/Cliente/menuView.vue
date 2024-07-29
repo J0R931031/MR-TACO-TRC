@@ -18,7 +18,7 @@
           <h1 style="padding-left: 80px; font-size: 25px;">$152.00</h1>
         </v-col>
         <v-col cols="4" class="bordered">
-          <h1>POLLO A LA PLANCHA</h1>
+          <h1>PECHUGA A LA PLANCHA</h1>
           <v-img  style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 295px; border: solid 3px black;" :src="pollo" contain></v-img>
          
           <h2>Fajitas de pollo acompañado <br> de verduras en vinagre, <br> ensalada y deliciosa pasta.</h2>

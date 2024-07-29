@@ -132,7 +132,7 @@
                     </v-row>
                     <v-row>
                       <v-col cols="12" md="6">
-                        <v-text-field label="ID de Empleado" v-model="formData.empleadoid" readonly></v-text-field>
+                        <v-text-field label="ID de Empleado" v-model="formData.empleadoid" outlined></v-text-field>
                         <v-btn color="red" @click="removeEmployee">Eliminar Empleado</v-btn>
                       </v-col>
                     </v-row>

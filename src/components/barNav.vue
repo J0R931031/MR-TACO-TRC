@@ -1,7 +1,6 @@
 <script setup>
 import { RouterView, RouterLink } from 'vue-router';
-import logo from '@/assets/mr-taco.png';  
-import { ref } from 'vue';
+import logo from '@/assets/mr-taco-min.png';  
 import { useRoute } from 'vue-router';
 
 const route = useRoute();

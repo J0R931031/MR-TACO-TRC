@@ -1,7 +1,8 @@
 <script setup>
 import { RouterView, RouterLink } from 'vue-router';
-import logo from '@/assets/mr-taco-min.png';  
+import logo from '@/assets/mr-taco.png';  
 import { useRoute } from 'vue-router';
+import { ref } from 'vue';
 
 const route = useRoute();
 const isSelected = (path) => route.path === path;
@@ -13,7 +14,8 @@ const toggleSubMenu = () => {
 </script>
 
 <template>
-  <div class="menu-container">
+  <div class="menu-container"
+  >
     <v-row class="menu" align="center" justify="center">
       <v-col class="menu-item" cols="1" align="start">
         <RouterLink to="/" class="menu-item" :class="{ selected: isSelected('/') }">Inicio</RouterLink>

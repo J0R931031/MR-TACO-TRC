@@ -109,8 +109,8 @@
                         <v-text-field label="Teléfono" v-model="formData.telefono" outlined></v-text-field>
                       </v-col>
                       <v-col cols="5">
-                        Confirmar Teléfono
-                        <v-text-field label="Teléfono" v-model="formData.confirmartelefono" outlined></v-text-field>
+                        Teléfono2
+                        <v-text-field label="Teléfono" v-model="formData.telefono2" outlined></v-text-field>
                       </v-col>
                   </v-row>
                   <v-container>
@@ -177,7 +177,7 @@
     correo: '',
     password: '',
     confirmpassword: '',
-    confirmartelefono:''
+    telefono2:''
   });
   
   const togglePasswordVisibility = () => {

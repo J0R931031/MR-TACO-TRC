@@ -65,7 +65,8 @@ const redirectToPage = (roleIndex) => {
       router.push('/meseros')
       break
     case 4:
-      router.push('/chef')
+      router.push('/chef');
+      router.push('/ChefLogin');
       break
     default:
       break

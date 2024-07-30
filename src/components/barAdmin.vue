@@ -9,7 +9,7 @@ const route = useRoute();
 const isSelected = (path) => route.path === path;
 
 const profileStore = useProfileStore();
-const { profileImage } = storeToRefs(profileStore);
+const { profileImage, name, email } = storeToRefs(profileStore);
 </script>
 
 <template>
@@ -28,13 +28,16 @@ const { profileImage } = storeToRefs(profileStore);
         <RouterLink to="/posts" class="menu-item" :class="{ selected: isSelected('/posts') }">Posts</RouterLink>
       </v-col>
       <v-col cols="1"></v-col>
-      <v-col class="d-flex align-center justify-end " cols="2">
-        <v-avatar color="info">
-          <v-img class="icon" :src="profileImage" contain></v-img>
-        </v-avatar>
-        <RouterLink to="/PerfilAdmin" class="menu-item" :class="{ selected: isSelected('/PerfilAdmin') }">
-          Editar perfil
+      <v-col class="d-flex align-center justify-end" cols="2">
+        <RouterLink to="/Editar">
+          <v-avatar color="info">
+            <v-img class="icon" :src="profileImage" contain></v-img>
+          </v-avatar>
         </RouterLink>
+        <div class="profile-info">
+          <div class="profile-name">{{ name }}</div>
+          <div class="profile-email">{{ email }}</div>
+        </div>
       </v-col>
     </v-row>
     <v-row class="fill-height" align="center" justify="center">
@@ -93,5 +96,20 @@ const { profileImage } = storeToRefs(profileStore);
   position: absolute;
   top: 10px;
   transform: translate(-20%, 1%);
+}
+
+.profile-info {
+  margin-left: 10px;
+  color: white;
+}
+
+.profile-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.profile-email {
+  font-size: 14px;
+  color: gray;
 }
 </style>

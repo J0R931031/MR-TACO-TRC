@@ -58,7 +58,7 @@
                     <v-col cols="6">
                         Fecha de Ingreso
                         <v-text-field
-                          label="Fecha de Nacimiento"
+                          label="Fecha de Ingreso"
                           v-model="formData.fechaNacimiento"
                           outlined
                           type="date"
@@ -75,7 +75,7 @@
                     <v-col cols="6">
                       Contraseña
                       <v-text-field 
-                        v-model="formData.password"
+                        v-model="formData.confirmpassword"
                         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                         :type="showPassword ? 'text' : 'password'"
                         label="Contraseña"
@@ -109,8 +109,8 @@
                         <v-text-field label="Teléfono" v-model="formData.telefono" outlined></v-text-field>
                       </v-col>
                       <v-col cols="5">
-                        Confirmar Teléfono
-                        <v-text-field label="Teléfono" v-model="formData.confirmartelefono" outlined></v-text-field>
+                        Teléfono2
+                        <v-text-field label="Teléfono" v-model="formData.telefono2" outlined></v-text-field>
                       </v-col>
                   </v-row>
                   <v-container>
@@ -132,7 +132,7 @@
                     </v-row>
                     <v-row>
                       <v-col cols="12" md="6">
-                        <v-text-field label="ID de Empleado" v-model="formData.empleadoid" readonly></v-text-field>
+                        <v-text-field label="ID de Empleado" v-model="formData.empleadoid" outlined></v-text-field>
                         <v-btn color="red" @click="removeEmployee">Eliminar Empleado</v-btn>
                       </v-col>
                     </v-row>
@@ -175,7 +175,9 @@
     telefono: '',
     fechaNacimiento: '',
     correo: '',
-    password: ''
+    password: '',
+    confirmpassword: '',
+    telefono2:''
   });
   
   const togglePasswordVisibility = () => {
@@ -193,14 +195,14 @@
       });
   
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Ha ocurrido un error en el sistema.');
       }
   
       const data = await response.json();
       console.log(data);
-      alert('Usuario registrado con éxito!');
+      alert('¡Usuario registrado con éxito!');
     } catch (error) {
-      console.error('Hubo un error!', error);
+      console.error('¡Hubo un error!', error);
       alert('No se pudo registrar al usuario.');
     }
   };

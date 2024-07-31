@@ -15,7 +15,7 @@ const isSelected = (path) => route.path === path;
       </v-col>
       <v-col class="menu-item" cols="2" align="center">
         <RouterLink to="/" class="menu-item" :class="{ selected: isSelected('/') }">Inicio</RouterLink>
-      </v-col>
+      </v-col>    
       
     </v-row>
     <v-row class="fill-height" align="center" justify="center">

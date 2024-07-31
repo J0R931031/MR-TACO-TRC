@@ -1,20 +1,22 @@
 <template>
 <div class="menu-container">
   <chefBar></chefBar>
+
+  <v-row>
+    <V-col style="position: absolute; margin-left: 170px;">
+                <v-img :src="logochef" style="width: 500px; height: 700px; "></v-img>
+              </V-col>
+  </v-row>
     <v-row class="menu" align="center" justify="center">
     </v-row>
     <div class="content-container"> 
       <v-row align="center" justify="center">
         <v-col cols="5" class="form-container">
           <v-card class="bordered-card">
-            <v-row>
-              <V-col style="position: absolute; ">
-                <v-img :src="iconochef" style="width: 90px; height: 75px;"></v-img>
-              </V-col>
-              <V-col style="font-family: 'Arial', sans-serif; font-size: 15px; padding-left: 100px; padding-top: 30px;">
+            <v-row>           
+              <V-col style="font-family: 'Arial', sans-serif; font-size: 15px; padding-left: 100px; padding-top: 30px; margin-left: 20px;">
                 <h1>BIENVENIDO CHEF</h1>
-              </V-col>
-           
+              </V-col>          
             </v-row>
           <v-card-text>
               <v-container>
@@ -39,9 +41,8 @@
                 </v-row>
                 <v-row>
                   <v-col cols="12" class="d-flex justify-center">
-                    <v-btn class="login-button" size="x-large" @click="submitLogin">
-                      Iniciar Sesión
-                    </v-btn>
+                    <RouterLink to="/Cheforden"><v-btn class="login-button" size="x-large" @click="submitLogin">
+                      Iniciar Sesión  </v-btn></RouterLink>                  
                   </v-col>
                 </v-row>
                
@@ -57,7 +58,7 @@
 <script setup>
 import { ref } from 'vue';
 import  chefBar from '@/components/chefBar.vue';
-import iconochef from '@/assets/iconochef.jpg';
+import logochef from '@/assets/CHEF.png'
 const showPassword = ref(false);
 const loginData = ref({
   correo: '',
@@ -102,6 +103,7 @@ const submitLogin = async () => {
 
 .content-container { 
   margin-top: 100px; 
+  margin-left: 150px;
 }
 
 .title h1 {
@@ -112,7 +114,7 @@ const submitLogin = async () => {
 .bordered-card {
   border: 2px solid #ff4f09;
   border-radius: 15px;
-  box-shadow: 0 0 25px 10px rgba(255, 79, 9, 0.8);
+  box-shadow: 0 0 15px 5px rgba(255, 79, 9, 0.8);
   padding: 16px;
 }
 

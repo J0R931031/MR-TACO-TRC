@@ -197,6 +197,7 @@ const deleteItem = (type, index) => {
   if (type === 'postre') selectedPostres.value.splice(index, 1);
 };
 </script>
+
 <style scoped>
 .div-container {
   position: relative;

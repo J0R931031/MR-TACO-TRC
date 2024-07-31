@@ -1,7 +1,7 @@
 
 <template>
   <chefBar></chefBar>
-  <v-table theme="dark" height="200px" style="width: 1000px; margin-left: 250px;">
+  <v-table theme="dark" height="350px" width="1500px" style="width: 1000px; margin-left: 250px;">
     <thead style="background-color: #ff4f09;">
       <tr>
         <th class="text-left">Detalles</th>
@@ -108,7 +108,7 @@ function updateStatus() {
 function getStatusClass(status) {
   if (status === 'Concluido') return 'status-concluido';
   if (status === 'Pendiente') return 'status-pendiente';
-  if (status === 'Concluido') return 'status-completado';
+  if (status === 'Completado') return 'status-completado';
   if (status === 'Proceso') return 'status-proceso';
   return '';
 }

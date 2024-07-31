@@ -12,8 +12,14 @@ import PostAdmin from '@/views/Admin/postAdminView.vue'
 import Meseros from '@/views/Mesero/meseroInicioview.vue'
 import Chef from '@/views/Chef/chefIniciView.vue'
 import Editar from '@/views/Admin/perfilAdminview.vue'
+<<<<<<< HEAD
 import ChefLogin from '@/views/Chef/chefloginView.vue'
 import Cheforden from '@/views/Chef/chefordenView.vue'
+=======
+import Posts from '@/views/Admin/postAdminView.vue'
+import EditPostsview from '@/views/Admin/editPostsview.vue'
+import CreatePostsview from '@/views/Admin/CreatePostsview.vue'
+>>>>>>> 2f596503d562afd33513dc386fd1e88bb8043764
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -82,6 +88,7 @@ const router = createRouter({
       path:'/Editar',
       name:'Editar',
       component:Editar
+<<<<<<< HEAD
       path:'/ChefLogin',
       name:'ChefLogin',
       component:ChefLogin
@@ -91,6 +98,24 @@ const router = createRouter({
       name:'Cheforden',
       component:Cheforden
     }
+=======
+    },
+    {
+      path:'/posts',
+      name:'Posts',
+      component:Posts
+    },
+    {
+      path: '/EditPosts/:id?',
+      name: 'EditarPosts',
+      component: EditPostsview
+    },
+    {
+      path: '/AñadirPost',
+      name: 'AñadirPost',
+      component: CreatePostsview
+    },
+>>>>>>> 2f596503d562afd33513dc386fd1e88bb8043764
   ]
 
 })

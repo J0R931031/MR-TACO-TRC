@@ -177,8 +177,7 @@
     fechaIngreso: '',
     correo: '',
     password: '',
-    confirmpassword: '',
-    confirmartelefono:''
+    confirmpassword: ''
   });
   
   const togglePasswordVisibility = () => {

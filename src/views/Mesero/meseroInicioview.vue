@@ -18,7 +18,7 @@
         <v-col class="px-2 d-flex flex-column align-center">
           <v-text-field 
             label="Nombre del Cliente" 
-            class="text-center select" 
+            class="text-center select"
             v-model="cliente" 
             hide-details 
             solo 

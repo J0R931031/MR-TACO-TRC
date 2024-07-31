@@ -12,9 +12,11 @@ import PostAdmin from '@/views/Admin/postAdminView.vue'
 import Meseros from '@/views/Mesero/meseroInicioview.vue'
 import Chef from '@/views/Chef/chefIniciView.vue'
 import Editar from '@/views/Admin/perfilAdminview.vue'
+=======
 import ChefLogin from '@/views/Chef/chefloginView.vue'
 import Cheforden from '@/views/Chef/chefordenView.vue'
 
+>>>>>>> a5a263b79176a2c0f87710ffe6ebeac871599b62
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -82,9 +84,8 @@ const router = createRouter({
     {
       path:'/Editar',
       name:'Editar',
-      component:Editar,
-    },
-    {
+      component:Editar
+=======
       path:'/ChefLogin',
       name:'ChefLogin',
       component:ChefLogin
@@ -92,7 +93,8 @@ const router = createRouter({
     {
       path:'/Cheforden',
       name:'Cheforden',
-      component:Cheforden,
+      component:Cheforden
+>>>>>>> a5a263b79176a2c0f87710ffe6ebeac871599b62
     }
   ]
 

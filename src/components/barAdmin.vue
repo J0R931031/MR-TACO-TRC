@@ -15,7 +15,7 @@ const { profileImage, name, email } = storeToRefs(profileStore);
 <template>
   <div class="menu-container">
     <v-row class="menu" align="center" justify="center">
-      <v-col class="menu-item-container" cols="2" align="start">
+      <v-col class="menu-item-container" cols="3" align="start">
         <RouterLink to="/" class="menu-item" :class="{ selected: isSelected('/') }">Inicio</RouterLink>
       </v-col>
       <v-col class="menu-item-container" cols="2" align="center">

@@ -1,16 +1,27 @@
 <template>
-  <div class="edit-profile">
+  <BarAdmin/>
+
+  <div class="edit-profile">  
     <h1>Editar Perfil</h1>
     <form @submit.prevent="submitForm">
       <v-avatar size="120" class="mb-3">
         <v-img :src="previewImage || profileImage" contain></v-img>
       </v-avatar>
-      <v-file-input
-        label="Cambiar foto de perfil"
+      <v-btn
+        color="primary"
+        class="mb-3"
+        prepend-icon="mdi-camera"
+        @click="selectImage"
+      >
+        Cambiar foto de perfil
+      </v-btn>
+      <input
+        type="file"
+        ref="fileInput"
         accept="image/*"
         @change="onFileChange"
-        prepend-icon="mdi-camera"
-      ></v-file-input>
+        style="display: none;"
+      />
       <v-text-field
         label="Nombre"
         v-model="profile.name"
@@ -28,52 +39,46 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import BarAdmin from '@/components/barAdmin.vue';
 import { useProfileStore } from '@/stores/profileStore';
 import { ref } from 'vue';
 
-export default {
-  setup() {
-    const profileStore = useProfileStore();
-    const { profileImage, setProfileImage, setProfileInfo } = profileStore;
-    const profile = ref({
-      name: '',
-      email: '',
-      // Otras propiedades de perfil
-    });
-    const previewImage = ref(null);
+const profileStore = useProfileStore();
+const { profileImage, setProfileImage, setProfileInfo } = profileStore;
+const profile = ref({
+  name: '',
+  email: '',
+  // Otras propiedades de perfil
+});
+const previewImage = ref(null);
+const fileInput = ref(null);
 
-    const onFileChange = (e) => {
-      const file = e.target.files[0];
-      previewImage.value = URL.createObjectURL(file);
-    };
+const selectImage = () => {
+  fileInput.value.click();
+};
 
-    const submitForm = () => {
-      // Lógica para enviar el formulario y actualizar el perfil
-      console.log("Formulario enviado:", profile.value);
-      if (previewImage.value) {
-        console.log("Nueva foto de perfil:", previewImage.value);
-        setProfileImage(previewImage.value);
-      }
-      setProfileInfo(profile.value.name, profile.value.email);
-      // Aquí iría la lógica para actualizar el perfil en el backend
-    };
+const onFileChange = (e) => {
+  const file = e.target.files[0];
+  previewImage.value = URL.createObjectURL(file);
+};
 
-    return {
-      profile,
-      previewImage,
-      onFileChange,
-      submitForm,
-      profileImage
-    };
+const submitForm = () => {
+  // Lógica para enviar el formulario y actualizar el perfil
+  console.log("Formulario enviado:", profile.value);
+  if (previewImage.value) {
+    console.log("Nueva foto de perfil:", previewImage.value);
+    setProfileImage(previewImage.value);
   }
+  setProfileInfo(profile.value.name, profile.value.email);
+  // Aquí iría la lógica para actualizar el perfil en el backend
 };
 </script>
 
 <style scoped>
 .edit-profile {
   max-width: 500px;
-  margin: 0 auto;
+  margin: 100px auto;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;

@@ -1,218 +1,942 @@
-<template>  
-  <BarNav />
-  <div class="div-container">
-    <v-container>
-      <v-row>
-        <v-col class="d-flex justify-center">
-          <v-card color="yellow" class="custom-border">
-            <p class="p">N°Mesa</p>
-          </v-card>
-        </v-col>
-        <v-col class="d-flex justify-center">
-          <v-card color="yellow" class="custom-border">
-            <p class="p">N°Orden</p>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row class="pa-4" no-gutters>
-        <v-col class="px-2">
-          <v-btn @click="platillosDialog = true" class="combo-box" color="primary">PLATILLOS</v-btn>
-        </v-col>
-        <v-col class="px-2">
-          <v-btn @click="bebidasDialog = true" class="combo-box" color="primary">BEBIDAS</v-btn>
-        </v-col>
-        <v-col class="px-2">
-          <v-btn @click="postresDialog = true" class="combo-box" color="primary">POSTRES</v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
+<template>
+  <div class="menu-container">
+    <barNav />
+    <div class="content-container">
+      <v-img :src="fondores" style="position: static; height: 135.9vh;">
 
-    <!-- Dialogo para Platillos -->
-    <v-dialog v-model="platillosDialog" max-width="600px">
-      <v-card>
-        <v-card-title>Seleccionar Platillos</v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row v-for="(platillo, index) in platillos" :key="index">
-              <v-col cols="12">
+        <!-- Botones para seleccionar platillos, bebidas y postres -->
+
+        <div class="button-group">
+          <v-btn @click="showPlatillosSection = true" class="platillos-button">
+            Seleccionar Platillos
+          </v-btn>
+          <v-btn @click="showBebidasSection = true" class="bebidas-button">
+            Seleccionar Bebidas
+          </v-btn>
+          <v-btn @click="showPostresSection = true" class="postres-button">
+            Seleccionar Postres
+          </v-btn>
+          <v-btn @click="showHistorial = true" class="historial-button">
+            Historial
+          </v-btn>
+          <v-btn @click="showOrderTable = true" class="order-table-button">
+            Ver Estado de la Orden
+          </v-btn>
+        </div>
+
+        <!-- Pantalla de seleccionar platillos -->
+
+        <div v-if="showPlatillosSection" class="details-overlay">
+          <div class="details-content">
+            <h2>Seleccionar Platillos</h2>
+            <div class="platillo-list">
+              <div v-for="(platillo, index) in platillos" :key="index" class="platillo-section">
                 <v-select
-                  v-model="platillo.name"
-                  :items="['Platillo 1', 'Platillo 2', 'Platillo 3']"
-                  label="PLATILLOS"
+                  v-model="platillo.selected"
+                  :label="`Selecciona platillo ${index + 1}`"
+                  :items="platilloOptions"
+                  outlined
                 ></v-select>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="platillo.cantidad"
-                  label="Cantidad"
-                  type="number"
-                  min="1"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-textarea v-model="platillo.notas" label="Notas" rows="2"></v-textarea>
-              </v-col>
-            </v-row>
-            <v-btn @click="addPlatillo" color="secondary">Agregar Más Platillos</v-btn>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" text @click="platillosDialog = false">Cerrar</v-btn>
-          <v-btn color="primary" text @click="guardarOrden">Guardar Platillos</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+                <div v-if="platillo.selected" class="counter-section">
+                  <p>Detalles para {{ platillo.selected }}:</p>
+                  <button @click="decrement(index)" class="counter-button platillos-counter-button">-</button>
+                  <span class="counter-value">{{ platillo.quantity }}</span>
+                  <button @click="increment(index)" class="counter-button platillos-counter-button">+</button>
+                </div>
+                <div v-if="platillo.selected" class="ingredients-section">
+                  <v-btn @click="viewIngredients(platillo, 'platillo')" class="ingredients-button">
+                    Ver Ingredientes
+                  </v-btn>
+                </div>
+                <div v-if="platillo.selected" class="notes-section">
+                  <v-textarea
+                    v-model="platillo.notes"
+                    label="Escribe tus notas aquí"
+                    rows="4"
+                    outlined
+                  ></v-textarea>
+                </div>
+              </div>
+            </div>
+            <div class="button-container">
 
-    <!-- Dialogo para Bebidas -->
-    <v-dialog v-model="bebidasDialog" max-width="600px">
-      <v-card>
-        <v-card-title>Seleccionar Bebidas</v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row v-for="(bebida, index) in bebidas" :key="index">
-              <v-col cols="12">
+              <v-btn
+                @click="addPlatillo"
+                class="action-button platillos-add-button"
+              >
+                Añadir otro platillo
+              </v-btn>
+              <div class="button-space">
+                <v-btn
+                  @click="savePlatillos"
+                  class="action-button platillos-save-button"
+                >
+                  Guardar
+                </v-btn>
+                <v-btn
+                  @click="cancelPlatillos"
+                  class="action-button platillos-cancel-button"
+                >
+                  Cancelar
+                </v-btn>
+                 <div>
+                   <button @click="showPlatillosSection = false" class="action-button">CERRAR</button>
+                 </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pantalla de seleccionar bebidas -->
+
+        <div v-if="showBebidasSection" class="details-overlay">
+          <div class="details-content">
+            <h2>Seleccionar Bebidas</h2>
+            <div class="bebida-list">
+              <div v-for="(bebida, index) in bebidas" :key="index" class="bebida-section">
                 <v-select
-                  v-model="bebida.name"
-                  :items="['Bebida 1', 'Bebida 2', 'Bebida 3']"
-                  label="BEBIDAS"
+                  v-model="bebida.selected"
+                  :label="`Selecciona bebida ${index + 1}`"
+                  :items="bebidaOptions"
+                  outlined
                 ></v-select>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="bebida.cantidad"
-                  label="Cantidad"
-                  type="number"
-                  min="1"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-textarea v-model="bebida.notas" label="Notas" rows="2"></v-textarea>
-              </v-col>
-            </v-row>
-            <v-btn @click="addBebida" color="secondary">Agregar Más Bebidas</v-btn>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" text @click="bebidasDialog = false">Cerrar</v-btn>
-          <v-btn color="primary" text @click="guardarOrden">Guardar Bebidas</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+                <div v-if="bebida.selected" class="counter-section">
+                  <p>Detalles para {{ bebida.selected }}:</p>
+                  <button @click="decrementBebida(index)" class="counter-button bebidas-counter-button">-</button>
+                  <span class="counter-value">{{ bebida.quantity }}</span>
+                  <button @click="incrementBebida(index)" class="counter-button bebidas-counter-button">+</button>
+                </div>
+                <div v-if="bebida.selected" class="ingredients-section">
+                  <v-btn @click="viewIngredients(bebida, 'bebida')" class="ingredients-button">
+                    Ver Ingredientes
+                  </v-btn>
+                </div>
+              </div>
+            </div>
+            <div class="button-container">
+              <v-btn
+                @click="addBebida"
+                class="action-button bebidas-add-button"
+              >
+                Añadir otra bebida
+              </v-btn>
+              <div class="action-buttons button-space">
+                <v-btn
+                  @click="saveBebidas"
+                  class="action-button bebidas-save-button"
+                >
+                  Guardar
+                </v-btn>
+                <v-btn
+                  @click="cancelBebidas"
+                  class="action-button bebidas-cancel-button"
+                >
+                  Cancelar
+                </v-btn>
+                <div>
+                  <button @click="showBebidasSection = false"  class="close-button bebidas-close-button">CERRAR</button>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
 
-    <!-- Dialogo para Postres -->
-    <v-dialog v-model="postresDialog" max-width="600px">
-      <v-card>
-        <v-card-title>Seleccionar Postres</v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row v-for="(postre, index) in postres" :key="index">
-              <v-col cols="12">
+        <!-- Pantalla de seleccionar postres -->
+
+        <div v-if="showPostresSection" class="details-overlay">
+          <div class="details-content">
+            <h2>Seleccionar Postres</h2>
+            <div class="postre-list">
+              <div v-for="(postre, index) in postres" :key="index" class="postre-section">
                 <v-select
-                  v-model="postre.name"
-                  :items="['Postre 1', 'Postre 2', 'Postre 3']"
-                  label="POSTRES"
+                  v-model="postre.selected"
+                  :label="`Selecciona postre ${index + 1}`"
+                  :items="postreOptions"
+                  outlined
                 ></v-select>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="postre.cantidad"
-                  label="Cantidad"
-                  type="number"
-                  min="1"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-textarea v-model="postre.notas" label="Notas" rows="2"></v-textarea>
-              </v-col>
-            </v-row>
-            <v-btn @click="addPostre" color="secondary">Agregar Más Postres</v-btn>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" text @click="postresDialog = false">Cerrar</v-btn>
-          <v-btn color="primary" text @click="guardarOrden">Guardar Postres</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+                <div v-if="postre.selected" class="counter-section">
+                  <p>Detalles para {{ postre.selected }}:</p>
+                  <button @click="decrementPostre(index)" class="counter-button postres-counter-button">-</button>
+                  <span class="counter-value">{{ postre.quantity }}</span>
+                  <button @click="incrementPostre(index)" class="counter-button postres-counter-button">+</button>
+                </div>
+                <div v-if="postre.selected" class="ingredients-section">
+                  <v-btn @click="viewIngredients(postre, 'postre')" class="ingredients-button">
+                    Ver Ingredientes
+                  </v-btn>
+                </div>
+              </div>
+            </div>
+            <div class="button-container">
 
-    <!-- Botón para Enviar Orden -->
-    <v-btn @click="enviarOrden" color="success" class="ma-2">Enviar Orden</v-btn>
+              <v-btn
+                @click="addPostre"
+                class="action-button postres-add-button"
+              >
+                Añadir otro postre
+              </v-btn>
+              <div class="action-buttons button-space">
+                <v-btn
+                  @click="savePostres"
+                  class="action-button postres-save-button"
+                >
+                  Guardar
+                </v-btn>
+                <v-btn
+                  @click="cancelPostres"
+                  class="action-button postres-cancel-button"
+                >
+                  Cancelar
+                </v-btn>
+                <div>
+                  <button @click="showPostresSection = false" class="action-button close-button postres-close-button">CERRAR</button>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pantalla de ingredientes -->
+
+        <div v-if="showIngredients" class="details-overlay">
+          <div class="details-content">
+            <h2>Ingredientes para {{ selectedItem.selected }}</h2>
+            <div class="ingredients-list">
+              <div v-for="(ingredient, index) in selectedIngredients" :key="index" class="ingredient-item">
+                <v-checkbox
+                  v-model="ingredient.available"
+                  :label="ingredient.name"
+                  class="custom-checkbox"
+                ></v-checkbox>
+              </div>
+            </div>
+            <v-btn @click="saveIngredients" class="action-button ingredients-save-button">
+              Guardar Ingredientes
+            </v-btn>
+            <v-btn @click="closeIngredients" class="action-button ingredients-close-button">
+              Cerrar
+            </v-btn>
+          </div>
+        </div>
+
+        <!-- Tabla de estado de la orden -->
+
+        <div v-if="showOrderTable && orders.length > 0" class="order-status-content">
+          <h2>Estado de la Orden</h2>
+          <div class="order-status-table-container">
+            <div class="order-status-table">
+              <div class="order-status-header">
+                <span>Tipo</span>
+                <span>Item</span>
+                <span>Cantidad</span>
+                <span>Fecha</span>
+                <span>Eliminar</span>
+              </div>
+              <div v-for="(order, index) in orders" :key="index" class="order-status-row">
+                <span class="center-content">{{ order.type }}</span>
+                <span class="center-content">{{ order.item }}</span>
+                <span class="center-content">{{ order.quantity }}</span>
+                <span class="center-content">{{ order.date }}</span>
+                <span class="center-content">
+                  <v-btn @click="removeOrder(index)" class="action-button">Eliminar</v-btn>
+                </span>
+              </div>
+            </div>
+          </div>
+          <v-btn @click="sendOrder" class="send-order-button">
+            Enviar Orden
+          </v-btn>
+        </div>
+
+        <!-- Pantalla de historial de órdenes -->
+
+        <div v-if="showHistorial" class="details-overlay">
+          <div class="details-content">
+            <h2>Historial de Órdenes</h2>
+            <div class="order-history-table-container">
+              <div class="order-history-table">
+                <div class="order-status-header">
+                  <span>Detalles</span>
+                  <span>Orden</span>
+                  <span>Cliente</span>
+                  <span>Fecha</span>
+                  <span>Hora</span>
+                  <span>Estado de Orden</span>
+                </div>
+                <div v-for="(history, index) in orderHistory" :key="index" class="order-status-row">
+                  <span class="center-content">
+                    <v-btn @click="viewOrderDetails(index)" class="action-button historial-view-button">Ver</v-btn>
+                  </span>
+                  <span class="center-content">{{ history.orderNumber }}</span>
+                  <span class="center-content">{{ history.client }}</span>
+                  <span class="center-content">{{ history.date }}</span>
+                  <span class="center-content">{{ history.time }}</span>
+                  <span class="center-content">
+                    <span :class="getStatusClass(history.status)">{{ history.status }}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <v-btn @click="closeHistorial" class="action-button historial-close-button">
+              Cerrar
+            </v-btn>
+          </div>
+        </div>
+
+        <!-- Pantalla de detalles de la orden -->
+         
+        <div v-if="showOrderDetails" class="details-overlay">
+          <div class="details-content">
+            <h2>Detalles de la Orden</h2>
+            <div class="order-status-table-container">
+              <div class="order-status-table">
+                <div class="order-status-header">
+                  <span>Tipo</span>
+                  <span>Item</span>
+                  <span>Cantidad</span>
+                  <span>Notas</span>
+                  <span>Ingredientes</span>
+                </div>
+                <div v-for="(item, index) in selectedOrderDetails" :key="index" class="order-status-row">
+                  <span class="center-content">{{ item.type }}</span>
+                  <span class="center-content">{{ item.item }}</span>
+                  <span class="center-content">{{ item.quantity }}</span>
+                  <span class="center-content">{{ item.notes || 'N/A' }}</span>
+                  <span class="center-content">
+                    <span v-if="item.ingredients">{{ item.ingredients.join(', ') }}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <v-btn @click="closeOrderDetails" class="action-button order-details-close-button">
+              Cerrar
+            </v-btn>
+          </div>
+        </div>
+      </v-img>
+    </div>
   </div>
 </template>
 
 <script setup>
-import BarNav from '@/components/meserosBar.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import BarNav from '@/components/barNav.vue';
+import fondores from '@/assets/fondores.jpg';
 
-const platillosDialog = ref(false);
-const bebidasDialog = ref(false);
-const postresDialog = ref(false);
+const platilloOptions = [
+  'Orden de tacos dorados',
+  'Pollo a la plancha',
+  'Tacos de pescado',
+  'Gringa carne asada',
+  'Orden de tostadas',
+  'Hamburguesa de la casa'
+];
 
-const platillos = ref([{ name: '', cantidad: 1, notas: '' }]);
-const bebidas = ref([{ name: '', cantidad: 1, notas: '' }]);
-const postres = ref([{ name: '', cantidad: 1, notas: '' }]);
+const bebidaOptions = [
+  'Agua del Día',
+  'Agua Mineral',
+  'Agua de Jamaica',
+  'Agua de Horchata',
+  'Coca Cola',
+  'Fanta',
+  'Manzanita'
+];
 
-function addPlatillo() {
-  platillos.value.push({ name: '', cantidad: 1, notas: '' });
-}
+const postreOptions = [
+  'Pay de Limón',
+  'Pay de Fresa',
+  'Pay de Queso',
+  'Pastel de Chocolate',
+  'Pastel de Zanahoria',
+  'Pastel Chorreado'
+];
 
-function addBebida() {
-  bebidas.value.push({ name: '', cantidad: 1, notas: '' });
-}
+const ingredientOptions = {
+  'Orden de tacos dorados': [
+    { name: 'Tortilla', available: true },
+    { name: 'Carne', available: true },
+    { name: 'Salsa', available: true }
+  ],
+  'Pollo a la plancha': [
+    { name: 'Pollo', available: true },
+    { name: 'Pimienta', available: true },
+    { name: 'Sal', available: true }
+  ],
+  'Tacos de pescado': [
+    { name: 'Pescado', available: true },
+    { name: 'Tortilla', available: true },
+    { name: 'Salsa', available: true }
+  ],
+  'Gringa carne asada': [
+    { name: 'Carne asada', available: true },
+    { name: 'Tortilla', available: true },
+    { name: 'Queso', available: true }
+  ],
+  'Orden de tostadas': [
+    { name: 'Tostada', available: true },
+    { name: 'Frijoles', available: true },
+    { name: 'Queso', available: true }
+  ],
+  'Hamburguesa de la casa': [
+    { name: 'Pan', available: true },
+    { name: 'Carne', available: true },
+    { name: 'Lechuga', available: true },
+    { name: 'Tomate', available: true }
+  ],
+  'Agua del Día': [
+    { name: 'Agua', available: true },
+    { name: 'Saborizante', available: true }
+  ],
+  'Agua Mineral': [
+    { name: 'Agua', available: true },
+    { name: 'Gas', available: true }
+  ],
+  'Agua de Jamaica': [
+    { name: 'Agua', available: true },
+    { name: 'Flor de Jamaica', available: true },
+    { name: 'Azúcar', available: true }
+  ],
+  'Agua de Horchata': [
+    { name: 'Agua', available: true },
+    { name: 'Arroz', available: true },
+    { name: 'Azúcar', available: true }
+  ],
+  'Coca Cola': [
+    { name: 'Agua', available: true },
+    { name: 'Gas', available: true },
+    { name: 'Colorante', available: true }
+  ],
+  'Fanta': [
+    { name: 'Agua', available: true },
+    { name: 'Gas', available: true },
+    { name: 'Saborizante', available: true }
+  ],
+  'Manzanita': [
+    { name: 'Agua', available: true },
+    { name: 'Gas', available: true },
+    { name: 'Saborizante de manzana', available: true }
+  ],
+  'Pay de Limón': [
+    { name: 'Limón', available: true },
+    { name: 'Galleta', available: true },
+    { name: 'Leche condensada', available: true }
+  ],
+  'Pay de Fresa': [
+    { name: 'Fresa', available: true },
+    { name: 'Galleta', available: true },
+    { name: 'Leche condensada', available: true }
+  ],
+  'Pay de Queso': [
+    { name: 'Queso crema', available: true },
+    { name: 'Galleta', available: true },
+    { name: 'Azúcar', available: true }
+  ],
+  'Pastel de Chocolate': [
+    { name: 'Chocolate', available: true },
+    { name: 'Harina', available: true },
+    { name: 'Azúcar', available: true }
+  ],
+  'Pastel de Zanahoria': [
+    { name: 'Zanahoria', available: true },
+    { name: 'Harina', available: true },
+    { name: 'Azúcar', available: true }
+  ],
+  'Pastel Chorreado': [
+    { name: 'Cajeta', available: true },
+    { name: 'Harina', available: true },
+    { name: 'Azúcar', available: true }
+  ]
+};
 
-function addPostre() {
-  postres.value.push({ name: '', cantidad: 1, notas: '' });
-}
+const platillos = ref([{ selected: null, notes: '', quantity: 1, ingredients: [], status: 'Pendiente' }]);
+const bebidas = ref([{ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' }]);
+const postres = ref([{ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' }]);
+const orders = ref([]);
+const orderHistory = ref([]);
+const showPlatillosSection = ref(false);
+const showBebidasSection = ref(false);
+const showPostresSection = ref(false);
+const showHistorial = ref(false);
+const showIngredients = ref(false);
+const showOrderTable = ref(false);
+const showOrderDetails = ref(false);
+const selectedOrderDetails = ref([]);
+const selectedItem = ref({});
+const selectedIngredients = ref([]);
 
-function guardarOrden() {
-  console.log('Platillos:', platillos.value);
-  console.log('Bebidas:', bebidas.value);
-  console.log('Postres:', postres.value);
-}
+const increment = (index) => {
+  const platillo = platillos.value[index].selected;
+  if (platillo) {
+    platillos.value[index].quantity += 1;
+  }
+};
 
-function enviarOrden() {
-  // Aquí puedes manejar el envío de la orden
-  console.log('Orden enviada:', { platillos: platillos.value, bebidas: bebidas.value, postres: postres.value });
-}
+const decrement = (index) => {
+  const platillo = platillos.value[index].selected;
+  if (platillo && platillos.value[index].quantity > 1) {
+    platillos.value[index].quantity -= 1;
+  }
+};
+
+const incrementBebida = (index) => {
+  const bebida = bebidas.value[index].selected;
+  if (bebida) {
+    bebidas.value[index].quantity += 1;
+  }
+};
+
+const decrementBebida = (index) => {
+  const bebida = bebidas.value[index].selected;
+  if (bebida && bebidas.value[index].quantity > 1) {
+    bebidas.value[index].quantity -= 1;
+  }
+};
+
+const incrementPostre = (index) => {
+  const postre = postres.value[index].selected;
+  if (postre) {
+    postres.value[index].quantity += 1;
+  }
+};
+
+const decrementPostre = (index) => {
+  const postre = postres.value[index].selected;
+  if (postre && postres.value[index].quantity > 1) {
+    postres.value[index].quantity -= 1;
+  }
+};
+
+const addPlatillo = () => {
+  platillos.value.push({ selected: null, notes: '', quantity: 1, ingredients: [], status: 'Pendiente' });
+};
+
+const addBebida = () => {
+  bebidas.value.push({ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' });
+};
+
+const addPostre = () => {
+  postres.value.push({ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' });
+};
+
+const savePlatillos = () => {
+  const newPlatillos = platillos.value
+    .filter(p => p.selected)
+    .map(p => ({
+      type: 'Platillo',
+      item: p.selected,
+      quantity: p.quantity,
+      ingredients: p.ingredients.filter(i => i.available).map(i => i.name),
+      notes: p.notes,
+      date: formattedDate.value
+    }));
+
+  orders.value = [...orders.value, ...newPlatillos];
+  platillos.value = [{ selected: null, notes: '', quantity: 1, ingredients: [], status: 'Pendiente' }];
+  showPlatillosSection.value = false;
+  showOrderTable.value = false;
+
+};
+
+const saveBebidas = () => {
+  const newBebidas = bebidas.value
+    .filter(b => b.selected)
+    .map(b => ({
+      type: 'Bebida',
+      item: b.selected,
+      quantity: b.quantity,
+      ingredients: b.ingredients.filter(i => i.available).map(i => i.name),
+      date: formattedDate.value
+    }));
+
+  orders.value = [...orders.value, ...newBebidas];
+  bebidas.value = [{ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' }];
+  showBebidasSection.value = false;
+  showOrderTable.value = false;
+
+};
+
+const savePostres = () => {
+  const newPostres = postres.value
+    .filter(p => p.selected)
+    .map(p => ({
+      type: 'Postre',
+      item: p.selected,
+      quantity: p.quantity,
+      ingredients: p.ingredients.filter(i => i.available).map(i => i.name),
+      date: formattedDate.value
+    }));
+
+  orders.value = [...orders.value, ...newPostres];
+  postres.value = [{ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' }];
+  showPostresSection.value = false;
+  showOrderTable.value = false;
+};
+
+const cancelPlatillos = () => {
+  platillos.value = [{ selected: null, notes: '', quantity: 1, ingredients: [], status: 'Pendiente' }];
+  showPlatillosSection.value = false;
+};
+
+const cancelBebidas = () => {
+  bebidas.value = [{ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' }];
+  showBebidasSection.value = false;
+};
+
+const cancelPostres = () => {
+  postres.value = [{ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' }];
+  showPostresSection.value = false;
+};
+
+const viewDetails = (order) => {
+  alert(`Detalles:\n${order.notes}`);
+};
+
+const removeOrder = (index) => {
+  orders.value.splice(index, 1);
+};
+
+// Formatear la fecha actual para mostrar en la tabla de estado de la orden
+const formattedDate = computed(() => {
+  const now = new Date();
+  return now.toLocaleDateString('es-ES');
+});
+
+const sendOrder = () => {
+  alert('Orden enviada con éxito:\n' + JSON.stringify(orders.value, null, 2));
+  const orderNumber = `nº orden ${orderHistory.value.length + 1}`;
+  const client = "Cliente"; // Puedes cambiar esto para obtener el nombre del cliente de un input
+  const time = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  orderHistory.value.push({ orderNumber, client, date: formattedDate.value, time, orders: [...orders.value], status: 'completado' });
+  orders.value = [];
+};
+
+const viewOrderDetails = (index) => {
+  selectedOrderDetails.value = orderHistory.value[index].orders;
+  showOrderDetails.value = true;
+};
+
+const closeHistorial = () => {
+  showHistorial.value = false;
+};
+
+const closeOrderDetails = () => {
+  showOrderDetails.value = false;
+};
+
+const viewIngredients = (item, type) => {
+  selectedItem.value = item;
+  selectedIngredients.value = ingredientOptions[item.selected] || [];
+  showIngredients.value = true;
+};
+
+const saveIngredients = () => {
+  selectedItem.value.ingredients = selectedIngredients.value;
+  showIngredients.value = false;
+};
+
+const closeIngredients = () => {
+  showIngredients.value = false;
+};
+
+const getStatusClass = (status) => {
+  switch (status) {
+    case 'concluido':
+      return 'status-concluido';
+    case 'completado':
+      return 'status-completado';
+    case 'proceso':
+      return 'status-proceso';
+    case 'pendiente':
+      return 'status-pendiente';
+    default:
+      return '';
+  }
+};
 </script>
 
-
 <style scoped>
-.div-container {
-  position: relative;
-}
-.v-card {
-  color: yellow;
-  border: 10px solid black;
-}
-.padding-combo-top {
-  padding-right: 30px;
+.button-container{
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
 }
-.padding-right {
-  padding-right: 100px;
+.button-space{
+display: flex;
+justify-content: space-around;
+
 }
-.padding-left {
-  padding-left: 100px;
+.menu-container {
+  position: relative;
 }
-.p {
+
+.barNav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.content-container {
+  margin-top: 60px; /* Ajusta este valor según la altura de barNav */
+  
+}
+
+.button-group {
   display: flex;
-  width: 200px;
-  height: 40px;
-  justify-content: center;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.button-group .v-btn{
+  background-color: orange !important;
+  color: white !important;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button-group .v-btn:hover {
+  background-color: darkorange !important;
+}
+
+.details-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
   align-items: center;
+  justify-content: center;
+  z-index: 2000;
 }
-.custom-border {
-  border: 1px solid orange;
-  width: 300px;
-  height: 60px;
+
+.details-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
 }
-.combo-box-padding {
-  padding-left: 15px;
+
+.platillo-list,
+.bebida-list,
+.postre-list,
+.historial-list,
+.order-details-list {
+  max-height: 60vh; /* Ajusta la altura máxima según tus necesidades */
+  overflow-y: auto;
 }
-.v-card-text {
+
+.platillo-section,
+.bebida-section,
+.postre-section,
+.historial-section,
+.order-details-section {
+  margin-bottom: 20px;
+}
+
+.counter-section {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.counter-button {
+  background-color: orange;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  color: white;
+  border-radius: 4px;
+}
+
+.counter-value {
+  margin: 0 10px;
+}
+
+.notes-section {
+  margin-top: 10px;
+}
+
+.action-button {
+  margin-top: 20px;
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.close-button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.order-status-content {
+  position: absolute;
+  top: 250px; /* Ajusta este valor según sea necesario */
+  transform: translateX(-50%);
+  width: 80%;
+  margin: 100px;
+  margin-left: 700px;
+  background-color: white;
+  text-align: center;
+}
+
+.order-status-table-container {
   max-height: 400px;
   overflow-y: auto;
+}
+
+.order-status-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: white;
+}
+
+.order-status-header {
+  display: flex;
+  justify-content: space-around;
+  font-weight: bold;
+  background-color: orange;
+  color: white;
+  padding: 9px;
+  text-align: center;
+}
+
+.order-status-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.center-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-right: 1px solid #ddd;
+}
+
+.center-content:last-child {
+  border-right: none;
+}
+
+.order-history-table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.order-history-table {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: white;
+  text-align: center;
+}
+
+.order-history-table .order-status-header,
+.order-history-table .order-status-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-history-table .order-status-header {
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+}
+
+.send-order-button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.historial-view-button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.historial-close-button {
+  background-color: orange;
+  margin-top: 20px;
+}
+
+.order-details-close-button {
+  background-color: orange;
+  margin-top: 20px;
+}
+
+.status-concluido {
+  background-color: #00c853;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.status-completado {
+  background-color: #2196f3;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.status-proceso {
+  background-color: #ffeb3b;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.status-pendiente {
+  background-color: #f44336;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.custom-checkbox .v-input--selection-controls__ripple {
+  background-color: orange !important;
+}
+
+.custom-checkbox .v-icon {
+  color: white !important;
+}
+
+.custom-checkbox .v-input--selection-controls__input:checked + .v-input--selection-controls__ripple {
+  background-color: orange !important;
+}
+
+.custom-checkbox .v-input--selection-controls__input:checked + .v-input--selection-controls__ripple .v-icon {
+  color: white !important;
 }
 </style>

@@ -13,13 +13,12 @@
       </v-container>
     </v-app-bar>
 
-    <v-main>
-      
-      <v-container class="pa-0 ma-0">
-        <v-row>
-          <v-col cols="12" md="3">
+    <v-main class="main-container">
+      <v-container class="pa-0 ma-0 fill-height">
+        <v-row class="pa-0 ma-0 fill-height no-gutters">
+          <v-col cols="12" md="3" class="pa-0 ma-0">
             <v-sheet rounded="lg" elevation="2">
-              <v-list height="100vh" class="padding" style="background-color:white;;">
+              <v-list height="100vh" class="padding" style="background-color:white;">
                 <v-list-item v-for="(role, index) in Roles" :key="index" link>
                   <v-list-item-content>
                     <v-list-item-title @click="redirectToPage(index + 1)">
@@ -31,13 +30,58 @@
             </v-sheet>
           </v-col>
           
-          <v-col cols="12" md="6">
-            <v-sheet height="100vh" width="200vh" border color="white" rounded>
-                <v-container class="pa-0 ma-0">
-                    <video  height="735vh"  autoplay loop  :src="Video">
-                      
-                    </video>
-                </v-container>
+          <v-col cols="12" md="9" class="pa-0 ma-0 fill-height no-padding">
+            <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
+              <H1 class="pa-0 ma-0 fill-height no-padding">
+                <div class="inicio-container pa-0 ma-0 fill-height no-padding">
+                  <div class="carousel-container first">
+                    <div class="carousel-content">
+                      <h1>¿Cuántos tacos va a llevar, joven?</h1>
+                      <v-btn class="carousel-button">Échale un vistazo al menú</v-btn>
+                    </div>
+                  </div>
+                  <div class="carousel-container">
+                    <div class="carousel-content" id="carrusel2">
+                      <h1>Mucho sabor... Mucho color...</h1>
+                      <h2>Todo en Torreón</h2>
+                    </div>
+                  </div>
+
+                  <div class="featured-dishes">
+                    <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
+                    <div class="dishes-carousel">
+                      <div class="dish-card" v-for="(dish, i) in dishes" :key="i">
+                        <img :src="dish.image" class="dish-image" />
+                        <h3>{{ dish.title }}</h3>
+                        <p>{{ dish.description }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="footer">
+                    <div class="footer-content">
+                      <address class="footer-text small-text">
+                        <strong>Dirección:</strong> Calle División del Norte # 190<br>
+                        Torreón, México<br>
+                        <strong>Teléfono:</strong> 871 474 0471<br>
+                        <strong>Correo:</strong> mrtacotrc@gmail.com
+                      </address>
+                      <div class="map-container">
+                        <h3 class="small-text">Ubicación en Google Maps:</h3>
+                        <img :src="mapImage" class="map-image" />
+                      </div>
+                    </div>
+                    <div class="social-media">
+                      <v-icon>mdi-facebook</v-icon>
+                      <v-icon>mdi-instagram</v-icon>
+                      <v-icon>mdi-twitter</v-icon>
+                    </div>
+                    <div class="footer-text small-text">
+                      <p>© Derechos Reservados 2024</p>
+                    </div>
+                  </div>
+                </div>
+              </H1>
             </v-sheet>
           </v-col>
         </v-row>
@@ -47,98 +91,183 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const links = ref(['Login', 'Registrarme'])
-const router = useRouter()
-const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef'])
+// Importar imágenes desde la carpeta de assets
+import hamburguesaImage from '@/assets/hamburguesa.webp';
+import tacotesImage from '@/assets/tacotes.jpg';
+import tacosImage from '@/assets/tacos.jpg';
+
+const links = ref(['Login', 'Registrarme']);
+const router = useRouter();
+const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
 
 const redirectToPage = (roleIndex) => {
   switch (roleIndex) {
     case 1:
-      router.push('/admin')
-      break
+      router.push('/admin');
+      break;
     case 2:
-      router.push('/login')
-      break
+      router.push('/login');
+      break;
     case 3:
-      router.push('/meseros')
-      break
+      router.push('/meseros');
+      break;
     case 4:
       router.push('/chef');
       router.push('/ChefLogin');
-      break
+      break;
     default:
-      break
+      break;
   }
-}
+};
 
 const handleButtonClick = (index) => {
   if (index === 0) {
-    router.push('/login')
+    router.push('/login');
   } else if (index === 1) {
-    router.push('/register')
+    router.push('/register');
   }
-}
+};
+
+const dishes = ref([
+  {
+    title: 'TACOS DORADOS',
+    description: 'Tortillas frescas rellenas con jugoso pollo marinado en especias...',
+    image: tacotesImage,
+  },
+  // Puedes agregar más platillos aquí
+]);
 
 import Video from '@/Video/Restaurante.mp4';
 </script>
 
 <style scoped>
-main {
-  background-color: gainsboro;
+.inicio-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Arial', sans-serif;
 }
 
-.texto {
-  text-align: justify;
-  padding: 20px; /* Añadiendo un padding para separar el texto de los bordes */
-}
-
-.v-carousel-item {
-  height: 100%; /* Ajusta la altura para llenar el contenedor del carrusel */
-}
-
-.child {
-  width: 100%;
-  font-size: 30px;
-  margin-left: 30px;
+.carousel-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.5);
   color: white;
+  margin-bottom: 20px;
+  position: relative;
 }
 
-.padding {
-  padding:0%;
-  
+.carousel-container.first {
+  background-image: url('@/assets/tacos.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-.padding-left {
-  padding-left: 30px;
+.carousel-container.second {
+  background-image: url('@/assets/hamburguesa.webp');
+  background-size: cover;
+  background-position: center;
 }
 
-.border-custom {
-  border: 5px solid black;
-  box-sizing: border-box; /* Asegura que el borde esté incluido en el tamaño total del contenedor */
+.carousel-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.custom-border-radius {
-  border-radius: 15px;
-  overflow: hidden;
+.carousel-button {
+  background-color: #ff4f09;
+  color: white;
+  margin-top: 20px;
 }
 
-.height-sheet {
-  height: 55vh;
+.featured-dishes {
+  background-color: #ffeb3b;
+  padding: 20px 0;
 }
 
-.custom-sheet .v-list-item {
-  border-bottom: 1px solid #ddd; /* Línea separadora entre elementos */
+.featured-title {
+  text-align: center;
+  color: #ff4f09;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.custom-sheet .v-list-item-title {
-  font-size: 18px; /* Tamaño de fuente */
-  color: #333; /* Color del texto */
+.dishes-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 0 15px;
 }
 
-.custom-sheet .v-list-item-title:hover {
-  color: #007bff; /* Color del texto al pasar el mouse */
+.dish-card {
+  background: white;
+  border: 1px solid #ff4f09;
+  border-radius: 10px;
+  padding: 10px;
+  flex: 0 0 auto;
+  width: 200px;
+  text-align: center;
+}
+
+.dish-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  padding: 20px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.map-container {
+  text-align: center;
+}
+
+.map-image {
+  width: 100%;
+  max-height: 200px;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.footer-text {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.small-text {
+  font-size: 0.8em;
+}
+
+.pa-0 {
+  padding: 0 !important;
+}
+
+.ma-0 {
+  margin: 0 !important;
+}
+
+.fill-height {
+  height: 100% !important;
 }
 </style>

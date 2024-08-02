@@ -22,7 +22,7 @@
             <v-card-title>{{ post.title }}</v-card-title>
             <v-card-text>{{ post.content }}</v-card-text>
             <v-card-actions>
-              <v-btn color="primary" @click="goToEditForm(post.id)">Editar Post</v-btn>
+              <v-btn color="error" @click="deletePost(post.id)">Eliminar Post</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -32,11 +32,13 @@
   
   <script setup>
   import BarAdmin from '@/components/barAdmin.vue';
+  import { computed } from 'vue';
   import { useRouter } from 'vue-router';
   import { usePostStore } from '@/stores/postStore';
   
   const postStore = usePostStore();
-  const posts = postStore.posts;
+  
+  const posts = computed(() => postStore.posts);
   
   const router = useRouter();
   
@@ -44,8 +46,8 @@
     router.push({ name: 'AñadirPost' });
   };
   
-  const goToEditForm = (id) => {
-    router.push({ name: 'EditarPosts', params: { id } });
+  const deletePost = (id) => {
+    postStore.deletePost(id);
   };
   </script>
   

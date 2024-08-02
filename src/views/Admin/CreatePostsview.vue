@@ -18,7 +18,7 @@
             ></v-text-field>
             <v-textarea
               label="Descripción"
-              v-model="post.description"
+              v-model="post.content"
               outlined
               required
             ></v-textarea>
@@ -60,7 +60,7 @@
   const postStore = usePostStore();
   const post = reactive({
     title: '',
-    description: '',
+    content: '',
     image: ''
   });
   const previewImage = ref(null);

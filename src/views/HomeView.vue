@@ -1,87 +1,73 @@
 <template>
   <v-app id="inspire">
-    <carrosel-global />
-    <v-app-bar app color="orange" flat>
-      <v-container class="py-0 fill-height">
-        <v-avatar class="mr-10" color="grey darken-1" size="32">HS</v-avatar>
-
-        <v-spacer></v-spacer>
-
-        <v-btn v-for="(link, index) in links" :key="link" text @click="handleButtonClick(index)">
-          {{ link }}
-        </v-btn>
-      </v-container>
-    </v-app-bar>
-
+    <bar-nav class="navbar" />
+    <div>.</div>
+    <div>.</div>
     <v-main class="main-container">
-      <v-container class="pa-0 ma-0 fill-height">
-        <v-row class="pa-0 ma-0 fill-height no-gutters">
-          <v-col cols="12" md="3" class="pa-0 ma-0">
-            <v-sheet rounded="lg" elevation="2">
-              <v-list height="100vh" class="padding" style="background-color:white;">
-                <v-list-item v-for="(role, index) in Roles" :key="index" link>
-                  <v-list-item-content>
-                    <v-list-item-title @click="redirectToPage(index + 1)">
-                      {{ role }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-sheet>
-          </v-col>
-          
-          <v-col cols="12" md="9" class="pa-0 ma-0 fill-height no-padding">
+      <v-container class="pa-0 ma-0 fill-height justify-center">
+        <v-row class="pa-0 ma-0 fill-height no-gutters justify-center">
+          <h1 class="textoinvisible">....</h1>
+          <h1 class="textoinvisible">....</h1>
+          <h1 class="textoinvisible">....</h1>
+          <h1 class="textoinvisible">....</h1>
+          <v-col ID="inicio123" class="pa-0 ma-0 fill-height justify-center no-padding">
             <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
-              <H1 class="pa-0 ma-0 fill-height no-padding">
-                <div class="inicio-container pa-0 ma-0 fill-height no-padding">
-                  <div class="carousel-container first">
-                    <div class="carousel-content">
-                      <h1>¿Cuántos tacos va a llevar, joven?</h1>
-                      <v-btn class="carousel-button">Échale un vistazo al menú</v-btn>
-                    </div>
+              <div class="inicio-container pa-0 ma-0 fill-height no-padding">
+                <div class="carousel-container first">
+                  <div class="carousel-content">
+                    <h1>¿Cuántos tacos va a llevar, joven?</h1>
+                    <v-btn class="carousel-button" @click="goToMenu">Échale un vistazo al menú</v-btn>
                   </div>
-                  <div class="carousel-container">
-                    <div class="carousel-content" id="carrusel2">
-                      <h1>Mucho sabor... Mucho color...</h1>
-                      <h2>Todo en Torreón</h2>
-                    </div>
+                </div>
+                <div class="carousel-container second">
+                  <div class="carousel-content">
+                    <h1>Mucho sabor... Mucho color...</h1>
+                    <h2>Todo en Torreón</h2>
                   </div>
+                </div>
 
-                  <div class="featured-dishes">
-                    <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
-                    <div class="dishes-carousel">
-                      <div class="dish-card" v-for="(dish, i) in dishes" :key="i">
-                        <img :src="dish.image" class="dish-image" />
-                        <h3>{{ dish.title }}</h3>
-                        <p>{{ dish.description }}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="footer">
-                    <div class="footer-content">
-                      <address class="footer-text small-text">
-                        <strong>Dirección:</strong> Calle División del Norte # 190<br>
-                        Torreón, México<br>
-                        <strong>Teléfono:</strong> 871 474 0471<br>
-                        <strong>Correo:</strong> mrtacotrc@gmail.com
-                      </address>
-                      <div class="map-container">
-                        <h3 class="small-text">Ubicación en Google Maps:</h3>
-                        <img :src="mapImage" class="map-image" />
-                      </div>
-                    </div>
-                    <div class="social-media">
-                      <v-icon>mdi-facebook</v-icon>
-                      <v-icon>mdi-instagram</v-icon>
-                      <v-icon>mdi-twitter</v-icon>
-                    </div>
-                    <div class="footer-text small-text">
-                      <p>© Derechos Reservados 2024</p>
+                <div class="featured-dishes">
+                  <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
+                  <div class="dishes-carousel">
+                    <div class="dish-card" v-for="(dish, i) in dishes" :key="i">
+                      <img :src="dish.image" class="dish-image" />
+                      <h3>{{ dish.title }}</h3>
+                      <p>{{ dish.description }}</p>
                     </div>
                   </div>
                 </div>
-              </H1>
+
+                <v-row class="justify-center mt-4">
+                  <v-btn v-for="(role, index) in Roles" :key="index" class="mx-2 role-button" @click="redirectToPage(index + 1)">
+                    {{ role }}
+                  </v-btn>
+                </v-row>
+
+                <div class="footer">
+                  <div class="footer-content">
+                    <address class="footer-text small-text">
+                      <strong>Dirección:</strong> Calle División del Norte # 190<br>
+                      Torreón, México<br>
+                      <strong>Teléfono:</strong> 871 474 0471<br>
+                      <strong>Correo:</strong> mrtacotrc@gmail.com
+                    </address>
+                    <div class="map-container">
+                      <h3 class="small-text">Ubicación en Google Maps:</h3>
+                      <a href="https://maps.app.goo.gl/rjmG3bGY1mq3MD1P6" target="_blank">
+                        <img :src="mapImage" class="map-image" />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="social-media">
+                    <v-icon>mdi-facebook</v-icon>
+                    <v-icon>mdi-instagram</v-icon>
+                    <v-icon>mdi-twitter</v-icon>
+                  </div>
+                  <div class="footer-text small-text">
+                    <p>© Derechos Reservados 2024</p>
+                  </div>
+                </div>
+              </div>
             </v-sheet>
           </v-col>
         </v-row>
@@ -94,10 +80,15 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+// Importar el componente de la barra de navegación
+import barNav from '@/components/barNav.vue';
+
 // Importar imágenes desde la carpeta de assets
 import hamburguesaImage from '@/assets/hamburguesa.webp';
 import tacotesImage from '@/assets/tacotes.jpg';
 import tacosImage from '@/assets/tacos.jpg';
+import maderadoImage from '@/assets/maderado.jpg';
+import ubicacionImage from '@/assets/ubicacion.png';
 
 const links = ref(['Login', 'Registrarme']);
 const router = useRouter();
@@ -131,6 +122,10 @@ const handleButtonClick = (index) => {
   }
 };
 
+const goToMenu = () => {
+  router.push('/menu');
+};
+
 const dishes = ref([
   {
     title: 'TACOS DORADOS',
@@ -140,14 +135,44 @@ const dishes = ref([
   // Puedes agregar más platillos aquí
 ]);
 
+const mapImage = ubicacionImage;
+
 import Video from '@/Video/Restaurante.mp4';
 </script>
 
 <style scoped>
+
+.main-container {
+  background-image: url('@/assets/maderado.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.textoinvisible
+{
+  visibility: hidden;
+}
+
+#inicio123
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Asegura que esté al frente */
+}
+
 .inicio-container {
   display: flex;
   flex-direction: column;
   font-family: 'Arial', sans-serif;
+  height: 100%;
+  width: 100%;
+  margin-top: 64px; /* Ajusta según la altura del navBar */
 }
 
 .carousel-container {
@@ -269,5 +294,25 @@ import Video from '@/Video/Restaurante.mp4';
 
 .fill-height {
   height: 100% !important;
+}
+
+.no-gutters {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  > .v-col {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+.main-container {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.role-button {
+  min-width: 100px;
+  margin: 5px;
 }
 </style>

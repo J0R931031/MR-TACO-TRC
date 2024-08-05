@@ -4,18 +4,18 @@
     <div>.</div>
     <div>.</div>
     <v-main class="main-container">
-      <v-container class="pa-0 ma-0 fill-height justify-center">
+      <v-container  class="pa-0 ma-0 fill-height justify-center">
         <v-row class="pa-0 ma-0 fill-height no-gutters justify-center">
           <h1 class="textoinvisible">....</h1>
           <h1 class="textoinvisible">....</h1>
           <h1 class="textoinvisible">....</h1>
           <h1 class="textoinvisible">....</h1>
-          <v-col ID="inicio123" class="pa-0 ma-0 fill-height justify-center no-padding">
+          <v-col ID="inicio123"  class="pa-0 ma-0 fill-height justify-center no-padding">
             <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
-              <div class="inicio-container pa-0 ma-0 fill-height no-padding">
+              <div style="background-color: black;"  class="inicio-container pa-0 ma-0 fill-height no-padding">
                 <div class="carousel-container first">
                   <div class="carousel-content">
-                    <h1>¿Cuántos tacos va a llevar, joven?</h1>
+                    <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">¿Cuántos tacos va a llevar, joven?</h1>
                     <v-btn class="carousel-button" @click="goToMenu">Échale un vistazo al menú</v-btn>
                   </div>
                 </div>
@@ -161,12 +161,14 @@ import Video from '@/Video/Restaurante.mp4';
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000; /* Asegura que esté al frente */
+  z-index: 1000;
+   /* Asegura que esté al frente */
 }
 
 .inicio-container {
@@ -214,7 +216,7 @@ import Video from '@/Video/Restaurante.mp4';
 }
 
 .featured-dishes {
-  background-color: #ffeb3b;
+  background-color: #422e13b2;
   padding: 20px 0;
 }
 
@@ -234,7 +236,7 @@ import Video from '@/Video/Restaurante.mp4';
 
 .dish-card {
   background: white;
-  border: 1px solid #ff4f09;
+  border: 3px solid #ff6600;
   border-radius: 10px;
   padding: 10px;
   flex: 0 0 auto;

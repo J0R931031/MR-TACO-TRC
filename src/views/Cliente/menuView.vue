@@ -18,8 +18,8 @@
           <h1 style="padding-left: 80px; font-size: 25px;">$152.00</h1>
         </v-col>
         <v-col cols="4" class="bordered">
-          <h1>PECHUGA A LA PLANCHA</h1>
-          <v-img  style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 295px; border: solid 3px black;" :src="pollo" contain></v-img>
+          <h1 style="color:  #ff4f09;">PECHUGA A LA PLANCHA</h1>
+          <v-img  style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 265px; border: solid 3px wheat;" :src="pollo" contain></v-img>
          
           <h2>Fajitas de pollo acompañado <br> de verduras en vinagre, <br> ensalada y deliciosa pasta.</h2>
           <h1 style="width: 12px; padding-left: 70px; margin-top: 40px; font-size: 25px;">$152.00</h1>   
@@ -31,11 +31,10 @@
         
           <h2>Tacos de pescado acompañados<br>de salchicha asada, <br> ensalada y cebolla asada</h2>
           <h1 style="padding-left: 80px; font-size: 25px;">$90.00</h1>
-        </v-col><v-col cols="4" class="bordered">
+        </v-col><v-col cols="4" class="bordered" style="color:aliceblue;">
           <h1>GRINGA CARNE ASADA</h1>
           <v-img  style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 295px; border: solid 3px black;" :src="gringa" contain></v-img>
-         
-       
+           
           <h2>Tortilla de harina gigante con <br> carne asada y queso, <br> acompañada de ensalada</h2>
           <h1 style="padding-left: 80px; font-size: 25px;">$150.00</h1>
         </v-col>
@@ -93,9 +92,9 @@
        </v-row>
       </v-row>
 
-         <v-row justify="center">
+      <v-row justify="center" style="height: 100px; width:700px;">
           <RouterLink to="/reserva"><v-col  cols="2" class="boton"><button @click="ordenar" style="color: black; margin-left:-5px;" >ORDENAR</button> </v-col></RouterLink>
-          </v-row>     
+      </v-row>     
     </div>
    </div>
 
@@ -114,6 +113,10 @@ import  hamburgesa from '@/assets/hamburgesa.jpeg';
 <style scoped>
 .menu-container {
   position: relative;
+  background-image: url('@/assets/maderado.jpg'); /* Ruta a la imagen de fondo */
+  background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
+  background-position: center; /* Centra la imagen de fondo */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 .content-container {
   margin-top: 70px;
@@ -129,30 +132,31 @@ import  hamburgesa from '@/assets/hamburgesa.jpeg';
   margin: 40px;
   width: 400px;
   height: 200px;
-  background-color: white;
+  background-color: rgb(10, 10, 10);
 }
 .guiso{
   border: 2px solid #ff4f09;
   border-radius: 15px;
   margin: 80px;
   height: 300px;
+  background-color: #010702;
+  color: wheat
 }
 h1 {
   font-family: monospace;
   font-size: 20px;
   margin: 10px;
+  color: #f3e8e8;
 }
 h2 {
   font-family: monospace;
   font-size: 15px;
-  color: #808080;
+  color: #f3e8e8;
   margin: 0%;
 }
 .boton{
   border: 2px solid #ff4f09;
   border-radius: 15px;
-  height: 100px;
-  width:700px;
   background-color: #ff4f09;
   font-family: monospace;
   font-size: 50px;

@@ -1,4 +1,3 @@
-
 <template>
   <chefBar></chefBar>
   <v-table theme="dark" height="350px" width="1500px" style="width: 1000px; margin-left: 250px;">
@@ -15,7 +14,7 @@
     <tbody>
       <tr v-for="item in desserts" :key="item.norden">
         <td>
-          <button style="border: 2px salmon solid; background-color: #ff4f09; width: 70px; border-radius: 15px;">Ver</button>
+          <button @click="showDetails(item.norden)" style="border: 2px salmon solid; background-color: #ff4f09; width: 70px; border-radius: 15px;">Ver</button>
         </td>
         <td>{{ item.norden }}</td>
         <td>{{ item.cliente }}</td>
@@ -23,32 +22,43 @@
         <td>{{ item.hora }}</td>
         <td :class="getStatusClass(item.estadord)">
           {{ item.estadord }}
-          <v-btn
-            style="border: 2px salmon solid; background-color: #ff4f09; width: 150px; border-radius: 15px; margin-left: 20px; color: white;"
-            @click="openDialog(item)"
-          >
-            Cambiar estatus
-          </v-btn>
         </td>
       </tr>
     </tbody>
   </v-table>
 
-  <!-- Dialogo para seleccionar nuevo estatus -->
-  <v-dialog v-model="dialog" max-width="290">
+  <!-- Tabla de detalles para la orden seleccionada -->
+  <v-table v-if="selectedOrderDetails.length" theme="dark" height="350px" width="1500px" style="width: 1000px; margin-left: 250px; margin-top: 20px;">
+    <thead style="background-color: #ff4f09;">
+      <tr>
+        <th class="text-left">Nombre Platillo</th>
+        <th class="text-left">Cantidad</th>
+        <th class="text-left">Especificaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="detail in selectedOrderDetails" :key="detail.id">
+        <td>{{ detail.norden }}</td>
+        <td>{{ detail.cantidad }}</td>
+        <td>
+          <button @click="viewDetails(detail)" style="border: 2px salmon solid; background-color: #ff4f09; width: 70px; border-radius: 15px;">Ver</button>
+        </td>
+      </tr>
+    </tbody>
+  </v-table>
+
+  <!-- Dialogo para ver especificaciones -->
+  <v-dialog v-model="detailDialog" max-width="290">
     <v-card>
-      <v-card-title class="headline">Seleccionar Estatus</v-card-title>
+      <v-card-title class="headline">Detalles</v-card-title>
       <v-card-text>
-        <v-select
-          v-model="selectedStatus"
-          :items="statusOptions"
-          label="Estatus"
-        ></v-select>
+        <p><strong>Nombre Platillo:</strong> {{ selectedDetail.norden }}</p>
+        <p><strong>Cantidad:</strong> {{ selectedDetail.cantidad }}</p>
+        <p><strong>Especificaciones:</strong> {{ selectedDetail.especificaciones }}</p>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" @click="updateStatus">Actualizar</v-btn>
-        <v-btn text @click="closeDialog">Cancelar</v-btn>
+        <v-btn text @click="closeDetailDialog">Cerrar</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -56,8 +66,9 @@
 
 <script setup>
 import chefBar from '@/components/chefBar.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
+// Datos de los pedidos
 const desserts = ref([
   {
     norden: 1001,
@@ -82,29 +93,44 @@ const desserts = ref([
   },
 ]);
 
-const dialog = ref(false);
-const selectedStatus = ref('');
-const currentItem = ref(null);
+// Datos de los detalles del pedido
+const orderDetails = ref([
+  { id: 1, norden: 1001, cantidad: 3, especificaciones: 'Envío urgente' },
+  { id: 2, norden: 1001, cantidad: 2, especificaciones: 'Sin gluten' },
+  { id: 3, norden: 1002, cantidad: 1, especificaciones: 'Con chocolate extra' },
+  { id: 4, norden: 1003, cantidad: 5, especificaciones: 'Con notas de vainilla' },
+]);
 
-const statusOptions = ['Proceso', 'Pendiente', 'Completado', 'Concluido'];
+// Estados de los componentes
+const selectedOrder = ref(null);
+const selectedDetail = ref(null);
+const detailDialog = ref(false);
 
-function openDialog(item) {
-  currentItem.value = item;
-  selectedStatus.value = item.estadord;
-  dialog.value = true;
-}
-
-function closeDialog() {
-  dialog.value = false;
-}
-
-function updateStatus() {
-  if (currentItem.value) {
-    currentItem.value.estadord = selectedStatus.value;
-    closeDialog();
+// Filtra los detalles según la orden seleccionada
+const selectedOrderDetails = computed(() => {
+  if (selectedOrder.value) {
+    return orderDetails.value.filter(detail => detail.norden === selectedOrder.value);
   }
+  return [];
+});
+
+// Función para mostrar detalles de la orden
+function showDetails(norden) {
+  selectedOrder.value = norden;
 }
 
+// Función para ver especificaciones de un detalle
+function viewDetails(detail) {
+  selectedDetail.value = detail;
+  detailDialog.value = true;
+}
+
+// Función para cerrar el diálogo de detalles
+function closeDetailDialog() {
+  detailDialog.value = false;
+}
+
+// Función para obtener la clase de estado
 function getStatusClass(status) {
   if (status === 'Concluido') return 'status-concluido';
   if (status === 'Pendiente') return 'status-pendiente';
@@ -130,3 +156,4 @@ function getStatusClass(status) {
   color: orange;
 }
 </style>
+  

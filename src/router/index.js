@@ -11,6 +11,8 @@ import RegAdmin from '@/views/Admin/regAdminview.vue';
 import PostAdmin from '@/views/Admin/postAdminView.vue';
 import Meseros from '@/views/Mesero/meseroInicioview.vue';
 import Chef from '@/views/Chef/chefIniciView.vue';
+import ChefLogin from '@/views/Chef/chefloginView.vue';
+import ChefOrden from '@/views/Chef/chefordenView.vue';
 import Editar from '@/views/Admin/perfilAdminview.vue';
 import CreatePostsView from '@/views/Admin/CreatePostsview.vue';
 
@@ -74,6 +76,16 @@ const routes = [
     path: '/chef',
     name: 'Chef',
     component: Chef
+  },
+  {
+    path: '/cheflogin',
+    name: 'ChefLogin',
+    component: ChefLogin
+  },
+  {
+    path: '/cheforden',
+    name: 'ChefOrden',
+    component: ChefOrden
   },
   {
     path: '/editar',

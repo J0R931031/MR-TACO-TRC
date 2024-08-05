@@ -3,7 +3,7 @@
   <chefBar></chefBar>
 
   <v-row>
-    <V-col style="position: absolute; margin-left: 170px;">
+    <V-col style="position: absolute; margin-left: 150px;">
                 <v-img :src="logochef" style="width: 500px; height: 700px; "></v-img>
               </V-col>
   </v-row>

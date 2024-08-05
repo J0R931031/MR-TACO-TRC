@@ -1,5 +1,5 @@
 <script setup>
-import { RouterView, RouterLink } from 'vue-router';
+import { RouterView } from 'vue-router';
 import logo from '@/assets/mr-taco.png';  
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
@@ -11,11 +11,14 @@ const showSubMenu = ref(false);
 const toggleSubMenu = () => {
   showSubMenu.value = !showSubMenu.value;
 };
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 </script>
 
 <template>
-  <div class="menu-container"
-  >
+  <div class="menu-container">
     <v-row class="menu" align="center" justify="center">
       <v-col class="menu-item" cols="1" align="start">
         <RouterLink to="/" class="menu-item" :class="{ selected: isSelected('/') }">Inicio</RouterLink>
@@ -31,7 +34,7 @@ const toggleSubMenu = () => {
         </div>
       </v-col>
       <v-col class="logo-container" cols="2" align="start">
-        <v-img class="logo" :src="logo" contain></v-img>
+        <v-img class="logo" :src="logo" contain @click="scrollToTop"></v-img>
       </v-col>
       <v-col class="menu-item" cols="2" align="center">
         <RouterLink to="/reg" class="menu-item" :class="{ selected: isSelected('/reg') }">Registrarse</RouterLink>
@@ -62,7 +65,7 @@ const toggleSubMenu = () => {
 
 }
 
-.menu-item {
+.menu-item{
   color: white;
   font-size: 30px;
   text-align: center;
@@ -70,10 +73,7 @@ const toggleSubMenu = () => {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   border: 1px solid transparent; 
   border-radius: 100px; 
-  padding: 2px 10px; 
- 
-
-}
+  padding: 2px 10px; }
 
 .menu-item.selected { 
   background-color: rgb(255, 136, 0); 
@@ -94,7 +94,7 @@ const toggleSubMenu = () => {
   padding: 5.5%;
   width: 200px; 
   position: absolute;
-  top: 10px;
+  top: 1px;
   transform: translate(-20%, 1%);
 }
 

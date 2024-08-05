@@ -3,9 +3,9 @@ import { defineStore } from 'pinia';
 
 export const useProfileStore = defineStore('profile', {
   state: () => ({
-    profileImage: '@/assets/RICHI-PELON.jpg',
-    name: '',
-    email: ''
+    profileImage: '@/assets/hamburguesa.webp',
+    name: 'Admin',
+    email: 'admin@gmail.com'
   }),
   actions: {
     setProfileImage(image) {

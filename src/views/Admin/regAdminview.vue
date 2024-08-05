@@ -125,7 +125,7 @@
                           ></v-img>
                           <v-icon v-else>mdi-camera</v-icon>
                         </v-sheet>
-                        <v-btn color="orange" class="mt-4" @click="selectImage">Ingresar Empleado</v-btn>
+                        <v-btn color="orange" class="mt-4" @click="selectImage">Ingresar Imagen</v-btn>
                         <input type="file" ref="fileInput" @change="onFileChange" class="d-none" accept="image/*">
                       </v-col>
                     </v-row>

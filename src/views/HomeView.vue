@@ -21,8 +21,11 @@
                 </div>
                 <div class="carousel-container second">
                   <div class="carousel-content">
-                    <h1 :style="{ color: 'white', textShadow: '3px 3px 1px black' }">Mucho sabor... Mucho color...</h1>
-                    <h2 :style="{ color: 'white', textShadow: '3px 3px 1px black' }">Todo en Torreón</h2>
+                    <h1>Mucho sabor... Mucho color...</h1>
+                    <p>Etiqueta de recuerdo para modificar imagen</p>
+                    <p>Y crear flexbox en cada contenedor</p>
+                    <p>Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
+                    <h2>Todo en Torreón</h2>
                   </div>
                 </div>
 

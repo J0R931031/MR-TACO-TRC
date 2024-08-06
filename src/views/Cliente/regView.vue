@@ -135,10 +135,6 @@ const formData = ref({
   password: ''
 });
 
-const rules = {
-  required: value => !!value || 'Requerido.',
-  min: v => (v && v.length >= 8) || 'Mínimo 8 caracteres'
-};
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;

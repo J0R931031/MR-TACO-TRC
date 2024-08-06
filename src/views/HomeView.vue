@@ -139,7 +139,6 @@ const goToMenu = () => {
 
 const mapImage = ubicacionImage;
 
-import Video from '@/Video/Restaurante.mp4';
 </script>
 
 <style scoped>

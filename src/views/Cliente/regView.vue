@@ -117,7 +117,6 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import '@mdi/font/css/materialdesignicons.css'; // Asegúrate de importar los íconos de Material Design
 
 import barNav from '@/components/barNav.vue';
 

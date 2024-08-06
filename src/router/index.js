@@ -15,6 +15,7 @@ import ChefLogin from '@/views/Chef/chefloginView.vue';
 import ChefOrden from '@/views/Chef/chefordenView.vue';
 import Editar from '@/views/Admin/perfilAdminview.vue';
 import CreatePostsView from '@/views/Admin/CreatePostsview.vue';
+import HistorialView from '@/views/Mesero/historialView.vue';
 
 const routes = [
   {
@@ -97,6 +98,12 @@ const routes = [
     name: 'AñadirPost',
     component: CreatePostsView
   },
+  {
+    path: '/historial',
+    name: 'Historial',
+    component: HistorialView,
+  },
+
 ];
 
 const router = createRouter({

@@ -32,10 +32,10 @@
                 <div class="featured-dishes">
                   <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
                   <div class="dishes-carousel">
-                    <div class="dish-card" v-for="(dish, i) in dishes" :key="i">
-                      <img :src="dish.image" class="dish-image" />
-                      <h3>{{ dish.title }}</h3>
-                      <p>{{ dish.description }}</p>
+                    <div class="dish-card" v-for="post in posts" :key="post.id">
+                      <img :src="post.image" class="dish-image" />
+                      <h3>{{ post.title }}</h3>
+                      <p>{{ post.content }}</p>
                     </div>
                   </div>
                 </div>
@@ -80,27 +80,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-
-// Importar el componente de la barra de navegación
+import { usePostStore } from '@/stores/postStore';
 import barNav from '@/components/barNav.vue';
 
 // Importar imágenes desde la carpeta de assets
-import hamburguesaImage from '@/assets/hamburguesa.webp';
-import tacotesImage from '@/assets/tacotes.jpg';
-import tacosImage from '@/assets/tacos.jpg';
-import maderadoImage from '@/assets/maderado.jpg';
 import ubicacionImage from '@/assets/ubicacion.png';
 
-const links = ref(['Login', 'Registrarme']);
 const router = useRouter();
 const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
+
+const postStore = usePostStore();
+const posts = computed(() => postStore.posts);
 
 const redirectToPage = (roleIndex) => {
   switch (roleIndex) {
     case 1:
-      router.push('/admin');
+      router.push('/posts');
       break;
     case 2:
       router.push('/login');
@@ -110,18 +107,9 @@ const redirectToPage = (roleIndex) => {
       break;
     case 4:
       router.push('/chef');
-      router.push('/ChefLogin');
       break;
     default:
       break;
-  }
-};
-
-const handleButtonClick = (index) => {
-  if (index === 0) {
-    router.push('/login');
-  } else if (index === 1) {
-    router.push('/register');
   }
 };
 
@@ -129,46 +117,32 @@ const goToMenu = () => {
   router.push('/menu');
 };
 
-const dishes = ref([
-  {
-    title: 'TACOS DORADOS',
-    description: 'Tortillas frescas rellenas con jugoso pollo marinado en especias...',
-    image: tacotesImage,
-  },
-  // Puedes agregar más platillos aquí
-]);
-
 const mapImage = ubicacionImage;
-
-import Video from '@/Video/Restaurante.mp4';
 </script>
 
 <style scoped>
-
 .main-container {
   background-image: url('@/assets/maderado.jpg');
   background-size: cover;
   background-position: center;
 }
 
-.textoinvisible
-{
+.textoinvisible {
   visibility: hidden;
 }
 
-#inicio123
-{
+#inicio123 {
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
+
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-   /* Asegura que esté al frente */
+  /* Asegura que esté al frente */
 }
 
 .inicio-container {

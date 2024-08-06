@@ -3,13 +3,13 @@ import { defineStore } from 'pinia';
 
 export const useProfileStore = defineStore('profile', {
   state: () => ({
-    profileImage: '@/assets/hamburguesa.webp',
+    profileImage: '../assets/RICHI-PELON.jpg',
     name: 'Admin',
     email: 'admin@gmail.com'
   }),
   actions: {
-    setProfileImage(image) {
-      this.profileImage = image;
+    setProfileImage(profileImage) {
+      this.profileImage = profileImage;
     },
     setProfileInfo(name, email) {
       this.name = name;

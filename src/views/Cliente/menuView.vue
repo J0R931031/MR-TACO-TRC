@@ -89,11 +89,13 @@
             <li>Zanahoria </li>
             <li>Chorreado</li>
         </v-col>
+ 
        </v-row>
       </v-row>
       <v-col cols="2" class="boton" style="height: 100px; width:700px; background-color: #ff4f09;">
           <RouterLink to="/reserva"><button @click="ordenar" style="color: black; margin-left:-5px;" >ORDENAR</button>
-          </RouterLink> </v-col>
+          </RouterLink> 
+        </v-col>
      
     </div>
    </div>

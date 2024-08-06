@@ -19,6 +19,12 @@ export const usePostStore = defineStore('postStore', {
       post.id = this.posts.length + 1;
       this.posts.push(post);
     },
+    updatePost(updatedPost) {
+      const index = this.posts.findIndex(post => post.id === updatedPost.id);
+      if (index !== -1) {
+        this.posts[index] = { ...updatedPost };
+      }
+    },
     deletePost(id) {
       this.posts = this.posts.filter(post => post.id !== id);
     }

@@ -21,11 +21,11 @@
                 </div>
                 <div class="carousel-container second">
                   <div class="carousel-content">
-                    <h1>Mucho sabor... Mucho color...</h1>
-                    <p>Etiqueta de recuerdo para modificar imagen</p>
-                    <p>Y crear flexbox en cada contenedor</p>
-                    <p>Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
-                    <h2>Todo en Torreón</h2>
+                    <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Mucho sabor... Mucho color...</h1>
+                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Etiqueta de recuerdo para modificar imagen</p>
+                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Y crear flexbox en cada contenedor</p>
+                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
+                    <h2 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Todo en Torreón</h2>
                   </div>
                 </div>
 
@@ -62,9 +62,13 @@
                     </div>
                   </div>
                   <div class="social-media">
-                    <v-icon>mdi-facebook</v-icon>
-                    <v-icon>mdi-instagram</v-icon>
-                    <v-icon>mdi-twitter</v-icon>
+                    <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
+                      <img src="@/assets/instagram.jpeg" alt="Instagram" />
+                    </button>
+                    <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
+                      <img src="@/assets/facebook.webp" alt="Facebook" />
+                    </button>
+                    <span>@MRTacoTRC</span>
                   </div>
                   <div class="footer-text small-text">
                     <p>© Derechos Reservados 2024</p>
@@ -86,7 +90,14 @@ import { usePostStore } from '@/stores/postStore';
 import barNav from '@/components/barNav.vue';
 
 // Importar imágenes desde la carpeta de assets
+import hamburguesaImage from '@/assets/hamburguesa.webp';
+import tacotesImage from '@/assets/tacotes.jpg';
+import tacosImage from '@/assets/tacos.jpg';
+import maderadoImage from '@/assets/maderado.jpg';
 import ubicacionImage from '@/assets/ubicacion.png';
+import instagramImage from '@/assets/instagram.jpeg';
+import facebookImage from '@/assets/facebook.webp';
+
 
 const router = useRouter();
 const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
@@ -107,9 +118,18 @@ const redirectToPage = (roleIndex) => {
       break;
     case 4:
       router.push('/chef');
+      router.push('/ChefLogin');
       break;
     default:
       break;
+  }
+};
+
+const handleButtonClick = (index) => {
+  if (index === 0) {
+    router.push('/login');
+  } else if (index === 1) {
+    router.push('/register');
   }
 };
 
@@ -118,6 +138,8 @@ const goToMenu = () => {
 };
 
 const mapImage = ubicacionImage;
+
+import Video from '@/Video/Restaurante.mp4';
 </script>
 
 <style scoped>
@@ -135,6 +157,7 @@ const mapImage = ubicacionImage;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .navbar {
@@ -256,11 +279,14 @@ const mapImage = ubicacionImage;
 
 .footer-text {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
+ padding-top: 15px;
+
 }
 
 .small-text {
   font-size: 0.8em;
+ 
 }
 
 .pa-0 {
@@ -293,5 +319,10 @@ const mapImage = ubicacionImage;
 .role-button {
   min-width: 100px;
   margin: 5px;
+}
+
+.footer .social-media img {
+  width: 40px;
+  margin-right: 10px;
 }
 </style>

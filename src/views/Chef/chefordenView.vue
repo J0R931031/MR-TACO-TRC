@@ -72,6 +72,7 @@ import { ref, computed } from 'vue';
 const desserts = ref([
   {
     norden: 1001,
+    nplatillos: "Orden de Tacos",
     cliente: 'Mariana',
     fecha: '01/01/24',
     hora: '03:00',
@@ -95,10 +96,9 @@ const desserts = ref([
 
 // Datos de los detalles del pedido
 const orderDetails = ref([
-  { id: 1, norden: 1001, cantidad: 3, especificaciones: 'Envío urgente' },
-  { id: 2, norden: 1001, cantidad: 2, especificaciones: 'Sin gluten' },
-  { id: 3, norden: 1002, cantidad: 1, especificaciones: 'Con chocolate extra' },
-  { id: 4, norden: 1003, cantidad: 5, especificaciones: 'Con notas de vainilla' },
+  { id: 1, nplatillos: "Orden de Tacos", cantidad: 3, especificaciones: 'Envío urgente' },
+  { id: 2, norden: 1002, cantidad: 1, especificaciones: 'Con chocolate extra' },
+  { id: 3, norden: 1003, cantidad: 5, especificaciones: 'Con notas de vainilla' },
 ]);
 
 // Estados de los componentes

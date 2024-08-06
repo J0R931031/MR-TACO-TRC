@@ -90,14 +90,8 @@ import { usePostStore } from '@/stores/postStore';
 import barNav from '@/components/barNav.vue';
 
 // Importar imágenes desde la carpeta de assets
-import hamburguesaImage from '@/assets/hamburguesa.webp';
-import tacotesImage from '@/assets/tacotes.jpg';
-import tacosImage from '@/assets/tacos.jpg';
-import maderadoImage from '@/assets/maderado.jpg';
-import ubicacionImage from '@/assets/ubicacion.png';
-import instagramImage from '@/assets/instagram.jpeg';
-import facebookImage from '@/assets/facebook.webp';
 
+import ubicacionImage from '@/assets/ubicacion.png';
 
 const router = useRouter();
 const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
@@ -118,20 +112,13 @@ const redirectToPage = (roleIndex) => {
       break;
     case 4:
       router.push('/chef');
-      router.push('/ChefLogin');
+      router.push('/ChefOrden');
       break;
     default:
       break;
   }
 };
 
-const handleButtonClick = (index) => {
-  if (index === 0) {
-    router.push('/login');
-  } else if (index === 1) {
-    router.push('/register');
-  }
-};
 
 const goToMenu = () => {
   router.push('/menu');

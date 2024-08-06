@@ -34,7 +34,7 @@ const scrollToTop = () => {
         </div>
       </v-col>
       <v-col class="logo-container" cols="2" align="start">
-        <v-img class="logo" :src="logo" contain @click="scrollToTop"></v-img>
+        <v-img style="color: blackn;" class="logo" :src="logo" contain @click="scrollToTop"></v-img>
       </v-col>
       <v-col class="menu-item" cols="2" align="center">
         <RouterLink to="/reg" class="menu-item" :class="{ selected: isSelected('/reg') }">Registrarse</RouterLink>
@@ -87,6 +87,7 @@ const scrollToTop = () => {
   margin: 0%;
   text-align: center;
   height: 80px;
+ 
 }
 
 .logo {
@@ -95,6 +96,7 @@ const scrollToTop = () => {
   position: absolute;
   top: 1px;
   transform: translate(-20%, 1%);
+
 }
 
 .submenu {

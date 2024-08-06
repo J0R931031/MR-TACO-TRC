@@ -108,11 +108,13 @@
     </div>
     <footer class="footer">
       <div class="social-media">
-        <img src="@/assets/instagram.jpeg" alt="Instagram" />
+        <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
+          <img src="@/assets/instagram.jpeg" alt="Instagram" />
+        </button>
         <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
           <img src="@/assets/facebook.webp" alt="Facebook" />
         </button>
-        <img src="@/assets/twitter.webp" alt="Twitter" />
+
         <span>@MRTacoTRC</span>
       </div>
       <div class="rights-reserved">
@@ -132,7 +134,11 @@ import tostadas from '@/assets/tostadas.jpg';
 import hamburgesa from '@/assets/hamburgesa.jpeg';
 
 const redirectToFacebook = () => {
-  window.location.href = 'https://www.facebook.com/share/ccFcZD2wrEKeNgu9/?mibextid=LQQJ4d';
+  window.location.href = 'https://www.facebook.com/Mr.Tacotorreon?mibextid=LQQJ4d';
+};
+
+const redirectToInstagram = () => {
+  window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
 };
 </script>
 
@@ -229,7 +235,7 @@ h2 {
   width: 100%;
 }
 .social-media img {
-  width: 30px;
+  width: 40px;
   margin-right: 10px;
 }
 .rights-reserved {

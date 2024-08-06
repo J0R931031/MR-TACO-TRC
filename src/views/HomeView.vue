@@ -84,10 +84,9 @@ import { useRouter } from 'vue-router';
 import barNav from '@/components/barNav.vue';
 
 // Importar imágenes desde la carpeta de assets
-import hamburguesaImage from '@/assets/hamburguesa.webp';
+
 import tacotesImage from '@/assets/tacotes.jpg';
-import tacosImage from '@/assets/tacos.jpg';
-import maderadoImage from '@/assets/maderado.jpg';
+
 import ubicacionImage from '@/assets/ubicacion.png';
 
 const links = ref(['Login', 'Registrarme']);
@@ -137,7 +136,7 @@ const dishes = ref([
 
 const mapImage = ubicacionImage;
 
-import Video from '@/Video/Restaurante.mp4';
+
 </script>
 
 <style scoped>
@@ -158,6 +157,7 @@ import Video from '@/Video/Restaurante.mp4';
   display: flex;
   justify-content: center;
   align-items: center;
+  
   
 }
 .navbar {

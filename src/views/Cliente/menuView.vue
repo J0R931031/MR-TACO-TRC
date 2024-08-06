@@ -1,6 +1,6 @@
 <template>
    <div class="menu-container">
-    <BarNav />
+    <bar-nav class="navbar" />
     <v-row class="menu" align="center" justify="center"></v-row>
     <div style="margin-top: 20px; " class="content-container">
       <v-row  justify="center">
@@ -19,7 +19,7 @@
         </v-col>
         <v-col cols="4" class="bordered">
           <h1>PECHUGA A LA PLANCHA</h1>
-          <v-img  style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 295px; border: solid 3px black;" :src="pollo" contain></v-img>
+          <v-img  style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 280px; border: solid 3px black;" :src="pollo" contain></v-img>
          
           <h2>Fajitas de pollo acompañado <br> de verduras en vinagre, <br> ensalada y deliciosa pasta.</h2>
           <h1 style="width: 12px; padding-left: 70px; margin-top: 40px; font-size: 25px;">$152.00</h1>   
@@ -41,7 +41,7 @@
         </v-col>
         <v-col cols="4" class="bordered">
           <h1>ORDEN DE TOSTADAS(3Pz)</h1>
-          <v-img  style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 295px; border: solid 3px black;" :src="tostadas" contain></v-img>
+          <v-img  style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 290px; border: solid 3px black;" :src="tostadas" contain></v-img>
          
    
           <h2>Deliciosas tostadas en una cama<br>de frijoles con el guiso<br>de su eleccion, acompañado de<br> ensalada, cueritos, queso y crema.</h2>
@@ -102,7 +102,7 @@
 </template>
 
 <script setup>
-import BarNav from '@/components/barNav.vue';
+import barNav from '@/components/barNav.vue';
 import tacos from '@/assets/tacos.jpg';
 import pollo from '@/assets/pollo.jpeg';
 import  pescado from '@/assets/tacos de pescado.jpeg';
@@ -114,6 +114,7 @@ import  hamburgesa from '@/assets/hamburgesa.jpeg';
 <style scoped>
 .menu-container {
   position: relative;
+  
 }
 .content-container {
   margin-top: 70px;
@@ -121,7 +122,7 @@ import  hamburgesa from '@/assets/hamburgesa.jpeg';
 .title h1 {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 33px;
-  padding-top: 50px;
+  padding-top: 150px;
 }
 .bordered {
   border: 2px solid #ff4f09;
@@ -167,6 +168,14 @@ h2 {
   position: absolute;
   border: 2px solid black;
 }
+  
 
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+   /* Asegura que esté al frente */
+}
 
 </style>

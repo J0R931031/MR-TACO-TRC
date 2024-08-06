@@ -21,8 +21,11 @@
                 </div>
                 <div class="carousel-container second">
                   <div class="carousel-content">
-                    <h1 :style="{ color: 'white', textShadow: '3px 3px 1px black' }">Mucho sabor... Mucho color...</h1>
-                    <h2 :style="{ color: 'white', textShadow: '3px 3px 1px black' }">Todo en Torreón</h2>
+                    <h1>Mucho sabor... Mucho color...</h1>
+                    <p>Etiqueta de recuerdo para modificar imagen</p>
+                    <p>Y crear flexbox en cada contenedor</p>
+                    <p>Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
+                    <h2>Todo en Torreón</h2>
                   </div>
                 </div>
 
@@ -84,12 +87,16 @@ import { useRouter } from 'vue-router';
 import barNav from '@/components/barNav.vue';
 
 // Importar imágenes desde la carpeta de assets
+<<<<<<< HEAD
 
 import tacotesImage from '@/assets/tacotes.jpg';
 
+=======
+import tacotesImage from '@/assets/tacotes.jpg';
+>>>>>>> e967b2484c65247434e9c8b575245d4216a1989f
 import ubicacionImage from '@/assets/ubicacion.png';
 
-const links = ref(['Login', 'Registrarme']);
+
 const router = useRouter();
 const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
 
@@ -106,20 +113,13 @@ const redirectToPage = (roleIndex) => {
       break;
     case 4:
       router.push('/chef');
-      router.push('/ChefLogin');
+      router.push('/ChefOrden');
       break;
     default:
       break;
   }
 };
 
-const handleButtonClick = (index) => {
-  if (index === 0) {
-    router.push('/login');
-  } else if (index === 1) {
-    router.push('/register');
-  }
-};
 
 const goToMenu = () => {
   router.push('/menu');
@@ -136,7 +136,10 @@ const dishes = ref([
 
 const mapImage = ubicacionImage;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e967b2484c65247434e9c8b575245d4216a1989f
 </script>
 
 <style scoped>

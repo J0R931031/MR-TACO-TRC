@@ -72,6 +72,8 @@
                       label="Contraseña"
                       outlined
                       @click:append="togglePasswordVisibility"
+                      hint="Al menos 8 caracteres"
+                      class="white-icon"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -95,12 +97,27 @@
         </v-col>
       </v-row>
     </div> 
+    <footer class="footer">
+      <div class="social-media">
+        <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
+          <img src="@/assets/instagram.jpeg" alt="Instagram" />
+        </button>
+        <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
+          <img src="@/assets/facebook.webp" alt="Facebook" />
+        </button>
+        <span>@MRTacoTRC</span>
+      </div>
+      <div class="rights-reserved">
+        <span>© Derechos Reservados 2024</span>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import '@mdi/font/css/materialdesignicons.css'; // Asegúrate de importar los íconos de Material Design
 
 import barNav from '@/components/barNav.vue';
 
@@ -117,6 +134,11 @@ const formData = ref({
   correo: '',
   password: ''
 });
+
+const rules = {
+  required: value => !!value || 'Requerido.',
+  min: v => (v && v.length >= 8) || 'Mínimo 8 caracteres'
+};
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
@@ -148,6 +170,14 @@ const submitForm = async () => {
 const cancel = () => {
   router.push('/'); // Redirige a la página de inicio principal
 };
+
+const redirectToFacebook = () => {
+  window.location.href = 'https://www.facebook.com/Mr.Tacotorreon?mibextid=LQQJ4d';
+};
+
+const redirectToInstagram = () => {
+  window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
+};
 </script>
 
 <style scoped>
@@ -156,7 +186,10 @@ const cancel = () => {
 }
 
 .content-container { 
-  margin-top: 180px; 
+  margin-top: 80px; 
+  background-image: url('@/assets/fondo reg.webp');
+  background-size: cover;
+  background-position: center;
 }
 
 .title h1 {
@@ -165,10 +198,16 @@ const cancel = () => {
 }
 
 .bordered-card {
-  border: 2px solid #ff4f09;
+ 
   border-radius: 16px;
-  box-shadow: 0 0 25px 10px rgba(255, 79, 9, 0.8);
+ 
   padding: 16px;
+  z-index: 999;
+  background-color: black;
+  margin-top: 85px;
+  color: white;
+  color-scheme: white;
+  margin-bottom: 90px;
 }
 
 .v-text-field input {
@@ -210,5 +249,31 @@ const cancel = () => {
   .v-btn {
     font-size: 14px;
   }
+}
+
+/* Agregar estilo para el icono blanco */
+.v-input--append .v-icon {
+  color: white !important;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding: 20px 20px;
+  bottom: 0;
+  width: 100%;
+  
+}
+
+.social-media img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.rights-reserved {
+  font-family: 'Arial', sans-serif;
 }
 </style>

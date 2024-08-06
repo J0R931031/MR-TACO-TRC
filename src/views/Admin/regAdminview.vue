@@ -72,22 +72,25 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="6">
+                  <v-col cols="12">
                     Contraseña
                     <v-text-field 
                       v-model="formData.password"
+                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="showPassword ? 'text' : 'password'"
                       label="Contraseña"
                       outlined
                       @click:append="togglePasswordVisibility"
+                      hint="Al menos 8 caracteres"
+                      class="white-icon"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="6">
+                  <v-col cols="5">
                     Confirmar Contraseña
                     <v-text-field 
                     v-model="formData.confirmpassword"
                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-on'"
-                    :type="showPassword ? 'text' : 'password'"
+                    :type="showPassword ? 'text' : 'confirmpassword'"
                     label="Contraseña"
                     outlined
                     @click:append="togglePasswordVisibility"

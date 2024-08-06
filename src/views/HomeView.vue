@@ -93,6 +93,13 @@ import barNav from '@/components/barNav.vue';
 
 import ubicacionImage from '@/assets/ubicacion.png';
 
+const redirectToFacebook = () => {
+  window.location.href = 'https://www.facebook.com/Mr.Tacotorreon?mibextid=LQQJ4d';
+};
+
+const redirectToInstagram = () => {
+  window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
+};
 const router = useRouter();
 const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
 

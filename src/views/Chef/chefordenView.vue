@@ -31,7 +31,7 @@
         </v-table>
 
         <!-- Tabla de detalles para la orden seleccionada -->
-        <v-table v-if="selectedOrderDetails.length" theme="dark" height="400px" width="1200px" style="margin-top: 20px;">
+        <v-table v-if="selectedOrderDetails.length" theme="dark" height="300px" width="1200px" style="margin-top: 20px;">
           <thead style="background-color: #ff4f09;">
             <tr>
               <th class="text-left">Nombre Platillo</th>
@@ -77,10 +77,12 @@
 import chefBar from '@/components/chefBar.vue';
 import { ref, computed } from 'vue';
 
+
 // Datos de los pedidos
 const desserts = ref([
   {
     norden: 1001,
+    nplatillos: "Orden de Tacos",
     cliente: 'Mariana',
     fecha: '01/01/24',
     hora: '03:00',
@@ -88,6 +90,7 @@ const desserts = ref([
   },
   {
     norden: 1002,
+    nplatillos: "Limonada",
     cliente: 'Ricky',
     fecha: '01/01/24',
     hora: '02:00',
@@ -95,6 +98,7 @@ const desserts = ref([
   },
   {
     norden: 1003,
+    nplatillos: "Carne Asada",
     cliente: 'Maria',
     fecha: '01/01/24',
     hora: '04:00',
@@ -105,7 +109,7 @@ const desserts = ref([
 // Datos de los detalles del pedido
 const orderDetails = ref([
   { id: 1, norden: 1001 ,nplatillos: "Orden de Tacos", cantidad: 3, notas: 'sin notas',especificaciones: 'sin Tomate' },
-  { id: 2, norden: 1001 ,nplatillos: "Limonada", cantidad: 2, notas: 'sin notas',especificaciones: 'null'},
+  { id: 2, norden: 1002 ,nplatillos: "Limonada", cantidad: 2, notas: 'sin notas',especificaciones: 'null'},
   { id: 3, norden: 1002 ,nplatillos: "Carne Asada", cantidad: 3, notas: 'sin notas',especificaciones: 'sin Cebolla' },
 ]);
 

@@ -6,7 +6,6 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 const isSelected = (path) => route.path === path;
 </script>
-
 <template>
   <div class="menu-container">
     <v-row class="menu" align="center" justify="center">

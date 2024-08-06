@@ -149,6 +149,8 @@ import Video from '@/Video/Restaurante.mp4';
   background-image: url('@/assets/maderado.jpg');
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: center;
 }
 
 .textoinvisible

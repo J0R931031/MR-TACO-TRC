@@ -1,6 +1,6 @@
 <template>
   <div class="menu-container">
-    <barNav />
+    <MeserosBar/>
     <div class="content-container">
       <v-img :src="fondores" style="position: static; height: 135.9vh;">
 
@@ -18,9 +18,6 @@
           </v-btn>
           <v-btn @click="showHistorial = true" class="historial-button">
             Historial
-          </v-btn>
-          <v-btn @click="showOrderTable = true" class="order-table-button">
-            Ver Estado de la Orden
           </v-btn>
         </div>
 
@@ -320,8 +317,8 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import BarNav from '@/components/barNav.vue';
 import fondores from '@/assets/fondores.jpg';
+import MeserosBar from '@/components/meserosBar.vue';
 
 const platilloOptions = [
   'Orden de tacos dorados',
@@ -533,7 +530,7 @@ const savePlatillos = () => {
   orders.value = [...orders.value, ...newPlatillos];
   platillos.value = [{ selected: null, notes: '', quantity: 1, ingredients: [], status: 'Pendiente' }];
   showPlatillosSection.value = false;
-  showOrderTable.value = false;
+  showOrderTable.value = true;
 
 };
 
@@ -551,7 +548,7 @@ const saveBebidas = () => {
   orders.value = [...orders.value, ...newBebidas];
   bebidas.value = [{ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' }];
   showBebidasSection.value = false;
-  showOrderTable.value = false;
+  showOrderTable.value = true;
 
 };
 
@@ -569,7 +566,7 @@ const savePostres = () => {
   orders.value = [...orders.value, ...newPostres];
   postres.value = [{ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' }];
   showPostresSection.value = false;
-  showOrderTable.value = false;
+  showOrderTable.value = true;
 };
 
 const cancelPlatillos = () => {

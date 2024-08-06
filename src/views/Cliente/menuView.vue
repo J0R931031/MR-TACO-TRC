@@ -107,7 +107,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import barNav from '@/components/barNav.vue';
 import tacos from '@/assets/tacos.jpg';
 import pollo from '@/assets/pollo.jpeg';

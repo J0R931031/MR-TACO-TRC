@@ -1,67 +1,76 @@
 <template>
   <chefBar></chefBar>
-  <v-table theme="dark" height="350px" width="1500px" style="width: 1000px; margin-left: 250px;">
-    <thead style="background-color: #ff4f09;">
-      <tr>
-        <th class="text-left">Detalles</th>
-        <th class="text-left">Orden</th>
-        <th class="text-left">Cliente</th>
-        <th class="text-left">Fecha</th>
-        <th class="text-left">Hora</th>
-        <th class="text-left">Estado de Orden</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in desserts" :key="item.norden">
-        <td>
-          <button @click="showDetails(item.norden)" style="border: 2px salmon solid; background-color: #ff4f09; width: 70px; border-radius: 15px;">Ver</button>
-        </td>
-        <td>{{ item.norden }}</td>
-        <td>{{ item.cliente }}</td>
-        <td>{{ item.fecha }}</td>
-        <td>{{ item.hora }}</td>
-        <td :class="getStatusClass(item.estadord)">
-          {{ item.estadord }}
-        </td>
-      </tr>
-    </tbody>
-  </v-table>
+  <v-container fluid fill-height>
+    <v-row justify="center">
+      <v-col cols="7" style="margin-top: 50px;">
+        <v-table theme="dark" height="400px" width="1200px" elevation="8">
+          <thead style="background-color: #ff4f09;">
+            <tr>
+              <th class="text-left">Detalles</th>
+              <th class="text-left">Orden</th>
+              <th class="text-left">Cliente</th>
+              <th class="text-left">Fecha</th>
+              <th class="text-left">Hora</th>
+              <th class="text-left">Estado de Orden</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in desserts" :key="item.norden">
+              <td>
+                <button @click="showDetails(item.norden)" style="border: 2px salmon solid; background-color: #ff4f09; width: 70px; border-radius: 15px;">Ver</button>
+              </td>
+              <td>{{ item.norden }}</td>
+              <td>{{ item.cliente }}</td>
+              <td>{{ item.fecha }}</td>
+              <td>{{ item.hora }}</td>
+              <td :class="getStatusClass(item.estadord)">
+                {{ item.estadord }}
+              </td>
+            </tr>
+          </tbody>
+        </v-table>
 
-  <!-- Tabla de detalles para la orden seleccionada -->
-  <v-table v-if="selectedOrderDetails.length" theme="dark" height="350px" width="1500px" style="width: 1000px; margin-left: 250px; margin-top: 20px;">
-    <thead style="background-color: #ff4f09;">
-      <tr>
-        <th class="text-left">Nombre Platillo</th>
-        <th class="text-left">Cantidad</th>
-        <th class="text-left">Especificaciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="detail in selectedOrderDetails" :key="detail.id">
-        <td>{{ detail.norden }}</td>
-        <td>{{ detail.cantidad }}</td>
-        <td>
-          <button @click="viewDetails(detail)" style="border: 2px salmon solid; background-color: #ff4f09; width: 70px; border-radius: 15px;">Ver</button>
-        </td>
-      </tr>
-    </tbody>
-  </v-table>
+        <!-- Tabla de detalles para la orden seleccionada -->
+        <v-table v-if="selectedOrderDetails.length" theme="dark" height="400px" width="1200px" style="margin-top: 20px;">
+          <thead style="background-color: #ff4f09;">
+            <tr>
+              <th class="text-left">Nombre Platillo</th>
+              <th class="text-left">Cantidad</th>
+              <th class="text-left">Notas</th>
+              <th class="text-left">Especificaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="detail in selectedOrderDetails" :key="detail.id">
+              <td>{{ detail.nplatillos }}</td>
+              <td>{{ detail.cantidad }}</td>
+              <td>{{ detail.notas }}</td>
+              <td>
+                <button @click="viewDetails(detail)" style="border: 2px salmon solid; background-color: #ff4f09; width: 70px; border-radius: 15px;">Ver</button>
+              </td>
+            </tr>
+          </tbody>
+        </v-table>
+      </v-col>
+    </v-row>
 
-  <!-- Dialogo para ver especificaciones -->
-  <v-dialog v-model="detailDialog" max-width="290">
-    <v-card>
-      <v-card-title class="headline">Detalles</v-card-title>
-      <v-card-text>
-        <p><strong>Nombre Platillo:</strong> {{ selectedDetail.norden }}</p>
-        <p><strong>Cantidad:</strong> {{ selectedDetail.cantidad }}</p>
-        <p><strong>Especificaciones:</strong> {{ selectedDetail.especificaciones }}</p>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn text @click="closeDetailDialog">Cerrar</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+    <!-- Dialogo para ver especificaciones -->
+    <v-dialog v-model="detailDialog" max-width="290">
+      <v-card>
+        <v-card-title class="headline">Detalles</v-card-title>
+        <v-card-text>
+          <p><strong>Nombre Platillo:</strong> {{ selectedDetail.nplatillos }}</p>
+          <p><strong>Cantidad:</strong> {{ selectedDetail.cantidad }}</p>
+          <p><strong>Notas:</strong> {{ selectedDetail.notas }}</p>
+          <p><strong>Especificaciones:</strong> {{ selectedDetail.especificaciones }}</p>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text @click="closeDetailDialog">Cerrar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-container>
 </template>
 
 <script setup>
@@ -72,7 +81,6 @@ import { ref, computed } from 'vue';
 const desserts = ref([
   {
     norden: 1001,
-    nplatillos: "Orden de Tacos",
     cliente: 'Mariana',
     fecha: '01/01/24',
     hora: '03:00',
@@ -96,9 +104,9 @@ const desserts = ref([
 
 // Datos de los detalles del pedido
 const orderDetails = ref([
-  { id: 1, nplatillos: "Orden de Tacos", cantidad: 3, especificaciones: 'Envío urgente' },
-  { id: 2, norden: 1002, cantidad: 1, especificaciones: 'Con chocolate extra' },
-  { id: 3, norden: 1003, cantidad: 5, especificaciones: 'Con notas de vainilla' },
+  { id: 1, norden: 1001 ,nplatillos: "Orden de Tacos", cantidad: 3, notas: 'sin notas',especificaciones: 'sin Tomate' },
+  { id: 2, norden: 1001 ,nplatillos: "Limonada", cantidad: 2, notas: 'sin notas',especificaciones: 'null'},
+  { id: 3, norden: 1002 ,nplatillos: "Carne Asada", cantidad: 3, notas: 'sin notas',especificaciones: 'sin Cebolla' },
 ]);
 
 // Estados de los componentes
@@ -146,7 +154,7 @@ function getStatusClass(status) {
 }
 .status-completado {
   color: rgb(6, 242, 6);
-}
+}s
 
 .status-pendiente {
   color: red;
@@ -156,4 +164,3 @@ function getStatusClass(status) {
   color: orange;
 }
 </style>
-  

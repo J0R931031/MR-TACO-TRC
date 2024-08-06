@@ -1,5 +1,5 @@
 <template>
-   <div class="menu-container">
+  <div class="menu-container">
     <bar-nav class="navbar" />
     <v-row class="menu" align="center" justify="center"></v-row>
     <div style="margin-top: 20px;" class="content-container">
@@ -17,9 +17,8 @@
           <h1 style="padding-left: 80px; font-size: 25px;">$152.00</h1>
         </v-col>
         <v-col cols="4" class="bordered">
-          <h1>PECHUGA A LA PLANCHA</h1>
-          <v-img  style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 280px; border: solid 3px black;" :src="pollo" contain></v-img>
-         
+          <h1 style="color:  #ff4f09;">PECHUGA A LA PLANCHA</h1>
+          <v-img style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 265px; border: solid 3px wheat;" :src="pollo" contain></v-img>
           <h2>Fajitas de pollo acompañado <br> de verduras en vinagre, <br> ensalada y deliciosa pasta.</h2>
           <h1 style="width: 12px; padding-left: 70px; margin-top: 40px; font-size: 25px;">$152.00</h1>
         </v-col>
@@ -37,9 +36,7 @@
         </v-col>
         <v-col cols="4" class="bordered">
           <h1>ORDEN DE TOSTADAS(3Pz)</h1>
-          <v-img  style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 290px; border: solid 3px black;" :src="tostadas" contain></v-img>
-         
-   
+          <v-img style="position: absolute; height: 100px; width: 150px; border-radius: 25px; margin-left: 295px; border: solid 3px black;" :src="tostadas" contain></v-img>
           <h2>Deliciosas tostadas en una cama<br>de frijoles con el guiso<br>de su eleccion, acompañado de<br> ensalada, cueritos, queso y crema.</h2>
           <h1 style="padding-left: 80px; font-size: 25px;">$90.00</h1>
         </v-col>
@@ -85,13 +82,20 @@
             <li>Zanahoria </li>
             <li>Chorreado</li>
           </v-col>
-        </v-row>
+        </v-row>  
       </v-row>
-      <v-col cols="2" class="boton" style="height: 100px; width:700px; background-color: #ff4f09;">
-        <RouterLink to="/reserva">
-          <button @click="ordenar" style="color: black; margin-left:-5px;">ORDENAR</button>
-        </RouterLink>
-      </v-col>
+      <v-row style="padding-left: 100px;" align="center">
+  <v-col
+    class="boton"
+    cols="auto"
+  >
+    <RouterLink to="/reserva">
+      <button @click="ordenar" style="color: black; display: block; margin: auto;">
+        ORDENAR
+      </button>
+    </RouterLink>
+  </v-col>
+</v-row>
     </div>
     <footer class="footer">
       <div class="social-media">
@@ -132,7 +136,10 @@ const redirectToInstagram = () => {
 <style scoped>
 .menu-container {
   position: relative;
-  
+  background-image: url('@/assets/maderado.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .content-container {
   margin-top: 70px;
@@ -188,14 +195,27 @@ h2 {
   position: absolute;
   border: 2px solid black;
 }
-  
-
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-   /* Asegura que esté al frente */
 }
-
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding: 20px 20px;
+  bottom: 0;
+  width: 100%;
+}
+.social-media img {
+  width: 40px;
+  margin-right: 10px;
+}
+.rights-reserved {
+  font-family: 'Arial', sans-serif;
+}
 </style>

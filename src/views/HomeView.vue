@@ -91,13 +91,7 @@ import { useRouter } from 'vue-router';
 import barNav from '@/components/barNav.vue';
 
 // Importar imágenes desde la carpeta de assets
-<<<<<<< HEAD
-
 import tacotesImage from '@/assets/tacotes.jpg';
-
-=======
-import tacotesImage from '@/assets/tacotes.jpg';
->>>>>>> e967b2484c65247434e9c8b575245d4216a1989f
 import ubicacionImage from '@/assets/ubicacion.png';
 import instagramImage from '@/assets/instagram.jpeg';
 import facebookImage from '@/assets/facebook.webp';
@@ -141,15 +135,6 @@ const dishes = ref([
 ]);
 
 const mapImage = ubicacionImage;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> e967b2484c65247434e9c8b575245d4216a1989f
-=======
-import Video from '@/Video/Restaurante.mp4';
->>>>>>> 5f48a53d14fac233f824a81ed847303fdfd5f35f
 </script>
 
 <style scoped>

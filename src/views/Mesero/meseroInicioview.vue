@@ -1,6 +1,7 @@
 <template>
   <MeserosBar />
   <div class="menu-container">
+    <barNav />
     <div class="content-container">
       <v-img :src="fondores" style="position: static; height: 135.9vh;">
         <!-- Botones para seleccionar platillos, bebidas y postres -->
@@ -16,9 +17,6 @@
           </v-btn>
           <v-btn @click="goToHistorialView" class="historial-button">
             Historial
-          </v-btn>
-          <v-btn @click="showOrderTable = true" class="order-table-button">
-            Ver Estado de la Orden
           </v-btn>
         </div>
 
@@ -249,10 +247,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 import fondores from '@/assets/fondores.jpg';
-import MeserosBar from '@/components/meserosBar.vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
 
 const platilloOptions = [
   'Orden de tacos dorados',
@@ -464,6 +458,7 @@ const savePlatillos = () => {
   platillos.value = [{ selected: null, notes: '', quantity: 1, ingredients: [], status: 'Pendiente' }];
   showPlatillosSection.value = false;
   showOrderTable.value = false;
+
 };
 
 const saveBebidas = () => {
@@ -481,6 +476,7 @@ const saveBebidas = () => {
   bebidas.value = [{ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' }];
   showBebidasSection.value = false;
   showOrderTable.value = false;
+
 };
 
 const savePostres = () => {
@@ -497,7 +493,7 @@ const savePostres = () => {
   orders.value = [...orders.value, ...newPostres];
   postres.value = [{ selected: null, quantity: 1, ingredients: [], status: 'Pendiente' }];
   showPostresSection.value = false;
-  showOrderTable.value = false;
+  showOrderTable.value = true;
 };
 
 const cancelPlatillos = () => {

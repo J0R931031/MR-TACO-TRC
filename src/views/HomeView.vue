@@ -138,7 +138,6 @@ const goToMenu = () => {
 };
 
 const mapImage = ubicacionImage;
-
 </script>
 
 <style scoped>
@@ -146,6 +145,8 @@ const mapImage = ubicacionImage;
   background-image: url('@/assets/maderado.jpg');
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: center;
 }
 
 .textoinvisible {

@@ -4,15 +4,11 @@
     <div>.</div>
     <div>.</div>
     <v-main class="main-container">
-      <v-container  class="pa-0 ma-0 fill-height justify-center">
+      <v-container class="pa-0 ma-0 fill-height justify-center">
         <v-row class="pa-0 ma-0 fill-height no-gutters justify-center">
-          <h1 class="textoinvisible">....</h1>
-          <h1 class="textoinvisible">....</h1>
-          <h1 class="textoinvisible">....</h1>
-          <h1 class="textoinvisible">....</h1>
-          <v-col ID="inicio123"  class="pa-0 ma-0 fill-height justify-center no-padding">
+          <v-col id="inicio123" class="pa-0 ma-0 fill-height justify-center no-padding">
             <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
-              <div style="background-color: black;"  class="inicio-container pa-0 ma-0 fill-height no-padding">
+              <div style="background-color: black;" class="inicio-container pa-0 ma-0 fill-height no-padding">
                 <div class="carousel-container first">
                   <div class="carousel-content">
                     <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">¿Cuántos tacos va a llevar, joven?</h1>
@@ -46,6 +42,7 @@
                   </v-btn>
                 </v-row>
 
+                <!-- Footer Section -->
                 <div class="footer">
                   <div class="footer-content">
                     <address class="footer-text small-text">
@@ -61,8 +58,11 @@
                       </a>
                     </div>
                   </div>
+                </div>
+                <!-- Social Media Section -->
+                <div class="social-container">
                   <div class="social-media">
-                    <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
+                    <button @click="redirectToInstagram" style= "background-color: transparent; margin-left: -900px; border: none; cursor: pointer;">
                       <img src="@/assets/instagram.jpeg" alt="Instagram" />
                     </button>
                     <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
@@ -71,9 +71,10 @@
                     <span>@MRTacoTRC</span>
                   </div>
                   <div class="footer-text small-text">
-                    <p>© Derechos Reservados 2024</p>
+                    <p style="margin-top: -75px; font-size: 15px; margin-left: 900px; margin-top: -35px;">© Derechos Reservados 2024</p>
                   </div>
                 </div>
+
               </div>
             </v-sheet>
           </v-col>
@@ -89,7 +90,7 @@ import { useRouter } from 'vue-router';
 import { usePostStore } from '@/stores/postStore';
 import barNav from '@/components/barNav.vue';
 
-// Importar imágenes desde la carpeta de assets
+
 
 import ubicacionImage from '@/assets/ubicacion.png';
 
@@ -118,7 +119,7 @@ const redirectToPage = (roleIndex) => {
       router.push('/meseros');
       break;
     case 4:
-      router.push('/chef');
+
       router.push('/ChefOrden');
       break;
     default:
@@ -143,15 +144,13 @@ const mapImage = ubicacionImage;
   justify-content: center;
 }
 
-.textoinvisible {
-  visibility: hidden;
-}
+
 
 #inicio123 {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 }
 
 .navbar {
@@ -159,7 +158,7 @@ const mapImage = ubicacionImage;
   top: 0;
   width: 100%;
   z-index: 1000;
-  /* Asegura que esté al frente */
+
 }
 
 .inicio-container {
@@ -168,18 +167,20 @@ const mapImage = ubicacionImage;
   font-family: 'Arial', sans-serif;
   height: 100%;
   width: 100%;
-  margin-top: 64px; /* Ajusta según la altura del navBar */
+  margin-top: 64px;
 }
 
 .carousel-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   height: 300px;
   background: rgba(0, 0, 0, 0.5);
   color: white;
   margin-bottom: 20px;
   position: relative;
+  flex-direction: column;
+  text-align: center;
 }
 
 .carousel-container.first {
@@ -198,6 +199,7 @@ const mapImage = ubicacionImage;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .carousel-button {
@@ -207,7 +209,7 @@ const mapImage = ubicacionImage;
 }
 
 .featured-dishes {
-  background-color: #422e13b2;
+  background-color: #3b1d0eb2;
   padding: 20px 0;
 }
 
@@ -243,15 +245,16 @@ const mapImage = ubicacionImage;
 }
 
 .footer {
-  background-color: black;
+  background-color: #3b1d0eb2;
   color: white;
   padding: 20px 0;
+  margin-top: -20px;
 }
 
 .footer-content {
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 40px;
   margin-bottom: 20px;
 }
 
@@ -264,23 +267,30 @@ const mapImage = ubicacionImage;
   max-height: 200px;
 }
 
+.social-container {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 35px 0;
+  
+}
+
 .social-media {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-top: 10px;
+ margin-bottom: -45px;
 }
 
 .footer-text {
   text-align: center;
   margin-top: 20px;
- padding-top: 15px;
-
+  padding-top: 15px;
+  
 }
 
 .small-text {
   font-size: 0.8em;
- 
+
 }
 
 .pa-0 {
@@ -315,8 +325,45 @@ const mapImage = ubicacionImage;
   margin: 5px;
 }
 
-.footer .social-media img {
+.social-container .social-media img {
   width: 40px;
   margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .carousel-container {
+    height: 200px;
+    margin-bottom: 10px;
+  }
+
+  .carousel-content h1,
+  .carousel-content p,
+  .carousel-content h2 {
+    font-size: 1.2em;
+  }
+
+  .featured-title {
+    font-size: 1.5em;
+  }
+
+  .dish-card {
+    width: 150px;
+  }
+
+  .dish-image {
+    height: 100px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .small-text {
+    font-size: 0.7em;
+  }
+
+  .map-image {
+    max-height: 150px;
+  }
 }
 </style>

@@ -10,7 +10,7 @@
           <h1 class="textoinvisible">....</h1>
           <h1 class="textoinvisible">....</h1>
           <h1 class="textoinvisible">....</h1>
-          <v-col ID="inicio123" class="pa-0 ma-0 fill-height justify-center no-padding">
+          <v-col ID="inicio123"  class="pa-0 ma-0 fill-height justify-center no-padding">
             <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
               <div style="background-color: black;" class="inicio-container pa-0 ma-0 fill-height no-padding">
                 <div class="carousel-container first">
@@ -46,6 +46,7 @@
                   </v-btn>
                 </v-row>
 
+                <!-- Footer Section -->
                 <div class="footer">
                   <div class="footer-content">
                     <address class="footer-text small-text">
@@ -61,15 +62,23 @@
                       </a>
                     </div>
                   </div>
+                </div>
+                <!-- Social Media Section -->
+                <div class="social-container">
                   <div class="social-media">
-                    <v-icon>mdi-facebook</v-icon>
-                    <v-icon>mdi-instagram</v-icon>
-                    <v-icon>mdi-twitter</v-icon>
+                    <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
+                      <img src="@/assets/instagram.jpeg" alt="Instagram" />
+                    </button>
+                    <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
+                      <img src="@/assets/facebook.webp" alt="Facebook" />
+                    </button>
+                    <span>@MRTacoTRC</span>
                   </div>
                   <div class="footer-text small-text">
-                    <p>© Derechos Reservados 2024</p>
+                    <p style="margin-top: -75px; font-size: 15px; margin-left: 900px; margin-top: -35px;">© Derechos Reservados 2024</p>
                   </div>
                 </div>
+
               </div>
             </v-sheet>
           </v-col>
@@ -86,6 +95,7 @@ import { usePostStore } from '@/stores/postStore';
 import barNav from '@/components/barNav.vue';
 
 // Importar imágenes desde la carpeta de assets
+
 import ubicacionImage from '@/assets/ubicacion.png';
 
 const router = useRouter();
@@ -107,6 +117,7 @@ const redirectToPage = (roleIndex) => {
       break;
     case 4:
       router.push('/chef');
+      router.push('/ChefOrden');
       break;
     default:
       break;
@@ -127,14 +138,13 @@ const mapImage = ubicacionImage;
   background-position: center;
 }
 
-.textoinvisible {
-  visibility: hidden;
-}
+
 
 #inicio123 {
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .navbar {
@@ -142,7 +152,7 @@ const mapImage = ubicacionImage;
   top: 0;
   width: 100%;
   z-index: 1000;
-  /* Asegura que esté al frente */
+
 }
 
 .inicio-container {
@@ -151,18 +161,20 @@ const mapImage = ubicacionImage;
   font-family: 'Arial', sans-serif;
   height: 100%;
   width: 100%;
-  margin-top: 64px; /* Ajusta según la altura del navBar */
+  margin-top: 64px;
 }
 
 .carousel-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   height: 300px;
   background: rgba(0, 0, 0, 0.5);
   color: white;
   margin-bottom: 20px;
   position: relative;
+  flex-direction: column;
+  text-align: center;
 }
 
 .carousel-container.first {
@@ -181,6 +193,7 @@ const mapImage = ubicacionImage;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .carousel-button {
@@ -190,7 +203,7 @@ const mapImage = ubicacionImage;
 }
 
 .featured-dishes {
-  background-color: #422e13b2;
+  background-color: #3b1d0eb2;
   padding: 20px 0;
 }
 
@@ -226,15 +239,16 @@ const mapImage = ubicacionImage;
 }
 
 .footer {
-  background-color: black;
+  background-color: #3b1d0eb2;
   color: white;
   padding: 20px 0;
+  margin-top: -20px;
 }
 
 .footer-content {
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 40px;
   margin-bottom: 20px;
 }
 
@@ -247,20 +261,30 @@ const mapImage = ubicacionImage;
   max-height: 200px;
 }
 
+.social-container {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 35px 0;
+  
+}
+
 .social-media {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-top: 10px;
+ margin-bottom: -45px;
 }
 
 .footer-text {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
+ padding-top: 15px;
+
 }
 
 .small-text {
   font-size: 0.8em;
+ 
 }
 
 .pa-0 {
@@ -293,5 +317,10 @@ const mapImage = ubicacionImage;
 .role-button {
   min-width: 100px;
   margin: 5px;
+}
+
+.footer .social-media img {
+  width: 40px;
+  margin-right: 10px;
 }
 </style>

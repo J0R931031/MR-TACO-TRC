@@ -46,6 +46,18 @@
           <h2>Jugosa carne premiun, jamón, <br> ensalada y aderezos.</h2>
           <h1 class="price">$100.00</h1>
         </v-col>
+        <v-col cols="12" md="4" class="bordered">
+          <h1>HAMBURGUESA C/PAPAS</h1>
+          <v-img class="dish-img" :src="hamburgesapapas" contain></v-img>
+          <h2>Deliciosas hamburguesas<br>con papas fritas</h2>
+          <h1 class="price">$90.00</h1>
+        </v-col>
+        <v-col cols="12" md="4" class="bordered">
+          <h1>BURRITOS C/CARNE ASADA</h1>
+          <v-img class="dish-img" :src="burritos" contain></v-img>
+          <h2>Burritos con carne asada<br> y verdura hecha en casa.</h2>
+          <h1 class="price">$100.00</h1>
+        </v-col>
       </v-row>
       <v-row justify="center">
         <v-col cols="12" md="3" class="guiso">
@@ -114,9 +126,11 @@ import barNav from '@/components/barNav.vue';
 import tacos from '@/assets/tacos.jpg';
 import pollo from '@/assets/pollo.jpeg';
 import pescado from '@/assets/tacos de pescado.jpeg';
-import gringa from '@/assets/gringa carne asada.png';
+import gringa from '@/assets/gringa carne asada.jpg';
 import tostadas from '@/assets/tostadas.jpg';
-import hamburgesa from '@/assets/hamburgesa.jpeg';
+import hamburgesa from '@/assets/hamburgesa.jpg';
+import hamburgesapapas from '@/assets/hamburgesapapas.jpg';
+import burritos from '@/assets/burritos.jpg';
 
 const redirectToFacebook = () => {
   window.location.href = 'https://www.facebook.com/Mr.Tacotorreon?mibextid=LQQJ4d';

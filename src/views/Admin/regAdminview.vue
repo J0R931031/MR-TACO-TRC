@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-container">
+  <div :style="backgroundStyle" class="menu-container">
     <BarAdmin></BarAdmin>
     <v-row class="menu" align="center" justify="center">
     </v-row>
@@ -72,25 +72,22 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col cols="12">
+                  <v-col cols="6">
                     Contraseña
                     <v-text-field 
                       v-model="formData.password"
-                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="showPassword ? 'text' : 'password'"
                       label="Contraseña"
                       outlined
                       @click:append="togglePasswordVisibility"
-                      hint="Al menos 8 caracteres"
-                      class="white-icon"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="5">
+                  <v-col cols="6">
                     Confirmar Contraseña
                     <v-text-field 
                     v-model="formData.confirmpassword"
                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-on'"
-                    :type="showPassword ? 'text' : 'confirmpassword'"
+                    :type="showPassword ? 'text' : 'password'"
                     label="Contraseña"
                     outlined
                     @click:append="togglePasswordVisibility"
@@ -166,6 +163,8 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import BarAdmin from '@/components/barAdmin.vue';
+import fondoAdmin from '@/assets/fondoadmin.jpg'; // Importa la imagen aquí
+
 const router = useRouter();
 
 const showPassword = ref(false);
@@ -215,34 +214,47 @@ const cancel = () => {
   router.push('/'); // Redirige a la página de inicio principal
 };
 const profileImage = ref(null);
-const employeeId = ref('JPP-0410');
 const fileInput = ref(null);
 
 const selectImage = () => {
-fileInput.value.click();
+  fileInput.value.click();
 };
 
 const onFileChange = (event) => {
-const file = event.target.files[0];
-if (file) {
-  profileImage.value = URL.createObjectURL(file);
-}
+  const file = event.target.files[0];
+  if (file) {
+    profileImage.value = URL.createObjectURL(file);
+  }
 };
 
 const removeEmployee = () => {
-profileImage.value = null;
-employeeId.value = '';
+  profileImage.value = null;
+};
+
+const backgroundStyle = {
+  backgroundImage: `url(${fondoAdmin})`, // Usa la imagen importada aquí
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  minHeight: '100vh'
 };
 </script>
 
 <style scoped>
 .menu-container {
   position: relative;
-  
+  min-height: 15vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .content-container { 
   margin-top: 100px; 
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .title h1 {
@@ -272,5 +284,4 @@ employeeId.value = '';
   color: white;
   width: 100%;
 }
-
 </style>

@@ -14,6 +14,7 @@ import Chef from '@/views/Chef/chefIniciView.vue';
 import ChefOrden from '@/views/Chef/chefordenView.vue';
 import Editar from '@/views/Admin/perfilAdminview.vue';
 import CreatePostsView from '@/views/Admin/CreatePostsview.vue';
+import OrdenesMesero from '@/views/Mesero/OrdenesView.vue';
 
 const routes = [
   {
@@ -91,6 +92,11 @@ const routes = [
     name: 'AñadirPost',
     component: CreatePostsView
   },
+  {
+    path: '/Ordenes',
+    name: 'OrdenesMesero',
+    component: OrdenesMesero
+  }
 ];
 
 const router = createRouter({

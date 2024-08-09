@@ -6,43 +6,83 @@ import { ref } from 'vue';
 
 const route = useRoute();
 const isSelected = (path) => route.path === path;
-
-const showSubMenu = ref(false);
-const toggleSubMenu = () => {
-  showSubMenu.value = !showSubMenu.value;
-};
-
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
 </script>
 
 <template>
-  <div class="menu-container">
-    <v-row class="menu" align="center" justify="center">
-      <v-col cols="5" align="start">
-  <h1 style="padding-left:100PX; padding-top: 8PX; font-size:35px; color: white; align-items: baseline;">SISTEMAS DE MESEROS</h1>
-      </v-col>
-      <v-col class="logo-container" cols="2" align="start">
-        <v-img class="logo" :src="logo" contain @click="scrollToTop"></v-img>
-      </v-col>
-      <v-col class="menu-item" cols="2" align="center">
-        <RouterLink to="/reg" class="menu-item" :class="{ selected: isSelected('/reg') }">Registrarse</RouterLink>
-      </v-col>
-      <v-col cols="2" align="end">
-        <RouterLink to="/login" class="menu-item" :class="{ selected: isSelected('/login') }">Iniciar Sesión</RouterLink>
-      </v-col>
-    </v-row>
-    <v-row class="fill-height" align="center" justify="center">
-      <v-col cols="7">
-        <v-row justify="center" style="padding: 10px;"></v-row>
-      </v-col>
-    </v-row>
-    <RouterView />
-  </div>
+ <body>
+    <nav class="navbar">
+        <div class="navbar-container">
+          <div>
+            <h1 class="brand">SISTEMA DE MESEROS</h1>
+          </div>
+          <div>
+            <v-container>
+      <v-row>
+        <v-col>
+          <div>
+            <v-img :src="logo"></v-img> <!-- URL de prueba -->
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+          </div>
+          <div>
+            <RouterLink to="/meseros" class="menu-item" :class="{ selected: isSelected('/meseros') }">Ordenar</RouterLink>
+            <RouterLink to="/Ordenes" class="menu-item" :class="{ selected: isSelected('/Ordenes') }">Ordenes</RouterLink>
+          </div>
+        </div>
+    </nav>
+</body>
 </template>
 
 <style scoped>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #333;
+    padding: 1rem 0;
+    color: white;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 50px;
+}
+
+.brand {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.nav-links a:hover {
+    color: #ddd;
+}
 .menu-container {
   position: static;
 }
@@ -72,49 +112,5 @@ const scrollToTop = () => {
 
 .menu-item:hover {
   cursor: pointer; /* Cambia el cursor al pasar el ratón */
-}
-
-.logo-container {
-  margin: 0%;
-  text-align: center;
-  height: 80px;
-}
-
-.logo {
-  padding: 5.5%;
-  width: 200px; 
-  position: absolute;
-  top: 1px;
-  transform: translate(-20%, 1%);
-}
-
-.submenu {
-  position: absolute;
-  background-color: rgb(0, 0, 0);
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-top: 5px;
-  padding: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Asegurar que el menú esté por encima */
-  height: 120px;
-  width: 200px;
-}
-
-.submenu-item {
-  display: block;
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  background-color: white;
-  font-size: 15px;
-}
-
-.submenu-item:hover {
-  background-color: rgb(255, 136, 0);
-  color: rgb(255, 255, 255);
 }
 </style>

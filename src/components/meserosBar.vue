@@ -2,17 +2,34 @@
 import { RouterView } from 'vue-router';
 import logo from '@/assets/mr-taco.png';  
 import { useRoute } from 'vue-router';
-import { ref } from 'vue';
-
 const route = useRoute();
 const isSelected = (path) => route.path === path;
+
+const showSubMenu = ref(false);
+const toggleSubMenu = () => {
+  showSubMenu.value = !showSubMenu.value;
+};
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 </script>
 
 <template>
   <div class="menu-container">
     <v-row class="menu" align="center" justify="center">
-      <v-col cols="5" align="start">
-  <h1 style="padding-left:100PX; padding-top: 8PX; font-size:35px; color: white; align-items: baseline;">SISTEMAS DE MESEROS</h1>
+      <v-col class="menu-item" cols="1" align="start">
+        <RouterLink to="/" class="menu-item" :class="{ selected: isSelected('/') }">Inicio</RouterLink>
+      </v-col>
+      <v-col class="menu-item" cols="2" align="center">
+        <RouterLink to="/menu" class="menu-item" :class="{ selected: isSelected('/menu') }">Menú</RouterLink>
+      </v-col>
+      <v-col class="menu-item" cols="2" align="center" @click="toggleSubMenu">
+        <span class="menu-item" :class="{ selected: isSelected('/reserva') || showSubMenu }">Ordenar</span>
+        <div v-if="showSubMenu" class="submenu">
+          <RouterLink to="/reserva" class="submenu-item">Come con Nosotros</RouterLink>
+          <RouterLink to="/j" class="submenu-item">Pasar a recoger pedido</RouterLink>
+        </div>
       </v-col>
       <v-col class="logo-container" cols="2" align="start">
         <v-img class="logo" :src="logo" contain @click="scrollToTop"></v-img>

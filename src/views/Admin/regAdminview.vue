@@ -130,8 +130,20 @@
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-col cols="12" md="6">
+                    <v-col cols="6" md="6">
                       <v-text-field label="ID de Empleado" v-model="formData.empleadoid" outlined></v-text-field>
+                    </v-col>
+                    <v-col cols="6" md="6">
+                      <v-select
+                        v-model="formData.rol"
+                        :items="['Chef', 'Mesero' ]"
+                        label="Rol"
+                        outlined
+                      ></v-select>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" md="6">
                       <v-btn color="red" @click="removeEmployee">Eliminar Empleado</v-btn>
                     </v-col>
                   </v-row>
@@ -180,7 +192,9 @@ const formData = ref({
   correo: '',
   password: '',
   confirmpassword: '',
-  confirmartelefono:''
+  confirmartelefono:'',
+  empleadoid: '',
+  rol: '' // Agregado el rol
 });
 
 const togglePasswordVisibility = () => {

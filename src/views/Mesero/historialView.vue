@@ -48,7 +48,7 @@
   };
   
   const closeHistorial = () => {
-    router.push('/');
+    router.push('/meseros');
   };
   
   const getStatusClass = (status) => {

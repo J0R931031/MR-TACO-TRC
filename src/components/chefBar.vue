@@ -39,6 +39,8 @@ const isSelected = (path) => route.path === path;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: -25px;
+  margin-left: -25px;
 }
 
 .menu-item {

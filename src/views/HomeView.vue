@@ -10,31 +10,24 @@
           <h1 class="textoinvisible">....</h1>
           <h1 class="textoinvisible">....</h1>
           <h1 class="textoinvisible">....</h1>
-          <v-col id="inicio123" class="pa-0 ma-0 fill-height justify-center no-padding">
+          <v-col ID="inicio123"  class="pa-0 ma-0 fill-height justify-center no-padding">
             <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
-              <div class="container-with-sidebar">
-                <!-- Sidebar Section -->
-                <div class="sidebar">
-                  <h2>Sidebar</h2>
-                  <!-- Add your sidebar content here -->
+              <div style="background-color: black;" class="inicio-container pa-0 ma-0 fill-height no-padding">
+                <div class="carousel-container first">
+                  <div class="carousel-content">
+                    <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">¿Cuántos tacos va a llevar, joven?</h1>
+                    <v-btn class="carousel-button" @click="goToMenu">Échale un vistazo al menú</v-btn>
+                  </div>
                 </div>
-                <!-- Main Content Section -->
-                <div style="background-color: black;" class="inicio-container pa-0 ma-0 fill-height no-padding">
-                  <div class="carousel-container first">
-                    <div class="carousel-content">
-                      <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">¿Cuántos tacos va a llevar, joven?</h1>
-                      <v-btn class="carousel-button" @click="goToMenu">Échale un vistazo al menú</v-btn>
-                    </div>
+                <div class="carousel-container second">
+                  <div class="carousel-content">
+                    <h1>Mucho sabor... Mucho color...</h1>
+                    <p>Etiqueta de recuerdo para modificar imagen</p>
+                    <p>Y crear flexbox en cada contenedor</p>
+                    <p>Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
+                    <h2>Todo en Torreón</h2>
                   </div>
-                  <div class="carousel-container second">
-                    <div class="carousel-content">
-                      <h1>Mucho sabor... Mucho color...</h1>
-                      <p>Etiqueta de recuerdo para modificar imagen</p>
-                      <p>Y crear flexbox en cada contenedor</p>
-                      <p>Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
-                      <h2>Todo en Torreón</h2>
-                    </div>
-                  </div>
+                </div>
 
                   <div class="featured-dishes">
                     <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
@@ -53,39 +46,39 @@
                     </v-btn>
                   </v-row>
 
-                  <!-- Footer Section -->
-                  <div class="footer">
-                    <div class="footer-content">
-                      <address class="footer-text small-text">
-                        <strong>Dirección:</strong> Calle División del Norte # 190<br>
-                        Torreón, México<br>
-                        <strong>Teléfono:</strong> 871 474 0471<br>
-                        <strong>Correo:</strong> mrtacotrc@gmail.com
-                      </address>
-                      <div class="map-container">
-                        <h3 class="small-text">Ubicación en Google Maps:</h3>
-                        <a href="https://maps.app.goo.gl/rjmG3bGY1mq3MD1P6" target="_blank">
-                          <img :src="mapImage" class="map-image" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Social Media Section -->
-                  <div class="social-container">
-                    <div class="social-media">
-                      <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
-                        <img src="@/assets/instagram.jpeg" alt="Instagram" />
-                      </button>
-                      <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
-                        <img src="@/assets/facebook.webp" alt="Facebook" />
-                      </button>
-                      <span>@MRTacoTRC</span>
-                    </div>
-                    <div class="footer-text small-text">
-                      <p style="margin-top: -75px; font-size: 15px; margin-left: 900px; margin-top: -35px;">© Derechos Reservados 2024</p>
+                <!-- Footer Section -->
+                <div class="footer">
+                  <div class="footer-content">
+                    <address class="footer-text small-text">
+                      <strong>Dirección:</strong> Calle División del Norte # 190<br>
+                      Torreón, México<br>
+                      <strong>Teléfono:</strong> 871 474 0471<br>
+                      <strong>Correo:</strong> mrtacotrc@gmail.com
+                    </address>
+                    <div class="map-container">
+                      <h3 class="small-text">Ubicación en Google Maps:</h3>
+                      <a href="https://maps.app.goo.gl/rjmG3bGY1mq3MD1P6" target="_blank">
+                        <img :src="mapImage" class="map-image" />
+                      </a>
                     </div>
                   </div>
                 </div>
+                <!-- Social Media Section -->
+                <div class="social-container">
+                  <div class="social-media">
+                    <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
+                      <img src="@/assets/instagram.jpeg" alt="Instagram" />
+                    </button>
+                    <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
+                      <img src="@/assets/facebook.webp" alt="Facebook" />
+                    </button>
+                    <span>@MRTacoTRC</span>
+                  </div>
+                  <div class="footer-text small-text">
+                    <p style="margin-top: -75px; font-size: 15px; margin-left: 900px; margin-top: -35px;">© Derechos Reservados 2024</p>
+                  </div>
+                </div>
+
               </div>
             </v-sheet>
           </v-col>
@@ -102,8 +95,16 @@ import { usePostStore } from '@/stores/postStore';
 import barNav from '@/components/barNav.vue';
 
 // Importar imágenes desde la carpeta de assets
+
 import ubicacionImage from '@/assets/ubicacion.png';
 
+const redirectToFacebook = () => {
+  window.location.href = 'https://www.facebook.com/Mr.Tacotorreon?mibextid=LQQJ4d';
+};
+
+const redirectToInstagram = () => {
+  window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
+};
 const router = useRouter();
 const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
 
@@ -123,11 +124,13 @@ const redirectToPage = (roleIndex) => {
       break;
     case 4:
       router.push('/chef');
+      router.push('/ChefOrden');
       break;
     default:
       break;
   }
 };
+
 
 const goToMenu = () => {
   router.push('/menu');
@@ -141,12 +144,15 @@ const mapImage = ubicacionImage;
   background-image: url('@/assets/maderado.jpg');
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: center;
 }
 
 #inicio123 {
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .navbar {
@@ -304,11 +310,13 @@ const mapImage = ubicacionImage;
 .footer-text {
   text-align: center;
   margin-top: 20px;
-  padding-top: 15px;
+ padding-top: 15px;
+
 }
 
 .small-text {
   font-size: 0.8em;
+ 
 }
 
 .pa-0 {
@@ -343,8 +351,45 @@ const mapImage = ubicacionImage;
   margin: 5px;
 }
 
-.footer .social-media img {
+.social-container .social-media img {
   width: 40px;
   margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .carousel-container {
+    height: 200px;
+    margin-bottom: 10px;
+  }
+
+  .carousel-content h1,
+  .carousel-content p,
+  .carousel-content h2 {
+    font-size: 1.2em;
+  }
+
+  .featured-title {
+    font-size: 1.5em;
+  }
+
+  .dish-card {
+    width: 150px;
+  }
+
+  .dish-image {
+    height: 100px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .small-text {
+    font-size: 0.7em;
+  }
+
+  .map-image {
+    max-height: 150px;
+  }
 }
 </style>

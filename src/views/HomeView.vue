@@ -6,11 +6,7 @@
     <v-main class="main-container">
       <v-container class="pa-0 ma-0 fill-height justify-center">
         <v-row class="pa-0 ma-0 fill-height no-gutters justify-center">
-          <h1 class="textoinvisible">....</h1>
-          <h1 class="textoinvisible">....</h1>
-          <h1 class="textoinvisible">....</h1>
-          <h1 class="textoinvisible">....</h1>
-          <v-col ID="inicio123"  class="pa-0 ma-0 fill-height justify-center no-padding">
+          <v-col id="inicio123" class="pa-0 ma-0 fill-height justify-center no-padding">
             <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
               <div style="background-color: black;" class="inicio-container pa-0 ma-0 fill-height no-padding">
                 <div class="carousel-container first">
@@ -21,11 +17,11 @@
                 </div>
                 <div class="carousel-container second">
                   <div class="carousel-content">
-                    <h1>Mucho sabor... Mucho color...</h1>
-                    <p>Etiqueta de recuerdo para modificar imagen</p>
-                    <p>Y crear flexbox en cada contenedor</p>
-                    <p>Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
-                    <h2>Todo en Torreón</h2>
+                    <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Mucho sabor... Mucho color...</h1>
+                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Etiqueta de recuerdo para modificar imagen</p>
+                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Y crear flexbox en cada contenedor</p>
+                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
+                    <h2 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Todo en Torreón</h2>
                   </div>
                 </div>
 
@@ -66,7 +62,7 @@
                 <!-- Social Media Section -->
                 <div class="social-container">
                   <div class="social-media">
-                    <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
+                    <button @click="redirectToInstagram" style= "background-color: transparent; margin-left: -900px; border: none; cursor: pointer;">
                       <img src="@/assets/instagram.jpeg" alt="Instagram" />
                     </button>
                     <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
@@ -94,10 +90,17 @@ import { useRouter } from 'vue-router';
 import { usePostStore } from '@/stores/postStore';
 import barNav from '@/components/barNav.vue';
 
-// Importar imágenes desde la carpeta de assets
+
 
 import ubicacionImage from '@/assets/ubicacion.png';
 
+const redirectToFacebook = () => {
+  window.location.href = 'https://www.facebook.com/Mr.Tacotorreon?mibextid=LQQJ4d';
+};
+
+const redirectToInstagram = () => {
+  window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
+};
 const router = useRouter();
 const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
 
@@ -116,13 +119,14 @@ const redirectToPage = (roleIndex) => {
       router.push('/meseros');
       break;
     case 4:
-      router.push('/chef');
+
       router.push('/ChefOrden');
       break;
     default:
       break;
   }
 };
+
 
 const goToMenu = () => {
   router.push('/menu');
@@ -136,6 +140,8 @@ const mapImage = ubicacionImage;
   background-image: url('@/assets/maderado.jpg');
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -144,7 +150,7 @@ const mapImage = ubicacionImage;
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 }
 
 .navbar {
@@ -278,13 +284,13 @@ const mapImage = ubicacionImage;
 .footer-text {
   text-align: center;
   margin-top: 20px;
- padding-top: 15px;
-
+  padding-top: 15px;
+  
 }
 
 .small-text {
   font-size: 0.8em;
- 
+
 }
 
 .pa-0 {
@@ -319,8 +325,45 @@ const mapImage = ubicacionImage;
   margin: 5px;
 }
 
-.footer .social-media img {
+.social-container .social-media img {
   width: 40px;
   margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .carousel-container {
+    height: 200px;
+    margin-bottom: 10px;
+  }
+
+  .carousel-content h1,
+  .carousel-content p,
+  .carousel-content h2 {
+    font-size: 1.2em;
+  }
+
+  .featured-title {
+    font-size: 1.5em;
+  }
+
+  .dish-card {
+    width: 150px;
+  }
+
+  .dish-image {
+    height: 100px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .small-text {
+    font-size: 0.7em;
+  }
+
+  .map-image {
+    max-height: 150px;
+  }
 }
 </style>

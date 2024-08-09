@@ -4,7 +4,7 @@
     <div>.</div>
     <div>.</div>
     <v-main class="main-container">
-      <v-container  class="pa-0 ma-0 fill-height justify-center">
+      <v-container class="pa-0 ma-0 fill-height justify-center">
         <v-row class="pa-0 ma-0 fill-height no-gutters justify-center">
           <h1 class="textoinvisible">....</h1>
           <h1 class="textoinvisible">....</h1>
@@ -12,7 +12,7 @@
           <h1 class="textoinvisible">....</h1>
           <v-col ID="inicio123"  class="pa-0 ma-0 fill-height justify-center no-padding">
             <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
-              <div style="background-color: black;"  class="inicio-container pa-0 ma-0 fill-height no-padding">
+              <div style="background-color: black;" class="inicio-container pa-0 ma-0 fill-height no-padding">
                 <div class="carousel-container first">
                   <div class="carousel-content">
                     <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">¿Cuántos tacos va a llevar, joven?</h1>
@@ -21,21 +21,21 @@
                 </div>
                 <div class="carousel-container second">
                   <div class="carousel-content">
-                    <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Mucho sabor... Mucho color...</h1>
-                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Etiqueta de recuerdo para modificar imagen</p>
-                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Y crear flexbox en cada contenedor</p>
-                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
-                    <h2 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Todo en Torreón</h2>
+                    <h1>Mucho sabor... Mucho color...</h1>
+                    <p>Etiqueta de recuerdo para modificar imagen</p>
+                    <p>Y crear flexbox en cada contenedor</p>
+                    <p>Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
+                    <h2>Todo en Torreón</h2>
                   </div>
                 </div>
 
                 <div class="featured-dishes">
                   <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
                   <div class="dishes-carousel">
-                    <div class="dish-card" v-for="(dish, i) in dishes" :key="i">
-                      <img :src="dish.image" class="dish-image" />
-                      <h3>{{ dish.title }}</h3>
-                      <p>{{ dish.description }}</p>
+                    <div class="dish-card" v-for="post in posts" :key="post.id">
+                      <img :src="post.image" class="dish-image" />
+                      <h3>{{ post.title }}</h3>
+                      <p>{{ post.content }}</p>
                     </div>
                   </div>
                 </div>
@@ -46,6 +46,7 @@
                   </v-btn>
                 </v-row>
 
+                <!-- Footer Section -->
                 <div class="footer">
                   <div class="footer-content">
                     <address class="footer-text small-text">
@@ -61,6 +62,9 @@
                       </a>
                     </div>
                   </div>
+                </div>
+                <!-- Social Media Section -->
+                <div class="social-container">
                   <div class="social-media">
                     <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
                       <img src="@/assets/instagram.jpeg" alt="Instagram" />
@@ -71,9 +75,10 @@
                     <span>@MRTacoTRC</span>
                   </div>
                   <div class="footer-text small-text">
-                    <p>© Derechos Reservados 2024</p>
+                    <p style="margin-top: -75px; font-size: 15px; margin-left: 900px; margin-top: -35px;">© Derechos Reservados 2024</p>
                   </div>
                 </div>
+
               </div>
             </v-sheet>
           </v-col>
@@ -84,26 +89,25 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-
-// Importar el componente de la barra de navegación
+import { usePostStore } from '@/stores/postStore';
 import barNav from '@/components/barNav.vue';
 
 // Importar imágenes desde la carpeta de assets
-import tacotesImage from '@/assets/tacotes.jpg';
-import ubicacionImage from '@/assets/ubicacion.png';
-import instagramImage from '@/assets/instagram.jpeg';
-import facebookImage from '@/assets/facebook.webp';
 
+import ubicacionImage from '@/assets/ubicacion.png';
 
 const router = useRouter();
 const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
 
+const postStore = usePostStore();
+const posts = computed(() => postStore.posts);
+
 const redirectToPage = (roleIndex) => {
   switch (roleIndex) {
     case 1:
-      router.push('/admin');
+      router.push('/posts');
       break;
     case 2:
       router.push('/login');
@@ -120,52 +124,35 @@ const redirectToPage = (roleIndex) => {
   }
 };
 
-
 const goToMenu = () => {
   router.push('/menu');
 };
-
-const dishes = ref([
-  {
-    title: 'TACOS DORADOS',
-    description: 'Tortillas frescas rellenas con jugoso pollo marinado en especias...',
-    image: tacotesImage,
-  },
-  // Puedes agregar más platillos aquí
-]);
 
 const mapImage = ubicacionImage;
 </script>
 
 <style scoped>
-
 .main-container {
   background-image: url('@/assets/maderado.jpg');
   background-size: cover;
   background-position: center;
-  display: flex;
-  justify-content: center;
 }
 
-.textoinvisible
-{
-  visibility: hidden;
-}
 
-#inicio123
-{
+
+#inicio123 {
   display: flex;
   justify-content: center;
   align-items: center;
   
-  
 }
+
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-   /* Asegura que esté al frente */
+
 }
 
 .inicio-container {
@@ -174,18 +161,20 @@ const mapImage = ubicacionImage;
   font-family: 'Arial', sans-serif;
   height: 100%;
   width: 100%;
-  margin-top: 64px; /* Ajusta según la altura del navBar */
+  margin-top: 64px;
 }
 
 .carousel-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   height: 300px;
   background: rgba(0, 0, 0, 0.5);
   color: white;
   margin-bottom: 20px;
   position: relative;
+  flex-direction: column;
+  text-align: center;
 }
 
 .carousel-container.first {
@@ -204,6 +193,7 @@ const mapImage = ubicacionImage;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .carousel-button {
@@ -213,7 +203,7 @@ const mapImage = ubicacionImage;
 }
 
 .featured-dishes {
-  background-color: #422e13b2;
+  background-color: #3b1d0eb2;
   padding: 20px 0;
 }
 
@@ -249,15 +239,16 @@ const mapImage = ubicacionImage;
 }
 
 .footer {
-  background-color: black;
+  background-color: #3b1d0eb2;
   color: white;
   padding: 20px 0;
+  margin-top: -20px;
 }
 
 .footer-content {
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 40px;
   margin-bottom: 20px;
 }
 
@@ -270,11 +261,18 @@ const mapImage = ubicacionImage;
   max-height: 200px;
 }
 
+.social-container {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 35px 0;
+  
+}
+
 .social-media {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-top: 10px;
+ margin-bottom: -45px;
 }
 
 .footer-text {

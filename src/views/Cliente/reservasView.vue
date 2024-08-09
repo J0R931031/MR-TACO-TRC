@@ -547,7 +547,7 @@ const openIngredientSelection = (index) => {
 };
 
 const saveIngredients = () => {
-  platillos.value.forEach((platillo, index) => {
+  platillos.value.forEach((platillo) => {
     platillo.ingredients = selectedIngredients.value;
   });
   showIngredientsSection.value = false;

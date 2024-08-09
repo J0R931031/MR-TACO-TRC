@@ -1,11 +1,10 @@
-// src/stores/profileStore.js
 import { defineStore } from 'pinia';
 
-export const useProfileStore = defineStore('profile', {
+export const useProfileStore = defineStore('profileStore', {
   state: () => ({
-    profileImage: '@/assets/hamburguesa.webp',
+    profileImage: '../assets/RICHI-PELON.jpg', // Establece un valor por defecto o vacío
     name: 'Admin',
-    email: 'admin@gmail.com'
+    email: 'Admin@gmail.com'
   }),
   actions: {
     setProfileImage(image) {
@@ -15,5 +14,6 @@ export const useProfileStore = defineStore('profile', {
       this.name = name;
       this.email = email;
     }
-  }
+  },
+  persist: true
 });

@@ -9,30 +9,28 @@ const isSelected = (path) => route.path === path;
 </script>
 
 <template>
- <body>
-    <nav class="navbar">
-        <div class="navbar-container">
-          <div>
-            <h1 class="brand">SISTEMA DE MESEROS</h1>
-          </div>
-          <div>
-            <v-container>
-      <v-row>
-        <v-col>
-          <div>
-            <v-img :src="logo"></v-img> <!-- URL de prueba -->
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
-          </div>
-          <div>
-            <RouterLink to="/meseros" class="menu-item" :class="{ selected: isSelected('/meseros') }">Ordenar</RouterLink>
-            <RouterLink to="/Ordenes" class="menu-item" :class="{ selected: isSelected('/Ordenes') }">Ordenes</RouterLink>
-          </div>
-        </div>
-    </nav>
-</body>
+  <div class="menu-container">
+    <v-row class="menu" align="center" justify="center">
+      <v-col cols="5" align="start">
+  <h1 style="padding-left:100PX; padding-top: 8PX; font-size:35px; color: white; align-items: baseline;">SISTEMAS DE MESEROS</h1>
+      </v-col>
+      <v-col class="logo-container" cols="2" align="start">
+        <v-img class="logo" :src="logo" contain @click="scrollToTop"></v-img>
+      </v-col>
+      <v-col class="menu-item" cols="2" align="center">
+        <RouterLink to="/reg" class="menu-item" :class="{ selected: isSelected('/reg') }">Registrarse</RouterLink>
+      </v-col>
+      <v-col cols="2" align="end">
+        <RouterLink to="/login" class="menu-item" :class="{ selected: isSelected('/login') }">Iniciar Sesión</RouterLink>
+      </v-col>
+    </v-row>
+    <v-row class="fill-height" align="center" justify="center">
+      <v-col cols="7">
+        <v-row justify="center" style="padding: 10px;"></v-row>
+      </v-col>
+    </v-row>
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>

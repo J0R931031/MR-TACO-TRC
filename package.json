@@ -14,7 +14,8 @@
     "@mdi/font": "^7.4.47",
     "@vueuse/core": "^10.11.0",
     "pinia": "^2.1.7",
-    "vue": "^3.4.35",
+    "pinia-plugin-persistedstate": "^3.2.1",
+    "vue": "^3.4.36",
     "vue-router": "^4.3.3",
     "vuetify": "^3.6.12"
   },

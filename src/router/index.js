@@ -14,7 +14,11 @@ import Chef from '@/views/Chef/chefIniciView.vue';
 import ChefOrden from '@/views/Chef/chefordenView.vue';
 import Editar from '@/views/Admin/perfilAdminview.vue';
 import CreatePostsView from '@/views/Admin/CreatePostsview.vue';
+<<<<<<< HEAD
 import OrdenesMesero from '@/views/Mesero/OrdenesView.vue';
+=======
+import HistorialView from '@/views/Mesero/historialView.vue';
+>>>>>>> 5ed5ddbe107c68332ed6e5a6fa3c41726b50de41
 
 const routes = [
   {
@@ -93,10 +97,18 @@ const routes = [
     component: CreatePostsView
   },
   {
+<<<<<<< HEAD
     path: '/Ordenes',
     name: 'OrdenesMesero',
     component: OrdenesMesero
   }
+=======
+    path: '/historial',
+    name: 'Historial',
+    component: HistorialView,
+  },
+
+>>>>>>> 5ed5ddbe107c68332ed6e5a6fa3c41726b50de41
 ];
 
 const router = createRouter({

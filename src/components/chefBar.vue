@@ -9,7 +9,8 @@ const isSelected = (path) => route.path === path;
 <template>
   <div class="menu-container">
     <v-row class="menu" align="center" justify="center">
-      <v-col class="logo-container" cols="2" align="start">
+      <v-col cols="2" style="color: white; textShadow: 4px 2px 2px #ff4f09; font-size: 16px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; "><h1>Sistema Chef</h1></v-col>
+      <v-col class="logo-container" cols="2" align="center">
         <v-img class="logo" :src="logo" contain></v-img>
       </v-col>
       <v-col class="menu-item" cols="2" align="center">
@@ -59,14 +60,19 @@ const isSelected = (path) => route.path === path;
 }
 .logo-container {
   margin: 0%;
+  margin-left: 200px;
   text-align: center;
   height: 80px;
+ 
 }
 
 .logo {
-  padding: 0%;
-  width: 150px; 
+  padding: 5.5%;
+  margin-top: 10px;
+  width: 200px; 
   position: absolute;
-  top: 10px;
+  top: 1px;
+  transform: translate(-20%, 1%);
+
 }
 </style>

@@ -32,7 +32,6 @@
           <h2>Tacos de guiso a elección debajo <br> de una cama de deliciosa ensalada, <br> cueritos y crema</h2>
           <h1 style="padding-left: 80px; font-size: 25px;">$152.00</h1>
         </v-col>
-        <!-- Additional items here -->
       </v-row>
     </div>
   </div>

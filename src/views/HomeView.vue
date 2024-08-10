@@ -1,40 +1,85 @@
 <template>
   <v-app id="inspire">
-    <carrosel-global />
-    <v-app-bar app color="red" flat>
-      <v-container class="py-0 fill-height">
-        <v-avatar class="mr-10" color="grey darken-1" size="32">HS</v-avatar>
+    <bar-nav class="navbar" />
+    <div>.</div>
+    <div>.</div>
+    <v-main class="main-container">
+      <v-container class="pa-0 ma-0 fill-height justify-center">
+        <v-row class="pa-0 ma-0 fill-height no-gutters justify-center">
+          <h1 class="textoinvisible">....</h1>
+          <h1 class="textoinvisible">....</h1>
+          <h1 class="textoinvisible">....</h1>
+          <h1 class="textoinvisible">....</h1>
+          <v-col ID="inicio123"  class="pa-0 ma-0 fill-height justify-center no-padding">
+            <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
+              <div style="background-color: black;" class="inicio-container pa-0 ma-0 fill-height no-padding">
+                <div class="carousel-container first">
+                  <div class="carousel-content">
+                    <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">¿Cuántos tacos va a llevar, joven?</h1>
+                    <v-btn class="carousel-button" @click="goToMenu">Échale un vistazo al menú</v-btn>
+                  </div>
+                </div>
+                <div class="carousel-container second">
+                  <div class="carousel-content">
+                    <h1>Mucho sabor... Mucho color...</h1>
+                    <p>Etiqueta de recuerdo para modificar imagen</p>
+                    <p>Y crear flexbox en cada contenedor</p>
+                    <p>Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
+                    <h2>Todo en Torreón</h2>
+                  </div>
+                </div>
 
-        <v-spacer></v-spacer>
+                  <div class="featured-dishes">
+                    <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
+                    <div class="dishes-carousel">
+                      <div class="dish-card" v-for="post in posts" :key="post.id">
+                        <img :src="post.image" class="dish-image" />
+                        <h3 class="text-content">{{ post.title }}</h3>
+                        <p class="text-content">{{ post.content }}</p>
+                      </div>
+                    </div>
+                  </div>
 
-        <v-btn v-for="(link, index) in links" :key="link" text @click="handleButtonClick(index)">
-          {{ link }}
-        </v-btn>
-      </v-container>
-    </v-app-bar>
-
-    <v-main>
-      <v-container>
-        <v-row>
-          <v-col cols="2">
-            <v-sheet rounded="lg">
-              <v-list color="transparent">
-                <v-list-item v-for="(role, index) in Roles" :key="index" link>
-                  <v-list-item-content>
-                    <v-list-item-title @click="redirectToPage(index + 1)">
+                  <v-row class="justify-center mt-4">
+                    <v-btn v-for="(role, index) in Roles" :key="index" class="mx-2 role-button" @click="redirectToPage(index + 1)">
                       {{ role }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-sheet>
-          </v-col>
+                    </v-btn>
+                  </v-row>
 
-          <v-col cols>
-            <v-sheet min-height="70vh" rounded="lg" class="texto">
-              <p style="margin: 0 10px">
-                
-              </p>
+                <!-- Footer Section -->
+                <div class="footer">
+                  <div class="footer-content">
+                    <address class="footer-text small-text">
+                      <strong>Dirección:</strong> Calle División del Norte # 190<br>
+                      Torreón, México<br>
+                      <strong>Teléfono:</strong> 871 474 0471<br>
+                      <strong>Correo:</strong> mrtacotrc@gmail.com
+                    </address>
+                    <div class="map-container">
+                      <h3 class="small-text">Ubicación en Google Maps:</h3>
+                      <a href="https://maps.app.goo.gl/rjmG3bGY1mq3MD1P6" target="_blank">
+                        <img :src="mapImage" class="map-image" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!-- Social Media Section -->
+                <div class="social-container">
+                  <div class="social-media">
+                    <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
+                      <img src="@/assets/instagram.jpeg" alt="Instagram" />
+                    </button>
+                    <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
+                      <img src="@/assets/facebook.webp" alt="Facebook" />
+                    </button>
+                    <span>@MRTacoTRC</span>
+                  </div>
+                  <div class="footer-text small-text">
+                    <p style="margin-top: -75px; font-size: 15px; margin-left: 900px; margin-top: -35px;">© Derechos Reservados 2024</p>
+                  </div>
+                </div>
+
+              </div>
             </v-sheet>
           </v-col>
         </v-row>
@@ -44,43 +89,307 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { usePostStore } from '@/stores/postStore';
+import barNav from '@/components/barNav.vue';
 
-const links = ref(['Login', 'Registrarme'])
+// Importar imágenes desde la carpeta de assets
 
-const router = useRouter()
+import ubicacionImage from '@/assets/ubicacion.png';
 
-const Roles = ref(['Admin', 'Cliente'])
+const redirectToFacebook = () => {
+  window.location.href = 'https://www.facebook.com/Mr.Tacotorreon?mibextid=LQQJ4d';
+};
+
+const redirectToInstagram = () => {
+  window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
+};
+const router = useRouter();
+const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
+
+const postStore = usePostStore();
+const posts = computed(() => postStore.posts);
 
 const redirectToPage = (roleIndex) => {
   switch (roleIndex) {
     case 1:
-      router.push('/inicio')
-      break
+      router.push('/posts');
+      break;
     case 2:
-      router.push('/login')
-      break
+      router.push('/login');
+      break;
+    case 3:
+      router.push('/meseros');
+      break;
+    case 4:
+      router.push('/chef');
+      router.push('/ChefOrden');
+      break;
     default:
-      break
+      break;
   }
-}
+};
 
-const handleButtonClick = (index) => {
-  if (index === 0) {
-    router.push('/Login')
-  } else if (index === 1) {
-    router.push('/register')
-  }
-}
+
+const goToMenu = () => {
+  router.push('/menu');
+};
+
+const mapImage = ubicacionImage;
 </script>
 
 <style scoped>
-main {
-  background-color: gainsboro;
+.main-container {
+  background-image: url('@/assets/maderado.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
 }
-.texto {
-  text-align: justify;
-  padding: 20px; /* Añadiendo un padding para separar el texto de los bordes */
+
+#inicio123 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.container-with-sidebar {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #3b1d0eb2;
+  color: white;
+  padding: 20px;
+}
+
+.inicio-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Arial', sans-serif;
+  height: 100%;
+  width: calc(100% - 250px); /* Adjust width to account for the sidebar */
+  margin-top: 64px;
+  padding: 20px; /* Add padding to avoid content touching the edges */
+  box-sizing: border-box; /* Ensure padding is included in the width */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: flex-start; /* Align items to the start */
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  margin-bottom: 20px;
+  position: relative;
+  flex-direction: column;
+  text-align: center;
+}
+
+.carousel-container.first {
+  background-image: url('@/assets/tacos.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-container.second {
+  background-image: url('@/assets/hamburguesa.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.carousel-button {
+  background-color: #ff4f09;
+  color: white;
+  margin-top: 20px;
+}
+
+.featured-dishes {
+  background-color: #3b1d0eb2;
+  padding: 20px 0;
+}
+
+.featured-title {
+  text-align: center;
+  color: #ff4f09;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.dishes-carousel {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping of content */
+  gap: 10px; /* Reduced gap between posts */
+  padding: 0 15px;
+}
+
+.dish-card {
+  background: white;
+  border: 3px solid #ff6600;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px; /* Reduced margin for lighter distance */
+  flex: 0 0 auto;
+  width: 200px; /* Fixed width to avoid shrinking */
+  flex-shrink: 0; /* Prevent shrinking */
+  text-align: center;
+}
+
+.dish-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.text-content {
+  word-wrap: break-word;
+  white-space: normal; /* Allow text to wrap normally */
+  overflow: visible; /* Ensure text is fully visible */
+  text-overflow: unset; /* Disable ellipsis */
+}
+
+.footer {
+  background-color: #3b1d0eb2;
+  color: white;
+  padding: 20px 0;
+  margin-top: -20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+  margin-bottom: 20px;
+}
+
+.map-container {
+  text-align: center;
+}
+
+.map-image {
+  width: 100%;
+  max-height: 200px;
+}
+
+.social-container {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 35px 0;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: -45px;
+}
+
+.footer-text {
+  text-align: center;
+  margin-top: 20px;
+ padding-top: 15px;
+
+}
+
+.small-text {
+  font-size: 0.8em;
+ 
+}
+
+.pa-0 {
+  padding: 0 !important;
+}
+
+.ma-0 {
+  margin: 0 !important;
+}
+
+.fill-height {
+  height: 100% !important;
+}
+
+.no-gutters {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  > .v-col {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+.main-container {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.role-button {
+  min-width: 100px;
+  margin: 5px;
+}
+
+.social-container .social-media img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .carousel-container {
+    height: 200px;
+    margin-bottom: 10px;
+  }
+
+  .carousel-content h1,
+  .carousel-content p,
+  .carousel-content h2 {
+    font-size: 1.2em;
+  }
+
+  .featured-title {
+    font-size: 1.5em;
+  }
+
+  .dish-card {
+    width: 150px;
+  }
+
+  .dish-image {
+    height: 100px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .small-text {
+    font-size: 0.7em;
+  }
+
+  .map-image {
+    max-height: 150px;
+  }
 }
 </style>

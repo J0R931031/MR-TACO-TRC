@@ -1,6 +1,6 @@
 <template>
   <div class="menu-container">
-    <BarNav/>
+    <bar-nav class="navbar" />
     <v-row class="menu" align="center" justify="center">
     </v-row>
     <div class="content-container"> 
@@ -53,12 +53,27 @@
         </v-col>
       </v-row>
     </div> 
+    <footer class="footer">
+      <div class="social-media">
+        <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
+          <img src="@/assets/instagram.jpeg" alt="Instagram" />
+        </button>
+        <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
+          <img src="@/assets/facebook.webp" alt="Facebook" />
+        </button>
+        <span>@MRTacoTRC</span>
+      </div>
+      <div class="rights-reserved">
+        <span>© Derechos Reservados 2024</span>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import BarNav from '@/components/barNav.vue';
+import barNav from '@/components/barNav.vue';
+
 const showPassword = ref(false);
 const loginData = ref({
   correo: '',
@@ -94,6 +109,14 @@ const submitLogin = async () => {
     alert('No se pudo iniciar sesión.');
   }
 };
+
+const redirectToFacebook = () => {
+  window.location.href = 'https://www.facebook.com/Mr.Tacotorreon?mibextid=LQQJ4d';
+};
+
+const redirectToInstagram = () => {
+  window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
+};
 </script>
 
 <style scoped>
@@ -102,7 +125,10 @@ const submitLogin = async () => {
 }
 
 .content-container { 
-  margin-top: 70px; 
+  margin-top: 90px; 
+  background-image: url('@/assets/fondo reg.webp');
+  background-size: cover;
+  background-position: center;
 }
 
 .title h1 {
@@ -111,10 +137,15 @@ const submitLogin = async () => {
 }
 
 .bordered-card {
-  border: 2px solid #ff4f09;
+
   border-radius: 15px;
-  box-shadow: 0 0 25px 10px rgba(255, 79, 9, 0.8);
+ 
   padding: 16px;
+  z-index: 999;
+  background-color: #000;
+  margin-top: 85px;
+  color: white;
+  margin-bottom: 90px;
 }
 
 .v-text-field input {
@@ -125,6 +156,13 @@ const submitLogin = async () => {
   background-color: #ff4f09;
   color: white;
   width: 100%;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; 
 }
 
 .links {
@@ -141,5 +179,25 @@ const submitLogin = async () => {
 
 .links a:hover {
   text-decoration: underline;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding: 20px 20px;
+  bottom: 0;
+  width: 100%;
+}
+
+.social-media img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.rights-reserved {
+  font-family: 'Arial', sans-serif;
 }
 </style>

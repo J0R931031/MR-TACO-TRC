@@ -27,10 +27,15 @@ const scrollToTop = () => {
         <RouterLink to="/menu" class="menu-item" :class="{ selected: isSelected('/menu') }">Menú</RouterLink>
       </v-col>
       <v-col class="menu-item" cols="2" align="center" @click="toggleSubMenu">
-        <span class="menu-item" :class="{ selected: isSelected('/reserva') || showSubMenu }">Ordenar</span>
+        <span 
+          class="menu-item" 
+          :class="{ selected: isSelected('/reserva') || isSelected('/ReservarView') || showSubMenu }"
+        >
+          Ordenar
+        </span>
         <div v-if="showSubMenu" class="submenu">
-          <RouterLink to="/reserva" class="submenu-item">Come con Nosotros</RouterLink>
-          <RouterLink to="/j" class="submenu-item">Pasar a recoger pedido</RouterLink>
+          <RouterLink to="/reserva" class="submenu-item">Crear Pedido</RouterLink>
+          <RouterLink to="/ReservarView" class="submenu-item">Reservar Mesa</RouterLink>
         </div>
       </v-col>
       <v-col class="logo-container" cols="2" align="start">
@@ -64,7 +69,7 @@ const scrollToTop = () => {
   align-items: center;
 }
 
-.menu-item{
+.menu-item {
   color: white;
   font-size: 30px;
   text-align: center;
@@ -72,7 +77,8 @@ const scrollToTop = () => {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   border: 1px solid transparent; 
   border-radius: 100px; 
-  padding: 2px 10px; }
+  padding: 2px 10px; 
+}
 
 .menu-item.selected { 
   background-color: rgb(255, 136, 0); 
@@ -80,14 +86,13 @@ const scrollToTop = () => {
 }
 
 .menu-item:hover {
-  cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  cursor: pointer; 
 }
 
 .logo-container {
   margin: 0%;
   text-align: center;
   height: 80px;
- 
 }
 
 .logo {
@@ -96,7 +101,6 @@ const scrollToTop = () => {
   position: absolute;
   top: 1px;
   transform: translate(-20%, 1%);
-
 }
 
 .submenu {
@@ -107,7 +111,7 @@ const scrollToTop = () => {
   margin-top: 5px;
   padding: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Asegurar que el menú esté por encima */
+  z-index: 1000;
   height: 120px;
   width: 200px;
 }

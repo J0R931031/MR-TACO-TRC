@@ -5,7 +5,7 @@
     </v-row>
     <div class="content-container"> 
       <v-row align="center" justify="center">
-        <v-col cols="5" class="form-container">
+        <v-col cols="12" md="8" lg="5" class="form-container">
           <v-card class="bordered-card">
             <v-row justify="center">
               <v-card-title class="title">
@@ -129,6 +129,10 @@ const redirectToInstagram = () => {
   background-image: url('@/assets/fondo reg.webp');
   background-size: cover;
   background-position: center;
+  min-height: 100vh; /* Asegura que ocupe toda la pantalla en dispositivos grandes */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido verticalmente */
 }
 
 .title h1 {
@@ -137,15 +141,13 @@ const redirectToInstagram = () => {
 }
 
 .bordered-card {
-
   border-radius: 15px;
- 
   padding: 16px;
   z-index: 999;
   background-color: #000;
-  margin-top: 85px;
   color: white;
-  margin-bottom: 90px;
+  margin: 0 auto;
+  margin-top: 50px;
 }
 
 .v-text-field input {
@@ -199,5 +201,51 @@ const redirectToInstagram = () => {
 
 .rights-reserved {
   font-family: 'Arial', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    margin-top: 60px; 
+    padding: 0 10px;
+  }
+
+  .bordered-card {
+    padding: 10px;
+  }
+
+  .login-button {
+    font-size: 16px;
+  }
+
+  .links a {
+    font-size: 12px;
+  }
+
+  .title h1 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-container {
+    margin-top: 50px; 
+    padding: 0 5px;
+  }
+
+  .bordered-card {
+    padding: 8px;
+  }
+
+  .login-button {
+    font-size: 14px;
+  }
+
+  .links a {
+    font-size: 10px;
+  }
+
+  .title h1 {
+    font-size: 24px;
+  }
 }
 </style>

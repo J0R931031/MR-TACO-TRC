@@ -5,20 +5,21 @@ import Loginview from '@/views/Cliente/loginView.vue';
 import Menu from '@/views/Cliente/menuView.vue';
 import RegCli from '@/views/Cliente/regView.vue';
 import Reservas from '@/views/Cliente/reservasView.vue';
+import Reservar from '@/views/Cliente/ReservarView.vue';
 import InicioCliente from '@/views/Cliente/inicioView.vue';
 import InicioAdmin from '@/views/Admin/iAdminView.vue';
 import RegAdmin from '@/views/Admin/regAdminview.vue';
 import PostAdmin from '@/views/Admin/postAdminView.vue';
-import Meseros from '@/views/Mesero/meseroInicioview.vue';
 import Chef from '@/views/Chef/chefIniciView.vue';
 import ChefOrden from '@/views/Chef/chefordenView.vue';
 import Editar from '@/views/Admin/perfilAdminview.vue';
 import CreatePostsView from '@/views/Admin/CreatePostsview.vue';
-<<<<<<< HEAD
-import OrdenesMesero from '@/views/Mesero/OrdenesView.vue';
-=======
+
+import Meseros from '@/views/Mesero/OrdenesView.vue';
+
 import HistorialView from '@/views/Mesero/historialView.vue';
->>>>>>> 5ed5ddbe107c68332ed6e5a6fa3c41726b50de41
+import InicioMesero from '@/views/Mesero/InicioMesero.vue';
+import MenuView from '@/views/Mesero/MenuView.vue';
 
 const routes = [
   {
@@ -52,6 +53,11 @@ const routes = [
     component: Reservas
   },
   {
+    path: '/ReservarView',
+    name: 'Reservar',
+    component: Reservar
+  },
+  {
     path: '/cliente',
     name: 'InicioCliente',
     component: InicioCliente
@@ -72,7 +78,17 @@ const routes = [
     component: PostAdmin
   },
   {
-    path: '/meseros',
+    path: '/InicioMesero',
+    name: 'InicioMesero',
+    component: InicioMesero
+  },
+  {
+    path: '/MenuView',
+    name: 'MenuView',
+    component: MenuView
+  },
+  {
+    path: '/OrdenesView',
     name: 'Meseros',
     component: Meseros
   },
@@ -96,19 +112,14 @@ const routes = [
     name: 'AñadirPost',
     component: CreatePostsView
   },
+ 
   {
-<<<<<<< HEAD
-    path: '/Ordenes',
-    name: 'OrdenesMesero',
-    component: OrdenesMesero
-  }
-=======
     path: '/historial',
     name: 'Historial',
     component: HistorialView,
   },
 
->>>>>>> 5ed5ddbe107c68332ed6e5a6fa3c41726b50de41
+
 ];
 
 const router = createRouter({

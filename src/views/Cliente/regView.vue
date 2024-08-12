@@ -1,8 +1,7 @@
 <template>
   <div class="menu-container">
     <bar-nav class="navbar" />
-    <v-row class="menu" align="center" justify="center">
-    </v-row>
+    <v-row class="menu" align="center" justify="center"></v-row>
     <!-- Contenedor principal -->
     <div class="content-container">
       <v-row align="center" justify="center">
@@ -118,7 +117,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import '@mdi/font/css/materialdesignicons.css'; // Asegúrate de importar los íconos de Material Design
+import '@mdi/font/css/materialdesignicons.css';
 
 import barNav from '@/components/barNav.vue';
 
@@ -136,19 +135,25 @@ const formData = ref({
   password: ''
 });
 
-
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
 
 const submitForm = async () => {
   try {
-    const response = await fetch('http://misitio.com/', {
+    // Convertir fecha a formato correcto (yyyy-mm-dd)
+    const formattedDate = formData.value.fechaNacimiento;
+
+    const response = await fetch('http://MrTaco.com/crearcliente', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData.value)
+      body: JSON.stringify({
+        ...formData.value,
+        fechaNacimiento: formattedDate,
+        contrasena: formData.value.password // Asegúrate de que el backend espera "contrasena"
+      })
     });
 
     if (!response.ok) {

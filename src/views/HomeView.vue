@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="featured-dishes">
-                  <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
+                  <h1 class="platillos-title">NUEVOS POSTEOS</h1>
                   <div class="dishes-carousel">
                     <div class="dish-card" v-for="post in posts" :key="post.id">
                       <img :src="post.image" class="dish-image" />
@@ -244,6 +244,13 @@ const mapImage = ubicacionImage;
   white-space: normal;
   overflow: visible;
   text-overflow: unset;
+}
+
+.platillos-title {
+  text-align: center;
+  color: white;
+  text-shadow: 4px 2px 2px #ff4f09;
+  margin-bottom: 20px;
 }
 
 .footer {

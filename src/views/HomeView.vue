@@ -6,7 +6,11 @@
     <v-main class="main-container">
       <v-container class="pa-0 ma-0 fill-height justify-center">
         <v-row class="pa-0 ma-0 fill-height no-gutters justify-center">
-          <v-col id="inicio123" class="pa-0 ma-0 fill-height justify-center no-padding">
+          <h1 class="textoinvisible">....</h1>
+          <h1 class="textoinvisible">....</h1>
+          <h1 class="textoinvisible">....</h1>
+          <h1 class="textoinvisible">....</h1>
+          <v-col ID="inicio123"  class="pa-0 ma-0 fill-height justify-center no-padding">
             <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
               <div style="background-color: black;" class="inicio-container pa-0 ma-0 fill-height no-padding">
                 <div class="carousel-container first">
@@ -17,24 +21,24 @@
                 </div>
                 <div class="carousel-container second">
                   <div class="carousel-content">
-                    <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Mucho sabor... Mucho color...</h1>
-                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Etiqueta de recuerdo para modificar imagen</p>
-                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Y crear flexbox en cada contenedor</p>
-                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
-                    <h2 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Todo en Torreón</h2>
+                    <h1>Mucho sabor... Mucho color...</h1>
+                    <p>Etiqueta de recuerdo para modificar imagen</p>
+                    <p>Y crear flexbox en cada contenedor</p>
+                    <p>Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
+                    <h2>Todo en Torreón</h2>
                   </div>
                 </div>
 
-                <div class="featured-dishes">
-                  <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
-                  <div class="dishes-carousel">
-                    <div class="dish-card" v-for="post in posts" :key="post.id">
-                      <img :src="post.image" class="dish-image" />
-                      <h3>{{ post.title }}</h3>
-                      <p>{{ post.content }}</p>
+                  <div class="featured-dishes">
+                    <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
+                    <div class="dishes-carousel">
+                      <div class="dish-card" v-for="post in posts" :key="post.id">
+                        <img :src="post.image" class="dish-image" />
+                        <h3 class="text-content">{{ post.title }}</h3>
+                        <p class="text-content">{{ post.content }}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
                 <v-row class="justify-center mt-4">
                   <v-btn v-for="(role, index) in Roles" :key="index" class="mx-2 role-button" @click="redirectToPage(index + 1)">
@@ -59,19 +63,20 @@
                     </div>
                   </div>
                 </div>
+
                 <!-- Social Media Section -->
                 <div class="social-container">
                   <div class="social-media">
-                    <button @click="redirectToInstagram" style="background-color: transparent; margin-left: -900px; border: none; cursor: pointer;">
+                    <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
                       <img src="@/assets/instagram.jpeg" alt="Instagram" />
                     </button>
-                    <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
-                      <img src="@/assets/facebook.webp" alt="Facebook" />
+                    <button @click="redirectToFacebook" class="social-button">
+                      <img src="@/assets/facebook.png" alt="Facebook" />
                     </button>
-                    <span>@MRTacoTRC</span>
+                    <span class="social-text">@MRTacoTRC</span>
                   </div>
                   <div class="footer-text small-text">
-                    <p style="margin-top: -75px; font-size: 15px; margin-left: 900px; margin-top: -35px;">© Derechos Reservados 2024</p>
+                    <p style="font-size: 15px;">© Derechos Reservados 2024</p>
                   </div>
                 </div>
 
@@ -115,6 +120,7 @@ const redirectToPage = (roleIndex) => {
       break;
     case 3:
       router.push('/meseros');
+      router.push('/OrdenesView');
       break;
     case 4:
       router.push('/ChefOrden');
@@ -214,8 +220,8 @@ const mapImage = ubicacionImage;
 
 .dishes-carousel {
   display: flex;
-  overflow-x: auto;
-  gap: 15px;
+  flex-wrap: wrap; /* Allow wrapping of content */
+  gap: 10px; /* Reduced gap between posts */
   padding: 0 15px;
 }
 
@@ -224,6 +230,7 @@ const mapImage = ubicacionImage;
   border: 3px solid #ff6600;
   border-radius: 10px;
   padding: 10px;
+  margin: 5px; /* Reduced margin for lighter distance */
   flex: 0 0 auto;
   width: 200px;
   text-align: center;
@@ -234,6 +241,13 @@ const mapImage = ubicacionImage;
   height: 150px;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.text-content {
+  word-wrap: break-word;
+  white-space: normal; /* Allow text to wrap normally */
+  overflow: visible; /* Ensure text is fully visible */
+  text-overflow: unset; /* Disable ellipsis */
 }
 
 .footer {
@@ -262,20 +276,43 @@ const mapImage = ubicacionImage;
 .social-container {
   background-color: rgb(0, 0, 0);
   color: white;
-  padding: 35px 0;
+  padding: 20px 0;
+  height: 150px;
 }
 
 .social-media {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: -45px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.social-button {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.social-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.social-text {
+  margin-left: 10px;
+  font-size: 1em;
+  color: white;
 }
 
 .footer-text {
   text-align: center;
   margin-top: 20px;
-  padding-top: 15px;
+ padding-top: 15px;
+
 }
 
 .small-text {
@@ -297,26 +334,6 @@ const mapImage = ubicacionImage;
 .no-gutters {
   margin-right: 0 !important;
   margin-left: 0 !important;
-  > .v-col {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-  }
-}
-
-.main-container {
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 100% !important;
-}
-
-.role-button {
-  min-width: 100px;
-  margin: 5px;
-}
-
-.social-container .social-media img {
-  width: 40px;
-  margin-right: 10px;
 }
 
 @media (max-width: 600px) {

@@ -349,7 +349,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import barNav from '@/components/barNav.vue';
+import barNav from '@/components/meserosBar.vue';
 
 const platilloOptions = [
   'Orden de tacos dorados',
@@ -614,12 +614,14 @@ const redirectToInstagram = () => {
 }
 
 .content-container { 
-  margin-top: 65px; 
+  margin-top: 60px; 
   background-image: url('@/assets/fondores.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 800px;
+  min-height: 100vh; /* Cambiado para que sea responsivo en iPad Pro */
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar {
@@ -633,7 +635,7 @@ const redirectToInstagram = () => {
   display: flex;
   flex-wrap: wrap; /* Permite que los botones se ajusten en varias filas si es necesario */
   justify-content: space-around;
-  margin-top: 150px;
+  margin-top: 100px;
 }
 
 .button-group .v-btn {
@@ -676,7 +678,6 @@ const redirectToInstagram = () => {
 
 .small-overlay .details-content {
   max-width: 400px;
-
 }
 
 .large-overlay .details-content {
@@ -696,7 +697,6 @@ const redirectToInstagram = () => {
 .order-ingredients-list {
   max-height: 60vh; /* Ajusta la altura máxima según tus necesidades */
   overflow-y: auto;
- 
 }
 
 .platillo-section,
@@ -706,15 +706,12 @@ const redirectToInstagram = () => {
 .order-details-section,
 .ingredient-section {
   margin-bottom: 20px;
-  
 }
 
 .counter-section {
   display: flex;
   align-items: center;
   margin-top: 10px;
- 
-
 }
 
 .counter-button {
@@ -729,7 +726,6 @@ const redirectToInstagram = () => {
 
 .counter-value {
   margin: 0 10px;
-  
 }
 
 .notes-section {
@@ -968,6 +964,7 @@ const redirectToInstagram = () => {
   padding: 20px;
   bottom: 0;
   width: 100%;
+  margin-top: auto; /* Asegura que el footer esté siempre al fondo */
 }
 
 .social-media img {

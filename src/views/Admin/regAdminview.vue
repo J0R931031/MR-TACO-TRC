@@ -14,35 +14,36 @@
             </v-row>
             <v-card-text>
               <v-container>
+                <!-- Form Fields -->
                 <v-row>
                   <v-col cols="12">
                     Nombre
-                    <v-text-field label="Nombre" v-model="formData.nombre" outlined></v-text-field>
+                    <v-text-field label="Nombre" v-model="Nombre" outlined></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="6">
                     Apellido Paterno
-                    <v-text-field label="Apellido Paterno" v-model="formData.apellidoPaterno" outlined></v-text-field>
+                    <v-text-field label="Apellido Paterno" v-model="ApellidoPaterno" outlined></v-text-field>
                   </v-col>
                   <v-col cols="6">
                     Apellido Materno
-                    <v-text-field label="Apellido Materno" v-model="formData.apellidoMaterno" outlined></v-text-field>
+                    <v-text-field label="Apellido Materno" v-model="ApellidoMaterno" outlined></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="6">
                     Sexo
                     <v-select
-                      v-model="formData.sexo"
-                      :items="['Masculino', 'Femenino', 'Otro']"
+                      v-model="Sexo"
+                      :items="['M', 'F']"
                       label="Sexo"
                       outlined
                     ></v-select>
                   </v-col>
                   <v-col cols="6">
                     Teléfono
-                    <v-text-field label="Teléfono" v-model="formData.telefono" outlined></v-text-field>
+                    <v-text-field label="Teléfono" v-model="Telefono" outlined></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -50,67 +51,46 @@
                     Fecha de Nacimiento
                     <v-text-field
                       label="Fecha de Nacimiento"
-                      v-model="formData.fechaNacimiento"
+                      v-model="FechaNacimiento"
                       outlined
                       type="date"
                     ></v-text-field>
                   </v-col>
+                </v-row>
+                <v-row>
                   <v-col cols="6">
-                      Fecha de Ingreso
-                      <v-text-field
-                        label="Fecha de Ingreso"
-                        v-model="formData.fechaIngreso"
-                        outlined
-                        type="date"
-                      ></v-text-field>
-                    </v-col>
+                    Direccción
+                    <v-text-field label=" Dirección" v-model="Direccion" outlined></v-text-field>
+                  </v-col>
+                  <v-col cols="6">
+                    CURP
+                    <v-text-field label=" CURP" v-model="CURP" outlined></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="6">
+                   RFC
+                    <v-text-field label="RFC" v-model="RFC" outlined></v-text-field>
+                  </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="12">
                     Correo
-                    <v-text-field label="Correo" v-model="formData.correo" outlined></v-text-field>
+                    <v-text-field label="Correo" v-model="Correo" outlined></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="6">
                     Contraseña
                     <v-text-field 
-                      v-model="formData.password"
+                      v-model="Contrasena"
                       :type="showPassword ? 'text' : 'password'"
                       label="Contraseña"
                       outlined
                       @click:append="togglePasswordVisibility"
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="6">
-                    Confirmar Contraseña
-                    <v-text-field 
-                    v-model="formData.confirmpassword"
-                    :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-on'"
-                    :type="showPassword ? 'text' : 'password'"
-                    label="Contraseña"
-                    outlined
-                    @click:append="togglePasswordVisibility"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col cols="8">
-                    Direccion
-                    <v-text-field label="Calle, Colonia, Número Exterior" v-model="formData.Direccion" outlined></v-text-field>
-                  </v-col>
-                  <v-col cols="3">
-                    Codigo Postal
-                    <v-text-field label="C.P" v-model="formData.CP" outlined></v-text-field>
-                  </v-col>
-                  <v-col cols="5">
-                      Teléfono 1
-                      <v-text-field label="Teléfono 1" v-model="formData.telefono1" outlined></v-text-field>
-                    </v-col>
-                    <v-col cols="5">
-                      Confirmar Teléfono
-                      <v-text-field label="Teléfono" v-model="formData.confirmartelefono" outlined></v-text-field>
-                    </v-col>
+                 
                 </v-row>
                 <v-container>
                   <v-row>
@@ -131,15 +111,15 @@
                   </v-row>
                   <v-row>
                     <v-col cols="6" md="6">
-                      <v-text-field label="ID de Empleado" v-model="formData.empleadoid" outlined></v-text-field>
-                    </v-col>
-                    <v-col cols="6" md="6">
-                      <v-select
-                        v-model="formData.rol"
-                        :items="['Chef', 'Mesero' ]"
-                        label="Rol"
-                        outlined
-                      ></v-select>
+                      <div class="propietario">
+                        <label for="Rol">Rol:  </label>
+                        <select id="Rol" v-model="Rol">
+                          <option class="opcion" value=""></option>
+                          <option v-for="option in Roles" :key="option.ID_ROL" :value="option.ID_ROL">
+                            {{ option.NombreRol }}
+                          </option>
+                        </select>
+                      </div>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -158,7 +138,7 @@
                   </v-btn>
                 </v-col>
                 <v-col class="d-flex justify-md-end">
-                  <v-btn class="register-button" size="x-large" @click="submitForm">
+                  <v-btn class="register-button" size="x-large" @click="submit">
                     Registrarse
                   </v-btn>
                 </v-col>
@@ -172,61 +152,98 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import BarAdmin from '@/components/barAdmin.vue';
-import fondoAdmin from '@/assets/fondoadmin.jpg'; // Importa la imagen aquí
+import fondoAdmin from '@/assets/fondoadmin.jpg';
 
 const router = useRouter();
 
 const showPassword = ref(false);
-const formData = ref({
-  nombre: '',
-  apellidoPaterno: '',
-  apellidoMaterno: '',
-  sexo: '',
-  telefono1: '',
-  telefono2: '',
-  fechaNacimiento: '',
-  fechaIngreso: '',
-  correo: '',
-  password: '',
-  confirmpassword: '',
-  confirmartelefono:'',
-  empleadoid: '',
-  rol: '' // Agregado el rol
-});
+
+const valid = ref(false);
+const  Nombre = ref('')
+const  ApellidoPaterno= ref('')
+const  ApellidoMaterno= ref('')
+const  Sexo= ref('')
+const  Telefono= ref('')
+const  FechaNacimiento= ref('')
+const  Correo= ref('')
+const  Contrasena= ref('')
+const  Rol= ref('')
+const  Roles = ref('')
+const  Direccion =ref('')
+const  CURP = ref('')
+const  RFC = ref('')
+
+
+const fetchroles = async () => {
+  try {
+    const response = await fetch('http://mrtaco.com/roles');
+    if (response.ok) {
+      const json = await response.json();
+      Roles.value = json.data; 
+      console.log('Propietarios obtenidos exitosamente', Roles.value);
+    } else {
+      console.error('Error al obtener la lista de propietarios');
+    }
+  } catch (error) {
+    console.error('Error de red:', error);
+  }
+};
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
 
-const submitForm = async () => {
-  try {
-    const response = await fetch('http://misitio.com/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData.value)
-    });
+const submit = async () => {
+  if (valid.value) {
+    const data = {
+      Nombre: Nombre.value,
+      ApellidoMaterno: ApellidoMaterno.value,
+      ApellidoPaterno: ApellidoPaterno.value,
+      Sexo: Sexo.value,
+      Telefono: Telefono.value,
+      FechaNacimiento: FechaNacimiento.value,
+      Correo: Correo.value,
+      Contrasena: Contrasena.value,
+      Rol: Rol.value,
+      Direccion:Direccion.value,
+      CURP:CURP.value,
+      RFC:RFC.value
+    };
 
-    if (!response.ok) {
-      throw new Error('Ha ocurrido un error en el sistema.');
+    try {
+      const response = await fetch('http://mrtaco.com/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const responseText = await response.text(); // Obtener la respuesta como texto
+      console.log('Respuesta del servidor:', responseText);
+
+      try {
+        const responseData = JSON.parse(responseText); // Intentar analizar como JSON
+        if (response.ok) {
+          console.log('Empleado registrado exitosamente', responseData);
+        } else {
+          console.error('Error al registrar el vehículo:', responseData);
+        }
+      } catch (error) {
+        console.error('Error al analizar la respuesta como JSON:', error);
+      }
+    } catch (error) {
+      console.error('Error de red:', error)}
     }
-
-    const data = await response.json();
-    console.log(data);
-    alert('¡Usuario registrado con éxito!');
-  } catch (error) {
-    console.error('¡Hubo un error!', error);
-    alert('No se pudo registrar al usuario.');
-  }
 };
 
 const cancel = () => {
-  router.push('/'); // Redirige a la página de inicio principal
+  router.push('/');
 };
+
 const profileImage = ref(null);
 const fileInput = ref(null);
 
@@ -246,11 +263,15 @@ const removeEmployee = () => {
 };
 
 const backgroundStyle = {
-  backgroundImage: `url(${fondoAdmin})`, // Usa la imagen importada aquí
+  backgroundImage: `url(${fondoAdmin})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   minHeight: '100vh'
 };
+
+onMounted(() =>{
+  fetchroles();
+})
 </script>
 
 <style scoped>

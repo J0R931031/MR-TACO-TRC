@@ -10,6 +10,7 @@ export const usePostStore = defineStore('postStore', {
         image: '/src/assets/tacos.jpg'
       },
     ],
+    previewImage: null,  // Nueva propiedad para la imagen de vista previa
   }),
   actions: {
     getPostById(id) {
@@ -27,7 +28,13 @@ export const usePostStore = defineStore('postStore', {
     },
     deletePost(id) {
       this.posts = this.posts.filter(post => post.id !== id);
-    }
+    },
+    setPreviewImage(image) {
+      this.previewImage = image;
+    },
+    getPreviewImage() {
+      return this.previewImage;
+    },
   },
-  persist: true
+  persist: true,  // Persistencia habilitada
 });

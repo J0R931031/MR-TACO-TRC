@@ -52,7 +52,7 @@
 
 <script setup>
 import BarAdmin from '@/components/barAdmin.vue';
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { usePostStore } from '@/stores/postStore';
 
@@ -73,13 +73,33 @@ const selectImage = () => {
 const onFileChange = (e) => {
   const file = e.target.files[0];
   previewImage.value = URL.createObjectURL(file);
+  postStore.setPreviewImage(previewImage.value);  // Guardar imagen en el store
+};
+
+const resetForm = () => {
+  post.title = '';
+  post.content = '';
+  previewImage.value = null;
+  postStore.setPreviewImage(null);  // Limpiar la imagen del store
 };
 
 const submitForm = () => {
   post.image = previewImage.value;
   postStore.addPost(post);
+  resetForm();
   router.push('/posts');
 };
+
+// Revalidar los datos al volver a la visibilidad de la página
+onMounted(() => {
+  previewImage.value = postStore.getPreviewImage(); // Recargar la imagen al montar el componente
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      previewImage.value = postStore.getPreviewImage(); // Recargar la imagen cuando la página se vuelve visible
+    }
+  });
+});
 </script>
 
 <style scoped>

@@ -28,12 +28,11 @@
 
 <script setup>
 import BarAdmin from '@/components/barAdmin.vue';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { usePostStore } from '@/stores/postStore';
 
 const postStore = usePostStore();
-
 const posts = computed(() => postStore.posts);
 
 const router = useRouter();
@@ -45,6 +44,17 @@ const goToCreateForm = () => {
 const deletePost = (id) => {
   postStore.deletePost(id);
 };
+
+onMounted(() => {
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      // Recargar los posts del estado para asegurar que se actualicen correctamente
+      postStore.$patch((state) => {
+        state.posts = [...state.posts];
+      });
+    }
+  });
+});
 </script>
 
 <style scoped>

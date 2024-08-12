@@ -6,11 +6,7 @@
     <v-main class="main-container">
       <v-container class="pa-0 ma-0 fill-height justify-center">
         <v-row class="pa-0 ma-0 fill-height no-gutters justify-center">
-          <h1 class="textoinvisible">....</h1>
-          <h1 class="textoinvisible">....</h1>
-          <h1 class="textoinvisible">....</h1>
-          <h1 class="textoinvisible">....</h1>
-          <v-col ID="inicio123"  class="pa-0 ma-0 fill-height justify-center no-padding">
+          <v-col id="inicio123" class="pa-0 ma-0 fill-height justify-center no-padding">
             <v-sheet height="100vh" width="100%" border color="white" rounded class="pa-0 ma-0 fill-height no-padding">
               <div style="background-color: black;" class="inicio-container pa-0 ma-0 fill-height no-padding">
                 <div class="carousel-container first">
@@ -21,30 +17,30 @@
                 </div>
                 <div class="carousel-container second">
                   <div class="carousel-content">
-                    <h1>Mucho sabor... Mucho color...</h1>
-                    <p>Etiqueta de recuerdo para modificar imagen</p>
-                    <p>Y crear flexbox en cada contenedor</p>
-                    <p>Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
-                    <h2>Todo en Torreón</h2>
+                    <h1 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Mucho sabor... Mucho color...</h1>
+                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Etiqueta de recuerdo para modificar imagen</p>
+                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Y crear flexbox en cada contenedor</p>
+                    <p :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Crear método de carrusel en este apartado, investigación de protocolos e inserción de imágenes</p>
+                    <h2 :style="{ color: 'white', textShadow: '4px 2px 2px black' }">Todo en Torreón</h2>
                   </div>
                 </div>
 
-                  <div class="featured-dishes">
-                    <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
-                    <div class="dishes-carousel">
-                      <div class="dish-card" v-for="post in posts" :key="post.id">
-                        <img :src="post.image" class="dish-image" />
-                        <h3 class="text-content">{{ post.title }}</h3>
-                        <p class="text-content">{{ post.content }}</p>
-                      </div>
+                <div class="featured-dishes">
+                  <h2 class="featured-title">PLATILLOS DESTACADOS</h2>
+                  <div class="dishes-carousel">
+                    <div class="dish-card" v-for="post in posts" :key="post.id">
+                      <img :src="post.image" class="dish-image" />
+                      <h3>{{ post.title }}</h3>
+                      <p>{{ post.content }}</p>
                     </div>
                   </div>
+                </div>
 
-                  <v-row class="justify-center mt-4">
-                    <v-btn v-for="(role, index) in Roles" :key="index" class="mx-2 role-button" @click="redirectToPage(index + 1)">
-                      {{ role }}
-                    </v-btn>
-                  </v-row>
+                <v-row class="justify-center mt-4">
+                  <v-btn v-for="(role, index) in Roles" :key="index" class="mx-2 role-button" @click="redirectToPage(index + 1)">
+                    {{ role }}
+                  </v-btn>
+                </v-row>
 
                 <!-- Footer Section -->
                 <div class="footer">
@@ -66,7 +62,7 @@
                 <!-- Social Media Section -->
                 <div class="social-container">
                   <div class="social-media">
-                    <button @click="redirectToInstagram" style="background-color: transparent; border: none; cursor: pointer;">
+                    <button @click="redirectToInstagram" style="background-color: transparent; margin-left: -900px; border: none; cursor: pointer;">
                       <img src="@/assets/instagram.jpeg" alt="Instagram" />
                     </button>
                     <button @click="redirectToFacebook" style="background-color: transparent; border: none; cursor: pointer;">
@@ -93,9 +89,6 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { usePostStore } from '@/stores/postStore';
 import barNav from '@/components/barNav.vue';
-
-// Importar imágenes desde la carpeta de assets
-
 import ubicacionImage from '@/assets/ubicacion.png';
 
 const redirectToFacebook = () => {
@@ -105,6 +98,7 @@ const redirectToFacebook = () => {
 const redirectToInstagram = () => {
   window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
 };
+
 const router = useRouter();
 const Roles = ref(['Admin', 'Cliente', 'Meseros', 'Chef']);
 
@@ -123,14 +117,12 @@ const redirectToPage = (roleIndex) => {
       router.push('/meseros');
       break;
     case 4:
-      router.push('/chef');
       router.push('/ChefOrden');
       break;
     default:
       break;
   }
 };
-
 
 const goToMenu = () => {
   router.push('/menu');
@@ -152,7 +144,6 @@ const mapImage = ubicacionImage;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
 .navbar {
@@ -162,30 +153,13 @@ const mapImage = ubicacionImage;
   z-index: 1000;
 }
 
-.container-with-sidebar {
-  display: flex;
-  height: 100%;
-  width: 100%;
-}
-
-.sidebar {
-  width: 250px;
-  background-color: #3b1d0eb2;
-  color: white;
-  padding: 20px;
-}
-
 .inicio-container {
   display: flex;
   flex-direction: column;
   font-family: 'Arial', sans-serif;
   height: 100%;
-  width: calc(100% - 250px); /* Adjust width to account for the sidebar */
+  width: 100%;
   margin-top: 64px;
-  padding: 20px; /* Add padding to avoid content touching the edges */
-  box-sizing: border-box; /* Ensure padding is included in the width */
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
-  justify-content: flex-start; /* Align items to the start */
 }
 
 .carousel-container {
@@ -240,8 +214,8 @@ const mapImage = ubicacionImage;
 
 .dishes-carousel {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping of content */
-  gap: 10px; /* Reduced gap between posts */
+  overflow-x: auto;
+  gap: 15px;
   padding: 0 15px;
 }
 
@@ -250,10 +224,8 @@ const mapImage = ubicacionImage;
   border: 3px solid #ff6600;
   border-radius: 10px;
   padding: 10px;
-  margin: 5px; /* Reduced margin for lighter distance */
   flex: 0 0 auto;
-  width: 200px; /* Fixed width to avoid shrinking */
-  flex-shrink: 0; /* Prevent shrinking */
+  width: 200px;
   text-align: center;
 }
 
@@ -262,13 +234,6 @@ const mapImage = ubicacionImage;
   height: 150px;
   object-fit: cover;
   border-radius: 10px;
-}
-
-.text-content {
-  word-wrap: break-word;
-  white-space: normal; /* Allow text to wrap normally */
-  overflow: visible; /* Ensure text is fully visible */
-  text-overflow: unset; /* Disable ellipsis */
 }
 
 .footer {
@@ -310,13 +275,11 @@ const mapImage = ubicacionImage;
 .footer-text {
   text-align: center;
   margin-top: 20px;
- padding-top: 15px;
-
+  padding-top: 15px;
 }
 
 .small-text {
   font-size: 0.8em;
- 
 }
 
 .pa-0 {

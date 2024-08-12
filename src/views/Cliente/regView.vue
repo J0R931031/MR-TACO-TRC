@@ -3,7 +3,8 @@
     <bar-nav class="navbar" />
     <v-row class="menu" align="center" justify="center">
     </v-row>
-    <div class="content-container"> 
+    <!-- Contenedor principal -->
+    <div class="content-container">
       <v-row align="center" justify="center">
         <v-col cols="12" md="8" lg="5" class="form-container">
           <v-card class="bordered-card">
@@ -179,13 +180,18 @@ const redirectToInstagram = () => {
 <style scoped>
 .menu-container {
   position: relative;
+
 }
 
 .content-container { 
   margin-top: 80px; 
-  background-image: url('@/assets/fondo reg.webp');
-  background-size: cover;
-  background-position: center;
+    background-image: url('@/assets/fondo reg.webp');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
 }
 
 .title h1 {
@@ -194,15 +200,12 @@ const redirectToInstagram = () => {
 }
 
 .bordered-card {
- 
   border-radius: 16px;
- 
   padding: 16px;
   z-index: 999;
   background-color: black;
-  margin-top: 85px;
+  margin-top: 105px;
   color: white;
-  color-scheme: white;
   margin-bottom: 90px;
 }
 
@@ -230,8 +233,16 @@ const redirectToInstagram = () => {
 }
 
 @media (max-width: 600px) {
-  .content-container {
+  .mobile-container {
+    padding: 20px; /* Ajusta el padding en pantallas pequeñas */
     margin-top: 120px;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro en versión móvil */
+    border-radius: 16px;
+  }
+
+  .content-container {
+    margin-top: 50px;
+    padding: 12px;
   }
 
   .bordered-card {
@@ -261,7 +272,6 @@ const redirectToInstagram = () => {
   padding: 20px 20px;
   bottom: 0;
   width: 100%;
-  
 }
 
 .social-media img {

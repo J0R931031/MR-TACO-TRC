@@ -614,7 +614,7 @@ const redirectToInstagram = () => {
 }
 
 .content-container { 
-  margin-top: 80px; 
+  margin-top: 65px; 
   background-image: url('@/assets/fondores.jpg');
   background-size: cover;
   background-position: center;

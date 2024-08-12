@@ -63,10 +63,10 @@
                 <div class="social-container">
                   <div class="social-media">
                     <button @click="redirectToInstagram" class="social-button">
-                      <img src="@/assets/instagram.jpeg" alt="Instagram" />
+                      <img src="@/assets/instagram.webp" alt="Instagram" />
                     </button>
                     <button @click="redirectToFacebook" class="social-button">
-                      <img src="@/assets/facebook.webp" alt="Facebook" />
+                      <img src="@/assets/facebook.png" alt="Facebook" />
                     </button>
                     <span class="social-text">@MRTacoTRC</span>
                   </div>

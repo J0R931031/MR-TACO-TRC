@@ -1,3 +1,66 @@
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import '@mdi/font/css/materialdesignicons.css';
+import barNav from '@/components/barNav.vue';
+
+const router = useRouter();
+const showPassword = ref(false);
+const formData = ref({
+  nombre: '',
+  apellidoPaterno: '',
+  apellidoMaterno: '',
+  sexo: '',
+  telefono: '',
+  fechaNacimiento: '',
+  correo: '',
+  password: ''
+});
+
+const togglePasswordVisibility = () => {
+  showPassword.value = !showPassword.value;
+};
+
+const submitForm = async () => {
+  try {
+    // Convertir fecha a formato correcto (yyyy-mm-dd)
+    const formattedDate = formData.value.fechaNacimiento;
+    await fetch('http://MrTaco.com/crearcliente', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'no-cors', // Modo no-cors agregado aquí
+      body: JSON.stringify({
+        ...formData.value,
+        fechaNacimiento: formattedDate,
+        contrasena: formData.value.password // Asegúrate de que el backend espera "contrasena"
+      })
+    });
+
+    // Como se está usando el modo no-cors, no podemos verificar la respuesta correctamente.
+    console.log('Solicitud enviada en modo no-cors.');
+    alert('Usuario registrado (verifica en el servidor si el registro fue exitoso).');
+
+  } catch (error) {
+    console.error('Hubo un error!', error);
+    alert('No se pudo registrar al usuario.');
+  }
+};
+
+const cancel = () => {
+  router.push('/'); // Redirige a la página de inicio principal
+};
+
+const redirectToFacebook = () => {
+  window.location.href = 'https://www.facebook.com/Mr.Tacotorreon?mibextid=LQQJ4d';
+};
+
+const redirectToInstagram = () => {
+  window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
+};
+</script>
+
 <template>
   <div class="menu-container">
     <bar-nav class="navbar" />
@@ -114,96 +177,24 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import '@mdi/font/css/materialdesignicons.css';
-
-import barNav from '@/components/barNav.vue';
-
-const router = useRouter();
-
-const showPassword = ref(false);
-const formData = ref({
-  nombre: '',
-  apellidoPaterno: '',
-  apellidoMaterno: '',
-  sexo: '',
-  telefono: '',
-  fechaNacimiento: '',
-  correo: '',
-  password: ''
-});
-
-const togglePasswordVisibility = () => {
-  showPassword.value = !showPassword.value;
-};
-
-const submitForm = async () => {
-  try {
-    // Convertir fecha a formato correcto (yyyy-mm-dd)
-    const formattedDate = formData.value.fechaNacimiento;
-
-    const response = await fetch('http://MrTaco.com/crearcliente', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ...formData.value,
-        fechaNacimiento: formattedDate,
-        contrasena: formData.value.password // Asegúrate de que el backend espera "contrasena"
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
-    const data = await response.json();
-    console.log(data);
-    alert('Usuario registrado con éxito!');
-  } catch (error) {
-    console.error('Hubo un error!', error);
-    alert('No se pudo registrar al usuario.');
-  }
-};
-
-const cancel = () => {
-  router.push('/'); // Redirige a la página de inicio principal
-};
-
-const redirectToFacebook = () => {
-  window.location.href = 'https://www.facebook.com/Mr.Tacotorreon?mibextid=LQQJ4d';
-};
-
-const redirectToInstagram = () => {
-  window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
-};
-</script>
-
 <style scoped>
 .menu-container {
   position: relative;
-
 }
-
 .content-container { 
   margin-top: 80px; 
-    background-image: url('@/assets/fondo reg.webp');
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
+  background-image: url('@/assets/fondo reg.webp');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
 }
-
 .title h1 {
   font-family: 'Arial', sans-serif; 
   font-size: 32px;
 }
-
 .bordered-card {
   border-radius: 16px;
   padding: 16px;
@@ -213,30 +204,25 @@ const redirectToInstagram = () => {
   color: white;
   margin-bottom: 90px;
 }
-
 .v-text-field input {
   font-family: 'Arial', sans-serif;
 }
-
 .register-button {
   background-color: #ff4f09;
   color: white;
   width: 100%;
 }
-
 .cancel-button {
   background-color: #ff4f09;
   color: white;
   width: 100%;
 }
-
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000; 
 }
-
 @media (max-width: 600px) {
   .mobile-container {
     padding: 20px; /* Ajusta el padding en pantallas pequeñas */
@@ -244,30 +230,24 @@ const redirectToInstagram = () => {
     background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro en versión móvil */
     border-radius: 16px;
   }
-
   .content-container {
     margin-top: 50px;
     padding: 12px;
   }
-
   .bordered-card {
     padding: 8px;
   }
-
   .title h1 {
     font-size: 24px;
   }
-
   .v-btn {
     font-size: 14px;
   }
 }
-
 /* Agregar estilo para el icono blanco */
 .v-input--append .v-icon {
   color: white !important;
 }
-
 .footer {
   display: flex;
   justify-content: space-between;
@@ -278,12 +258,10 @@ const redirectToInstagram = () => {
   bottom: 0;
   width: 100%;
 }
-
 .social-media img {
   width: 40px;
   margin-right: 10px;
 }
-
 .rights-reserved {
   font-family: 'Arial', sans-serif;
 }

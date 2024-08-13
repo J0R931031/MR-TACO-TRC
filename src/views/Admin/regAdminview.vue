@@ -1,9 +1,8 @@
 <template>
   <div :style="backgroundStyle" class="menu-container">
     <BarAdmin></BarAdmin>
-    <v-row class="menu" align="center" justify="center">
-    </v-row>
-    <div class="content-container"> 
+    <v-row class="menu" align="center" justify="center"></v-row>
+    <div class="content-container">
       <v-row align="center" justify="center">
         <v-col cols="8" class="form-container">
           <v-card class="bordered-card">
@@ -36,7 +35,7 @@
                     Sexo
                     <v-select
                       v-model="Sexo"
-                      :items="['M', 'F']"
+                      :items="['Masculino', 'Femenino', 'Otro']"
                       label="Sexo"
                       outlined
                     ></v-select>
@@ -59,17 +58,17 @@
                 </v-row>
                 <v-row>
                   <v-col cols="6">
-                    Direccción
-                    <v-text-field label=" Dirección" v-model="Direccion" outlined></v-text-field>
+                    Dirección
+                    <v-text-field label="Dirección" v-model="Direccion" outlined></v-text-field>
                   </v-col>
                   <v-col cols="6">
                     CURP
-                    <v-text-field label=" CURP" v-model="CURP" outlined></v-text-field>
+                    <v-text-field label="CURP" v-model="CURP" outlined></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="6">
-                   RFC
+                    RFC
                     <v-text-field label="RFC" v-model="RFC" outlined></v-text-field>
                   </v-col>
                 </v-row>
@@ -82,7 +81,7 @@
                 <v-row>
                   <v-col cols="6">
                     Contraseña
-                    <v-text-field 
+                    <v-text-field
                       v-model="Contrasena"
                       :type="showPassword ? 'text' : 'password'"
                       label="Contraseña"
@@ -90,35 +89,33 @@
                       @click:append="togglePasswordVisibility"
                     ></v-text-field>
                   </v-col>
-                 
                 </v-row>
                 <v-container>
                   <v-row>
-                    <v-col cols="12" md="6">
-                      <v-sheet height="200px" width="200px" class="d-flex align-center justify-center" outlined>
-                        <v-img
-                          v-if="profileImage"
-                          :src="profileImage"
-                          width="100%"
-                          height="100%"
-                          contain
-                        ></v-img>
-                        <v-icon v-else>mdi-camera</v-icon>
-                      </v-sheet>
-                      <v-btn color="orange" class="mt-4" @click="selectImage">Ingresar Imagen</v-btn>
-                      <input type="file" ref="fileInput" @change="onFileChange" class="d-none" accept="image/*">
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="6" md="6">
+                    <v-col cols="12" md="12">
                       <div class="propietario">
-                        <label for="Rol">Rol:  </label>
-                        <select id="Rol" v-model="Rol">
-                          <option class="opcion" value=""></option>
-                          <option v-for="option in Roles" :key="option.ID_ROL" :value="option.ID_ROL">
-                            {{ option.NombreRol }}
-                          </option>
-                        </select>
+                        <label for="Rol" style="font-size: 25px;" >Rol: </label>
+                        <v-btn
+                          color="#ffff" style="margin-right: 10px;"
+                          :class="{'selected': Rol === 3}"
+                          @click="Rol = 3"
+                        > Mesero
+                          
+                        </v-btn>
+                        <v-btn
+                          color="#ffff" style="margin-right: 10px;"
+                          :class="{'selected': Rol === 2}"
+                          @click="Rol = 2"
+                        >
+                          Cocinero
+                        </v-btn>
+                        <v-btn
+                          color="#ffff" style="margin-right: 10px;"
+                          :class="{'selected': Rol === 1}"
+                          @click="Rol = 1"
+                        >
+                          Administrador
+                        </v-btn>
                       </div>
                     </v-col>
                   </v-row>
@@ -147,131 +144,100 @@
           </v-card>
         </v-col>
       </v-row>
-    </div> 
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import BarAdmin from '@/components/barAdmin.vue';
 import fondoAdmin from '@/assets/fondoadmin.jpg';
 
 const router = useRouter();
-
 const showPassword = ref(false);
-
-const valid = ref(false);
-const  Nombre = ref('')
-const  ApellidoPaterno= ref('')
-const  ApellidoMaterno= ref('')
-const  Sexo= ref('')
-const  Telefono= ref('')
-const  FechaNacimiento= ref('')
-const  Correo= ref('')
-const  Contrasena= ref('')
-const  Rol= ref('')
-const  Roles = ref('')
-const  Direccion =ref('')
-const  CURP = ref('')
-const  RFC = ref('')
-
-
-const fetchroles = async () => {
-  try {
-    const response = await fetch('http://mrtaco.com/roles');
-    if (response.ok) {
-      const json = await response.json();
-      Roles.value = json.data; 
-      console.log('Propietarios obtenidos exitosamente', Roles.value);
-    } else {
-      console.error('Error al obtener la lista de propietarios');
-    }
-  } catch (error) {
-    console.error('Error de red:', error);
-  }
-};
+const Nombre = ref('');
+const ApellidoPaterno = ref('');
+const ApellidoMaterno = ref('');
+const Sexo = ref('');
+const Telefono = ref('');
+const FechaNacimiento = ref('');
+const Correo = ref('');
+const Contrasena = ref('');
+const Rol = ref(null);
+const Direccion = ref('');
+const CURP = ref('');
+const RFC = ref('');
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
 
 const submit = async () => {
-  if (valid.value) {
+  if (
+    Nombre.value &&
+    ApellidoPaterno.value &&
+    ApellidoMaterno.value &&
+    Sexo.value &&
+    Telefono.value &&
+    FechaNacimiento.value &&
+    Correo.value &&
+    Contrasena.value &&
+    Rol.value &&
+    Direccion.value &&
+    CURP.value &&
+    RFC.value
+  ) {
     const data = {
-      Nombre: Nombre.value,
-      ApellidoMaterno: ApellidoMaterno.value,
-      ApellidoPaterno: ApellidoPaterno.value,
-      Sexo: Sexo.value,
-      Telefono: Telefono.value,
-      FechaNacimiento: FechaNacimiento.value,
-      Correo: Correo.value,
-      Contrasena: Contrasena.value,
-      Rol: Rol.value,
-      Direccion:Direccion.value,
-      CURP:CURP.value,
-      RFC:RFC.value
+      nombre: Nombre.value,
+      apellidoPaterno: ApellidoPaterno.value,
+      apellidoMaterno: ApellidoMaterno.value,
+      sexo: Sexo.value,
+      telefono: Telefono.value,
+      fechaNacimiento: FechaNacimiento.value,
+      direccion: Direccion.value,
+      CURP: CURP.value,
+      RFC: RFC.value,
+      correo: Correo.value,
+      contrasena: Contrasena.value,
+      rolID: Rol.value,
     };
-
     try {
-      const response = await fetch('http://mrtaco.com/register', {
+      await fetch('http://mrtaco.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        mode: 'no-cors', // No recomendado para producción
       });
 
-      const responseText = await response.text(); // Obtener la respuesta como texto
-      console.log('Respuesta del servidor:', responseText);
+      // Asumimos que el registro fue exitoso
+      alert('Registro enviado (verifique en el servidor si se realizó correctamente).');
 
-      try {
-        const responseData = JSON.parse(responseText); // Intentar analizar como JSON
-        if (response.ok) {
-          console.log('Empleado registrado exitosamente', responseData);
-        } else {
-          console.error('Error al registrar el vehículo:', responseData);
-        }
-      } catch (error) {
-        console.error('Error al analizar la respuesta como JSON:', error);
-      }
     } catch (error) {
-      console.error('Error de red:', error)}
+      console.error('Error de red:', error);
+      alert('Error de red al intentar registrar el empleado.');
     }
+  } else {
+    alert('Por favor complete todos los campos requeridos.');
+  }
 };
 
 const cancel = () => {
   router.push('/');
 };
 
-const profileImage = ref(null);
-const fileInput = ref(null);
-
-const selectImage = () => {
-  fileInput.value.click();
-};
-
-const onFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    profileImage.value = URL.createObjectURL(file);
-  }
-};
-
 const removeEmployee = () => {
-  profileImage.value = null;
+  console.log('Empleado eliminado');
 };
 
 const backgroundStyle = {
   backgroundImage: `url(${fondoAdmin})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  minHeight: '100vh'
+  minHeight: '100vh',
 };
-
-onMounted(() =>{
-  fetchroles();
-})
 </script>
 
 <style scoped>
@@ -281,20 +247,23 @@ onMounted(() =>{
   width: 100%;
   display: flex;
   flex-direction: column;
+  
 }
 
-.content-container { 
-  margin-top: 100px; 
+.content-container {
+  margin-top: 100px;
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: center;
   width: 100%;
+  
 }
 
 .title h1 {
-  font-family: 'Arial', sans-serif; 
+  font-family: 'Arial', sans-serif;
   font-size: 32px;
+  
 }
 
 .bordered-card {
@@ -302,6 +271,8 @@ onMounted(() =>{
   border-radius: 16px;
   box-shadow: 0 0 25px 10px rgba(255, 79, 9, 0.8);
   padding: 16px;
+  background-color: black;
+  color:white;
 }
 
 .v-text-field input {
@@ -318,5 +289,11 @@ onMounted(() =>{
   background-color: #ff4f09;
   color: white;
   width: 100%;
+}
+
+/* Estilos para los botones seleccionados */
+.propietario .v-btn.selected {
+  background-color: orange !important;
+  color: white !important;
 }
 </style>

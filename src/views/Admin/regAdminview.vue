@@ -203,18 +203,26 @@ const submit = async () => {
       rolID: Rol.value,
     };
     try {
-      await fetch('http://mrtaco.com/register', {
+      const response = await fetch('http://mrtaco.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-        mode: 'no-cors', // No recomendado para producción
       });
 
-      // Asumimos que el registro fue exitoso
-      alert('Registro enviado (verifique en el servidor si se realizó correctamente).');
+      const responseData = await response.json();
 
+      if (response.ok) {
+        if (responseData.message === 'Este correo ya ha sido registrado.') {
+          alert('Este correo ya ha sido registrado previamente.');
+        } else {
+          alert(responseData.message); // Mensaje como 'Empleado registrado exitosamente.'
+        }
+      } else {
+        console.error('Error al registrar el empleado:', responseData.message);
+        alert('Error al registrar el empleado.');
+      }
     } catch (error) {
       console.error('Error de red:', error);
       alert('Error de red al intentar registrar el empleado.');

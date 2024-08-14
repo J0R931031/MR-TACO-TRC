@@ -14,7 +14,7 @@ import Chef from '@/views/Chef/chefIniciView.vue';
 import ChefOrden from '@/views/Chef/chefordenView.vue';
 import Editar from '@/views/Admin/perfilAdminview.vue';
 import CreatePostsView from '@/views/Admin/CreatePostsview.vue';
-
+import InfoAdminView from '@/views/Admin/tablasInfoAdminView.vue';
 import Meseros from '@/views/Mesero/OrdenesView.vue';
 
 import HistorialView from '@/views/Mesero/historialView.vue';
@@ -66,6 +66,11 @@ const routes = [
     path: '/admin',
     name: 'InicioAdmin',
     component: InicioAdmin
+  },
+  {
+    path: '/infoAdmin',
+    name: 'TablasAdmin',
+    component: InfoAdminView
   },
   {
     path: '/registros',

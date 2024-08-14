@@ -22,15 +22,20 @@ const togglePasswordVisibility = () => {
 };
 
 const submitForm = async () => {
+  // Verificar si todos los campos están llenos
+  if (Object.values(formData.value).some(field => field === '')) {
+    alert('Por favor, completa todos los campos antes de continuar.');
+    return;
+  }
+
   try {
     // Convertir fecha a formato correcto (yyyy-mm-dd)
     const formattedDate = formData.value.fechaNacimiento;
-    await fetch('http://MrTaco.com/crearcliente', {
+    const response = await fetch('http://MrTaco.com/crearcliente', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      mode: 'no-cors', // Modo no-cors agregado aquí
       body: JSON.stringify({
         ...formData.value,
         fechaNacimiento: formattedDate,
@@ -38,13 +43,19 @@ const submitForm = async () => {
       })
     });
 
-    // Como se está usando el modo no-cors, no podemos verificar la respuesta correctamente.
-    console.log('Solicitud enviada en modo no-cors.');
-    alert('Usuario registrado (verifica en el servidor si el registro fue exitoso).');
+    const data = await response.json(); // Obtener la respuesta como JSON
+
+    if (data.message === 'Este correo ya ha sido registrado.') {
+      alert('Este correo ya ha sido registrado.');
+    } else if (data.message === 'Cliente registrado exitosamente.') {
+      alert('Usuario registrado con éxito.');
+    } else {
+      alert('Hubo un problema al registrar el usuario.');
+    }
 
   } catch (error) {
     console.error('Hubo un error!', error);
-    alert('No se pudo registrar al usuario.');
+    alert('No se pudo registrar al usuario debido a un error de red.');
   }
 };
 
@@ -60,6 +71,7 @@ const redirectToInstagram = () => {
   window.location.href = 'https://www.instagram.com/mr.taco.trc?igsh=azQ3ZTYzd3A5YXBm';
 };
 </script>
+
 
 <template>
   <div class="menu-container">

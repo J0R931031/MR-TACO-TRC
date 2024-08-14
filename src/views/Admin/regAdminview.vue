@@ -152,7 +152,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import BarAdmin from '@/components/barAdmin.vue';
-import fondoAdmin from '@/assets/fondoadmin.jpg';
+import fondoAdmin from '@/assets/fondoAdmin.webp';
 
 const router = useRouter();
 const showPassword = ref(false);

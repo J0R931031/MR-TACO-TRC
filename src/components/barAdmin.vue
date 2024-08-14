@@ -15,26 +15,29 @@ const { profileImage, name, email } = storeToRefs(profileStore);
 <template>
   <div class="menu-container">
     <v-row class="menu" align="center" justify="center">
-      <v-col class="menu-item-container" cols="3" align="start">
-        <RouterLink to="/" class="menu-item" :class="{ selected: isSelected('/') }">Inicio</RouterLink>
+      <v-col class="menu-item-container" cols="1" align="start">
+        <RouterLink to="/" class="menu-item" :class="{ selected: isSelected('/') }" style="margin-left: 50px;" >Inicio</RouterLink>
       </v-col>
       <v-col class="menu-item-container" cols="2" align="center">
-        <RouterLink to="/registros" class="menu-item" :class="{ selected: isSelected('/registros') }">Registros</RouterLink>
+        <RouterLink to="/registros" class="menu-item" :class="{ selected: isSelected('/registros') }" style="margin-left: 60px;" >Registros</RouterLink>
+      </v-col>
+      <v-col class="menu-item-container" cols="2" align="center">
+        <RouterLink to="/infoAdmin" class="menu-item" :class="{ selected: isSelected('/infoAdmin') }">Datos</RouterLink>
       </v-col>
       <v-col class="logo-container" cols="2" align="start">
         <v-img class="logo" :src="logo" contain></v-img>
       </v-col>
-      <v-col class="menu-item-container" cols="1" align="end">
+      <v-col class="menu-item-container" cols="2" align="end">
         <RouterLink to="/posts" class="menu-item" :class="{ selected: isSelected('/posts') }">Posts</RouterLink>
       </v-col>
       <v-col cols="1"></v-col>
-      <v-col class="d-flex align-center justify-end" cols="2">
-        <RouterLink to="/Editar">
+      <v-col class="d-flex align-center justify-end" cols="2"  >
+        <RouterLink to="/Editar" style="margin-right: 10px;" >
           <v-avatar color="info">
             <v-img class="icon" :src="profileImage" contain></v-img>
           </v-avatar>
         </RouterLink>
-        <div class="profile-info">
+        <div class="profile-info" style="margin-right: 90px;" >
           <div class="profile-name">{{ name }}</div>
           <div class="profile-email">{{ email }}</div>
         </div>

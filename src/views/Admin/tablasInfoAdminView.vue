@@ -78,7 +78,7 @@
   
   <script setup>
   import { ref, onMounted } from 'vue';
-  import barNav from '@/components/barNav.vue';
+  import barNav from '@/components/barAdmin.vue';
   
   const chefs = ref([]);
   const meseros = ref([]);
@@ -101,11 +101,18 @@
   
   <style scoped>
   .container {
-    padding: 20px;
+    margin-top: 50px; 
+    background-image: url('@/assets/fondoAdmin.webp');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   
   .tables-container {
-    margin-top: 20px;
+    margin-top: -230px;
   }
   
   .v-card-title {
@@ -115,5 +122,13 @@
   .v-simple-table {
     width: 100%;
   }
+  .navbar
+{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  margin-left: -10px;
+}
   </style>
   
